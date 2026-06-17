@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMI Calculator - CalcVerse</title>
+
+<meta name="description" content="Free BMI Calculator. Calculate your Body Mass Index instantly using height and weight.">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6f9;
+padding:20px;
+color:#222;
+line-height:1.7;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:#fff;
+padding:25px;
+border-radius:12px;
+box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+
+h1{
+text-align:center;
+margin-bottom:10px;
+color:#2e7d32;
+}
+
+.subtitle{
+text-align:center;
+margin-bottom:25px;
+color:#666;
+}
+
+label{
+display:block;
+font-weight:bold;
+margin-top:15px;
+}
+
+input{
+width:100%;
+padding:14px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:18px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:20px;
+border:none;
+background:#2e7d32;
+color:white;
+font-size:20px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#256628;
+}
+
+.result{
+margin-top:25px;
+padding:20px;
+border-radius:10px;
+text-align:center;
+display:none;
+}
+
+.result h2{
+margin-bottom:10px;
+}
+
+.bmi{
+font-size:40px;
+font-weight:bold;
+}
+
+.section{
+margin-top:35px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+table, th, td{
+border:1px solid #ddd;
+}
+
+th, td{
+padding:10px;
+text-align:center;
+}
+
+footer{
+margin-top:40px;
+text-align:center;
+}
+
+footer a{
+display:block;
+margin:5px;
+text-decoration:none;
+color:#2e7d32;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>BMI Calculator</h1>
+
+<p class="subtitle">
+Check your Body Mass Index instantly.
+</p>
+
+<label>Weight (kg)</label>
+<input type="number" id="weight" placeholder="Enter weight">
+
+<label>Height (cm)</label>
+<input type="number" id="height" placeholder="Enter height">
+
+<button onclick="calculateBMI()">Calculate BMI</button>
+
+<div id="result" class="result">
+<h2>Your BMI</h2>
+<div class="bmi" id="bmiValue"></div>
+<h3 id="category"></h3>
+</div>
+
+<div class="section">
+<h2>BMI Categories</h2>
+
+<table>
+<tr>
+<th>BMI</th>
+<th>Category</th>
+</tr>
+
+<tr>
+<td>Below 18.5</td>
+<td>Underweight</td>
+</tr>
+
+<tr>
+<td>18.5 - 24.9</td>
+<td>Normal Weight</td>
+</tr>
+
+<tr>
+<td>25 - 29.9</td>
+<td>Overweight</td>
+</tr>
+
+<tr>
+<td>30+</td>
+<td>Obese</td>
+</tr>
+
+</table>
+</div>
+
+<div class="section">
+<h2>About BMI Calculator</h2>
+
+<p>
+BMI Calculator helps estimate body weight status using height and weight.
+</p>
+</div>
+
+<div class="section">
+<h2>How to Use</h2>
+
+<p>1. Enter your weight in kilograms.</p>
+<p>2. Enter your height in centimeters.</p>
+<p>3. Click Calculate BMI.</p>
+<p>4. View your BMI score and category.</p>
+</div>
+
+<div class="section">
+<h2>FAQ</h2>
+
+<b>What is BMI?</b>
+<p>BMI stands for Body Mass Index.</p>
+
+<br>
+
+<b>Is BMI accurate?</b>
+<p>BMI is a useful screening tool but does not directly measure body fat.</p>
+</div>
+
+<footer>
+
+<p>© 2026 CalcVerse</p>
+
+<a href="index.html">Age Calculator</a>
+<a href="date-calculator.html">Date Calculator</a>
+<a href="emi-calculator.html">EMI Calculator</a>
+<a href="privacy-policy.html">Privacy Policy</a>
+
+</footer>
+
+</div>
+
+<script>
+
+function calculateBMI(){
+
+let weight = parseFloat(document.getElementById("weight").value);
+let height = parseFloat(document.getElementById("height").value);
+
+if(!weight || !height){
+alert("Please enter weight and height.");
+return;
+}
+
+height = height / 100;
+
+let bmi = weight / (height * height);
+
+let category = "";
+let color = "";
+
+if(bmi < 18.5){
+category = "Underweight";
+color = "#2196F3";
+}
+else if(bmi < 25){
+category = "Normal Weight";
+color = "#4CAF50";
+}
+else if(bmi < 30){
+category = "Overweight";
+color = "#FF9800";
+}
+else{
+category = "Obese";
+color = "#F44336";
+}
+
+document.getElementById("result").style.display="block";
+document.getElementById("result").style.background=color;
+document.getElementById("result").style.color="white";
+
+document.getElementById("bmiValue").innerHTML=bmi.toFixed(1);
+document.getElementById("category").innerHTML=category;
+
+}
+
+</script>
+
+</body>
+</html>
