@@ -1,9 +1,99 @@
-<!DOCTYPE html>
-<html>
+
+<!DOCTYPE html><html lang="en">
 <head>
-<title>Age Calculator</title>
-</head>
-<body>
-<h1>My Age Calculator Website</h1>
-</body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Age Calculator - Calculate Your Exact Age Online</title><meta name="description" content="Calculate your exact age in years, months, days, hours, minutes and seconds instantly."><style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:#1e293b;
+padding:25px;
+border-radius:15px;
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+}
+
+input,button{
+width:100%;
+padding:14px;
+margin-top:12px;
+border:none;
+border-radius:8px;
+font-size:16px;
+}
+
+button{
+background:#22c55e;
+color:white;
+font-weight:bold;
+}
+
+.card{
+background:#334155;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+}
+
+.result{
+margin-top:20px;
+}
+
+.info{
+margin-top:30px;
+line-height:1.8;
+}
+</style></head><body><div class="container"><h1>Age Calculator</h1><input type="date" id="dob"><button onclick="calculateAge()">Calculate Age</button>
+
+<div id="result" class="result"></div><div class="info">
+<h2>About This Tool</h2>
+<p>This free age calculator helps calculate exact age online.</p>
+</div></div><script>
+function calculateAge(){
+
+let dob=new Date(document.getElementById("dob").value);
+let now=new Date();
+
+let diff=now-dob;
+
+let totalSeconds=Math.floor(diff/1000);
+let totalMinutes=Math.floor(totalSeconds/60);
+let totalHours=Math.floor(totalMinutes/60);
+let totalDays=Math.floor(totalHours/24);
+
+let years=Math.floor(totalDays/365.25);
+let months=Math.floor((totalDays%365.25)/30.44);
+let days=Math.floor(totalDays-(years*365.25)-(months*30.44));
+
+document.getElementById("result").innerHTML=`
+
+<div class="card"><b>Years:</b> ${years}</div>
+<div class="card"><b>Months:</b> ${months}</div>
+<div class="card"><b>Days:</b> ${days}</div>
+
+<div class="card"><b>Total Days:</b> ${totalDays}</div>
+<div class="card"><b>Total Hours:</b> ${totalHours}</div>
+<div class="card"><b>Total Minutes:</b> ${totalMinutes}</div>
+<div class="card"><b>Total Seconds:</b> ${totalSeconds}</div>
+
+`;
+
+}
+</script></body>
 </html>
