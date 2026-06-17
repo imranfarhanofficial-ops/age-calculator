@@ -107,7 +107,10 @@ color:#ccc;
 <p class="subtitle">
 Calculate your exact age instantly.
 </p>
-
+<label>
+<b>Input Date of Birth</b>
+</label>
+<br><br>
 <input type="date" id="dob">
 
 <button onclick="calculateAge()">
@@ -180,19 +183,30 @@ let days = Math.floor(totalDays-(years*365.25)-(months*30.44));
 
 document.getElementById("result").innerHTML = `
 
-<div class="card"><b>Years:</b> ${years}</div>
+document.getElementById("result").innerHTML = `
 
-<div class="card"><b>Months:</b> ${months}</div>
+<div class="card">
+<h2>Age Result</h2>
 
-<div class="card"><b>Days:</b> ${days}</div>
+<p><b>${years} Years ${months} Months ${days} Days</b></p>
 
-<div class="card"><b>Total Days:</b> ${totalDays}</div>
+<hr>
 
-<div class="card"><b>Total Hours:</b> ${totalHours}</div>
+<p>Or ${years*12+months} Months ${days} Days</p>
 
-<div class="card"><b>Total Minutes:</b> ${totalMinutes}</div>
+<p>Or ${Math.floor(totalDays/7)} Weeks ${totalDays%7} Days</p>
 
-<div class="card"><b>Total Seconds:</b> ${totalSeconds}</div>
+<p>Or ${totalDays} Days</p>
+
+<p>Or ${totalHours} Hours</p>
+
+<p>Or ${totalMinutes} Minutes</p>
+
+<p>Or ${totalSeconds} Seconds</p>
+
+</div>
+
+`;
 
 `;
 
