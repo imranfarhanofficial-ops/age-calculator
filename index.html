@@ -119,22 +119,22 @@ font-weight:bold;
 text-decoration:none;
 }
   select{
-width:30%;
+width:31%;
 padding:15px;
 font-size:18px;
 border:1px solid #ccc;
 border-radius:5px;
-margin-right:2%;
 margin-bottom:15px;
 }
 
 #birthYear,
 #targetYear{
-width:34%;
-display:inline-block;
-}
-footer a:hover{
-text-decoration:underline;
+width:31%;
+padding:15px;
+font-size:18px;
+border:1px solid #ccc;
+border-radius:5px;
+margin-bottom:15px;
 }
 .calculator-box{
 background:#f5f5f5;
@@ -176,7 +176,7 @@ Calculate your exact age instantly.
 <div class="calculator-box">
 
 <h3>Date of Birth</h3>
-
+<div style="display:flex;gap:10px;flex-wrap:nowrap;">
 <select id="birthMonth">
 <option value="0">Jan</option>
 <option value="1">Feb</option>
@@ -204,9 +204,9 @@ Calculate your exact age instantly.
 </select>
 
 <input type="number" id="birthYear" placeholder="Year">
-
+</div>
 <h3>Age at the Date of</h3>
-
+<div style="display:flex;gap:10px;flex-wrap:nowrap;">
 <select id="targetMonth">
 <option value="0">Jan</option>
 <option value="1">Feb</option>
@@ -234,13 +234,13 @@ Calculate your exact age instantly.
 </select>
 
 <input type="number" id="targetYear" placeholder="Year">
-
+</div>
 <button onclick="calculateAge()">
 Calculate Age
 </button>
 
 </div>
-</button>
+
 
 <div id="result" class="result"></div>
 
