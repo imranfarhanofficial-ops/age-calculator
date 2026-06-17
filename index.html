@@ -117,7 +117,20 @@ text-decoration:none;
 footer a:hover{
 text-decoration:underline;
 }
+.calculator-box{
+background:#f5f5f5;
+border:1px solid #ddd;
+padding:25px;
+border-radius:10px;
+margin-top:20px;
+}
 
+h3{
+color:#2e7d32;
+font-size:24px;
+margin-bottom:10px;
+margin-top:20px;
+}
 </style>
 </head>
 
@@ -130,14 +143,21 @@ text-decoration:underline;
 <p class="subtitle">
 Calculate your exact age instantly.
 </p>
-<label>
-<b>Input Date of Birth</b>
-</label>
-<br><br>
+<div class="calculator-box">
+
+<h3>Date of Birth</h3>
+
 <input type="date" id="dob">
+
+<h3>Age at the Date of</h3>
+
+<input type="date" id="targetDate">
 
 <button onclick="calculateAge()">
 Calculate Age
+</button>
+
+</div>
 </button>
 
 <div id="result" class="result"></div>
