@@ -1,8 +1,14 @@
-
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Age Calculator - Calculate Your Exact Age Online</title><meta name="description" content="Calculate your exact age in years, months, days, hours, minutes and seconds instantly."><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Age Calculator - Calculate Your Exact Age Online Free</title>
+
+<meta name="description" content="Free online age calculator. Calculate your exact age in years, months, days, hours, minutes and seconds instantly.">
+
+<style>
 *{
 margin:0;
 padding:0;
@@ -11,89 +17,184 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#0f172a;
+background:#081426;
 color:white;
 padding:20px;
 }
 
 .container{
-max-width:700px;
+max-width:800px;
 margin:auto;
-background:#1e293b;
+background:#13233c;
 padding:25px;
-border-radius:15px;
+border-radius:20px;
 }
 
 h1{
 text-align:center;
 margin-bottom:20px;
+font-size:40px;
+}
+
+.subtitle{
+text-align:center;
+margin-bottom:20px;
+color:#cfd8e3;
 }
 
 input,button{
 width:100%;
-padding:14px;
-margin-top:12px;
+padding:15px;
 border:none;
-border-radius:8px;
-font-size:16px;
+border-radius:10px;
+font-size:18px;
+margin-top:10px;
 }
 
 button{
-background:#22c55e;
+background:#21c45d;
 color:white;
 font-weight:bold;
+cursor:pointer;
 }
 
-.card{
-background:#334155;
-padding:12px;
-margin-top:10px;
-border-radius:8px;
+button:hover{
+opacity:0.9;
 }
 
 .result{
 margin-top:20px;
 }
 
-.info{
-margin-top:30px;
+.card{
+background:#31435e;
+padding:15px;
+margin-top:10px;
+border-radius:10px;
+font-size:20px;
+}
+
+.section{
+margin-top:35px;
 line-height:1.8;
 }
-</style></head><body><div class="container"><h1>Age Calculator</h1><input type="date" id="dob"><button onclick="calculateAge()">Calculate Age</button>
 
-<div id="result" class="result"></div><div class="info">
-<h2>About This Tool</h2>
-<p>This free age calculator helps calculate exact age online.</p>
-</div></div><script>
+.section h2{
+margin-bottom:10px;
+}
+
+.faq{
+background:#23344d;
+padding:15px;
+border-radius:10px;
+margin-top:10px;
+}
+
+footer{
+text-align:center;
+margin-top:30px;
+color:#ccc;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Age Calculator</h1>
+
+<p class="subtitle">
+Calculate your exact age instantly.
+</p>
+
+<input type="date" id="dob">
+
+<button onclick="calculateAge()">
+Calculate Age
+</button>
+
+<div id="result" class="result"></div>
+
+<div class="section">
+<h2>About Age Calculator</h2>
+
+<p>
+This free online age calculator helps you calculate your exact age from your date of birth. It shows age in years, months, days, hours, minutes and seconds instantly.
+</p>
+</div>
+
+<div class="section">
+<h2>FAQ</h2>
+
+<div class="faq">
+<b>How does this age calculator work?</b>
+<p>Enter your date of birth and click Calculate Age.</p>
+</div>
+
+<div class="faq">
+<b>Is this calculator free?</b>
+<p>Yes, it is 100% free to use.</p>
+</div>
+
+<div class="faq">
+<b>Can I calculate age in days?</b>
+<p>Yes. It calculates total days, hours, minutes and seconds.</p>
+</div>
+
+</div>
+
+<footer>
+© 2026 Free Age Calculator
+</footer>
+
+</div>
+
+<script>
+
 function calculateAge(){
 
-let dob=new Date(document.getElementById("dob").value);
-let now=new Date();
+let dob = new Date(document.getElementById("dob").value);
 
-let diff=now-dob;
+if(!document.getElementById("dob").value){
+alert("Please select your date of birth");
+return;
+}
 
-let totalSeconds=Math.floor(diff/1000);
-let totalMinutes=Math.floor(totalSeconds/60);
-let totalHours=Math.floor(totalMinutes/60);
-let totalDays=Math.floor(totalHours/24);
+let now = new Date();
 
-let years=Math.floor(totalDays/365.25);
-let months=Math.floor((totalDays%365.25)/30.44);
-let days=Math.floor(totalDays-(years*365.25)-(months*30.44));
+let diff = now - dob;
 
-document.getElementById("result").innerHTML=`
+let totalSeconds = Math.floor(diff/1000);
+let totalMinutes = Math.floor(totalSeconds/60);
+let totalHours = Math.floor(totalMinutes/60);
+let totalDays = Math.floor(totalHours/24);
+
+let years = Math.floor(totalDays/365.25);
+let months = Math.floor((totalDays%365.25)/30.44);
+let days = Math.floor(totalDays-(years*365.25)-(months*30.44));
+
+document.getElementById("result").innerHTML = `
 
 <div class="card"><b>Years:</b> ${years}</div>
+
 <div class="card"><b>Months:</b> ${months}</div>
+
 <div class="card"><b>Days:</b> ${days}</div>
 
 <div class="card"><b>Total Days:</b> ${totalDays}</div>
+
 <div class="card"><b>Total Hours:</b> ${totalHours}</div>
+
 <div class="card"><b>Total Minutes:</b> ${totalMinutes}</div>
+
 <div class="card"><b>Total Seconds:</b> ${totalSeconds}</div>
 
 `;
 
 }
-</script></body>
+
+</script>
+
+</body>
 </html>
