@@ -137,7 +137,18 @@ margin-top:20px;
 <body>
 
 <div class="container">
-
+<div style="
+background:#2e7d32;
+color:white;
+padding:15px;
+font-size:24px;
+font-weight:bold;
+text-align:center;
+border-radius:8px;
+margin-bottom:20px;
+">
+Calculate Your Age
+</div>
 <h1>Age Calculator</h1>
 
 <p class="subtitle">
@@ -209,17 +220,30 @@ This free online age calculator helps you calculate your exact age from your dat
 </div>
 
 <script>
+window.onload = function(){
 
+let today = new Date();
+
+let yyyy = today.getFullYear();
+
+let mm = String(today.getMonth()+1).padStart(2,'0');
+
+let dd = String(today.getDate()).padStart(2,'0');
+
+document.getElementById("targetDate").value =
+yyyy + "-" + mm + "-" + dd;
+
+}
 function calculateAge(){
 
 let dob = new Date(document.getElementById("dob").value);
-
-if(!document.getElementById("dob").value){
-alert("Please select your date of birth");
+let targetDate = new Date(document.getElementById("targetDate").value);
+if(!document.getElementById("dob").value || !document.getElementById("targetDate").value){
+alert("Please select both dates");
 return;
 }
 
-let now = new Date();
+let now = targetDate;
 
 let diff = now - dob;
 
