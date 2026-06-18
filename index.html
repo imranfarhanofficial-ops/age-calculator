@@ -198,6 +198,41 @@ margin-top:15px;
 display:flex;
 align-items:center;
 }
+  .popular-cards{
+display:flex;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+margin:30px 0;
+}
+
+.card{
+background:white;
+width:250px;
+padding:25px;
+border-radius:15px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+.card h3{
+color:#0d5c2f;
+margin-bottom:10px;
+}
+
+.card p{
+color:#666;
+margin-bottom:15px;
+}
+
+.card button{
+background:#0d5c2f;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:8px;
+cursor:pointer;
+}
 </style>
 </head>
 
@@ -238,13 +273,11 @@ Fast. Accurate. Always Free.
 <br>
 
 
-<div class="section">
 
-<h2 style="text-align:center;">
-⭐ Most Popular Calculators
-</h2>
 
-</div>
+
+
+
 </div>
 
 
@@ -320,6 +353,40 @@ Calculate Age
 
 <div id="result" class="result"></div>
 
+  <div class="section">
+<h2 style="text-align:center;">
+⭐ Most Popular Calculators
+</h2>
+  </div>
+
+  <div class="popular-cards">
+
+<div class="card">
+<h3>Age Calculator</h3>
+<p>Calculate your exact age.</p>
+<button>Calculate Now</button>
+</div>
+
+<div class="card">
+<h3>BMI Calculator</h3>
+<p>Check your Body Mass Index.</p>
+<button>Calculate Now</button>
+</div>
+
+<div class="card">
+<h3>EMI Calculator</h3>
+<p>Calculate monthly loan EMI.</p>
+<button>Calculate Now</button>
+</div>
+
+<div class="card">
+<h3>Calorie Calculator</h3>
+<p>Calculate daily calorie needs.</p>
+<button>Calculate Now</button>
+</div>
+
+  </div>
+  
 <div class="section">
 <h2>About CalcVerse</h2>
 
