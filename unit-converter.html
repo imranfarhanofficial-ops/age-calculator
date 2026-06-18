@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unit Converter - CalcVerse</title>
+
+<meta name="description" content="Free Unit Converter. Convert length, weight and temperature instantly.">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6f9;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+
+h1{
+text-align:center;
+color:#2e7d32;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+color:#555;
+margin-bottom:25px;
+}
+
+label{
+display:block;
+margin-top:15px;
+font-weight:bold;
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:20px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:8px;
+font-size:18px;
+cursor:pointer;
+}
+
+.result{
+display:none;
+margin-top:25px;
+padding:20px;
+background:#e8f5e9;
+border-radius:10px;
+}
+
+.section{
+margin-top:30px;
+}
+
+.section h2{
+color:#2e7d32;
+margin-bottom:10px;
+}
+
+footer{
+margin-top:40px;
+text-align:center;
+}
+
+footer a{
+display:block;
+margin:5px;
+text-decoration:none;
+color:#2e7d32;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Unit Converter</h1>
+
+<p class="subtitle">
+Convert units instantly and accurately.
+</p>
+
+<label>Enter Value</label>
+<input type="number" id="value">
+
+<label>Select Conversion</label>
+
+<select id="conversion">
+<option value="km-mile">Kilometers to Miles</option>
+<option value="mile-km">Miles to Kilometers</option>
+<option value="kg-lb">Kilograms to Pounds</option>
+<option value="lb-kg">Pounds to Kilograms</option>
+<option value="c-f">Celsius to Fahrenheit</option>
+<option value="f-c">Fahrenheit to Celsius</option>
+<option value="cm-inch">Centimeters to Inches</option>
+<option value="inch-cm">Inches to Centimeters</option>
+</select>
+
+<button onclick="convertUnit()">
+Convert
+</button>
+
+<div class="result" id="result">
+
+<h2>Conversion Result</h2>
+
+<p><strong>Result:</strong> <span id="output"></span></p>
+
+</div>
+
+<div class="section">
+<h2>About Unit Converter</h2>
+<p>
+This free converter helps convert common units of length, weight and temperature.
+</p>
+</div>
+
+<footer>
+
+<p>© 2026 CalcVerse</p>
+
+<a href="index.html">Age Calculator</a>
+
+</footer>
+
+</div>
+
+<script>
+
+function convertUnit(){
+
+let value=parseFloat(document.getElementById("value").value);
+
+if(isNaN(value)){
+alert("Enter a value");
+return;
+}
+
+let type=document.getElementById("conversion").value;
+let result=0;
+
+if(type=="km-mile") result=value*0.621371;
+if(type=="mile-km") result=value*1.60934;
+if(type=="kg-lb") result=value*2.20462;
+if(type=="lb-kg") result=value*0.453592;
+if(type=="c-f") result=(value*9/5)+32;
+if(type=="f-c") result=(value-32)*5/9;
+if(type=="cm-inch") result=value*0.393701;
+if(type=="inch-cm") result=value*2.54;
+
+document.getElementById("output").innerHTML=result.toFixed(4);
+
+document.getElementById("result").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
