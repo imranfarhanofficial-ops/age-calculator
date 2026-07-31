@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=1200, user-scalable=yes">
 <title>CalcVerse - Free Online Calculators</title>
 <style>
   :root{
@@ -18,7 +18,8 @@
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{
-    font-family:'Segoe UI',Arial,Helvetica,sans-serif;
+    font-family:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    font-style:normal;
     color:var(--text-dark);
     background:var(--white);
     -webkit-font-smoothing:antialiased;
@@ -499,43 +500,13 @@
   }
   .mobile-nav.open{display:flex;}
 
-  /* ============ RESPONSIVE ============ */
-  @media (max-width:1024px){
-    .popular-grid{grid-template-columns:repeat(2,1fr);}
-    .category-grid{grid-template-columns:repeat(3,1fr);}
-    .why-grid{grid-template-columns:repeat(2,1fr);}
-    .recent-grid{grid-template-columns:repeat(2,1fr);}
-    .about-faq-grid{grid-template-columns:1fr;}
-    .footer-grid{grid-template-columns:repeat(2,1fr);}
-  }
-
-  @media (max-width:768px){
-    nav.main-nav{display:none;}
-    .header-search{display:none;}
-    .hero h1{font-size:30px;}
-    .hero .tagline{font-size:16px;}
-    .hero p{font-size:14px;}
-    .hero-search{flex-direction:column;box-shadow:none;border:none;gap:10px;background:none;}
-    .hero-search input{border:1px solid var(--border);border-radius:8px;background:var(--white);}
-    .hero-search button{border-radius:8px;padding:14px;justify-content:center;}
-    .section-title{font-size:21px;}
-    .popular-grid{grid-template-columns:1fr 1fr;gap:12px;}
-    .nav-arrow{display:none;}
-    .category-grid{grid-template-columns:1fr 1fr;gap:12px;}
-    .why-grid{grid-template-columns:1fr;}
-    .recent-grid{grid-template-columns:1fr 1fr;gap:12px;}
-    .about-stats{grid-template-columns:1fr 1fr;gap:16px;}
-    .footer-grid{grid-template-columns:1fr;gap:26px;}
-    .footer-bottom{flex-direction:column;text-align:center;}
-    .container, .section{padding-left:5%;padding-right:5%;}
-  }
-
-  @media (max-width:480px){
-    .popular-grid{grid-template-columns:1fr;}
-    .category-grid{grid-template-columns:1fr;}
-    .recent-grid{grid-template-columns:1fr;}
-    .hero h1{font-size:26px;}
-  }
+  /* Layout is intentionally fixed at desktop proportions.
+     The viewport meta tag (width=1200) makes mobile browsers
+     scale this exact desktop layout down to fit the screen —
+     users pinch-zoom to read, but every box/color/spacing
+     percentage stays identical to the desktop version. */
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+  body{min-width:1200px;}
 </style>
 </head>
 <body>
@@ -544,7 +515,7 @@
 <header>
   <div class="header-inner">
     <div class="header-left">
-      <button class="hamburger" onclick="document.getElementById('mobileNav').classList.toggle('open')">&#9776;</button>
+      <button class="hamburger">&#9776;</button>
       <a href="#" class="logo">CalcVerse</a>
     </div>
     <div class="header-search">
@@ -558,12 +529,6 @@
       <a href="#">Contact</a>
     </nav>
     <button class="theme-toggle">&#9789;</button>
-  </div>
-  <div class="mobile-nav" id="mobileNav">
-    <a href="#">Home</a>
-    <a href="#">All Calculators</a>
-    <a href="#">About Us</a>
-    <a href="#">Contact</a>
   </div>
 </header>
 
