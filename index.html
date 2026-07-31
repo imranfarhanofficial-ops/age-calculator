@@ -259,6 +259,32 @@ margin-bottom:15px;
 margin:8px 0;
 color:#555;
 }
+  .recently-used{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+margin:20px 0;
+}
+
+.recent-box{
+width:230px;
+height:60px;
+background:#fff;
+border:1px solid #ddd;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.recent-box:hover{
+transform:translateY(-3px);
+box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
 </style>
 </head>
 
@@ -461,10 +487,26 @@ margin-top:20px;
 <h3>Privacy Focused</h3>
 <p>Your data is never stored.</p>
 </div>
+  
+<h2>About CalcVerse</h2>
+  </div>
+    <div class="section">
+
+<h2 style="text-align:center;">🕘 Recently Used</h2>
+
+<div class="recently-used">
+
+<div class="recent-box">Age Calculator</div>
+
+<div class="recent-box">EMI Calculator</div>
+
+<div class="recent-box">Mortgage Calculator</div>
+
+<div class="recent-box">Calorie Calculator</div>
 
 </div>
 
-  </div>
+    </div>
 <h2>About CalcVerse</h2>
 
 <p>
