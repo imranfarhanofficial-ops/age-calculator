@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1200, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CalcVerse - Free Online Calculators</title>
 <style>
   :root{
@@ -504,13 +504,75 @@
   }
   .mobile-nav.open{display:flex;}
 
-  /* Layout is intentionally fixed at desktop proportions.
-     The viewport meta tag (width=1200) makes mobile browsers
-     scale this exact desktop layout down to fit the screen —
-     users pinch-zoom to read, but every box/color/spacing
-     percentage stays identical to the desktop version. */
   html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
-  body{min-width:1200px;}
+
+  /* ============ RESPONSIVE (readable, tighter gaps) ============ */
+  @media (max-width:1024px){
+    .popular-grid{grid-template-columns:repeat(2,1fr);}
+    .category-grid{grid-template-columns:repeat(3,1fr);}
+    .why-grid{grid-template-columns:repeat(2,1fr);}
+    .recent-grid{grid-template-columns:repeat(2,1fr);}
+    .about-faq-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:repeat(2,1fr);}
+  }
+
+  @media (max-width:768px){
+    .header-inner{padding:12px 4%;}
+    nav.main-nav{display:none;}
+    .header-search{display:none;}
+    .section{padding:36px 5%;}
+    .hero{padding:36px 5% 42px;}
+    .hero h1{font-size:30px;}
+    .hero .tagline{font-size:17px;}
+    .hero p{font-size:14.5px;}
+    .hero-search{flex-direction:column;box-shadow:none;border:none;gap:10px;background:none;}
+    .hero-search input{border:1px solid var(--border);border-radius:8px;background:var(--white);padding:14px 16px;font-size:15px;}
+    .hero-search button{border-radius:8px;padding:14px;justify-content:center;font-size:15px;}
+    .section-title{font-size:20px;margin-bottom:22px;}
+
+    .nav-arrow{display:none;}
+    .popular-grid{grid-template-columns:1fr 1fr;gap:12px;}
+    .calc-card{padding:20px 14px;}
+    .calc-icon{width:60px;height:60px;font-size:28px;margin-bottom:12px;}
+    .calc-card h3{font-size:16px;}
+    .calc-card p{font-size:13px;min-height:auto;margin-bottom:14px;}
+    .btn-green{padding:9px 16px;font-size:13.5px;width:100%;}
+
+    .category-grid{grid-template-columns:1fr 1fr;gap:12px;}
+    .category-card{padding:18px 14px;}
+    .category-icon{width:58px;height:58px;font-size:24px;margin-bottom:10px;}
+    .category-card h3{font-size:16px;margin-bottom:10px;}
+    .category-card ul li{font-size:13.5px;padding:4px 0;}
+
+    .why-grid{grid-template-columns:1fr;gap:12px;}
+    .why-card{padding:16px;gap:12px;}
+    .why-icon{width:48px;height:48px;min-width:48px;font-size:20px;}
+    .why-card h4{font-size:15.5px;}
+    .why-card p{font-size:13.5px;}
+
+    .recent-grid{grid-template-columns:1fr 1fr;gap:12px;}
+    .recent-card{padding:14px;}
+    .recent-icon{width:38px;height:38px;font-size:16px;}
+    .recent-card span{font-size:14px;}
+
+    .about-box, .faq-box{padding:20px;}
+    .about-stats{grid-template-columns:1fr 1fr;gap:18px;row-gap:20px;}
+    .about-stats .num{font-size:24px;}
+
+    .footer-grid{grid-template-columns:1fr 1fr;gap:26px;padding-bottom:24px;}
+    .footer-bottom{flex-direction:column;text-align:center;gap:6px;padding:16px 0;}
+  }
+
+  @media (max-width:480px){
+    .popular-grid{grid-template-columns:1fr;}
+    .category-grid{grid-template-columns:1fr;}
+    .recent-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:24px;}
+    .hero h1{font-size:26px;}
+    .calc-card{text-align:left;display:flex;flex-direction:column;align-items:flex-start;}
+    .calc-icon{margin-bottom:10px;}
+    .btn-green{width:auto;}
+  }
 </style>
 </head>
 <body>
@@ -519,7 +581,7 @@
 <header>
   <div class="header-inner">
     <div class="header-left">
-      <button class="hamburger">&#9776;</button>
+      <button class="hamburger" onclick="document.getElementById('mobileNav').classList.toggle('open')">&#9776;</button>
       <a href="#" class="logo">CalcVerse</a>
     </div>
     <div class="header-search">
@@ -533,6 +595,12 @@
       <a href="#">Contact</a>
     </nav>
     <button class="theme-toggle">&#9789;</button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#">Home</a>
+    <a href="#">All Calculators</a>
+    <a href="#">About Us</a>
+    <a href="#">Contact</a>
   </div>
 </header>
 
