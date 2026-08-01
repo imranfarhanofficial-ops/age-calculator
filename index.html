@@ -1,129 +1,669 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="_fZ1DV_6sYZH1a-rVxvsfLcFBu81vMxATSGE3KIIIsg" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CalcVerse — Free Online Calculators for Finance, Health, Math & More</title>
+<meta name="description" content="Free, accurate online calculators for finance, health, education and everyday math. No sign-up, no clutter — just the answer you need, on any device.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calcverse.example.com/">
+<meta name="theme-color" content="#1F6F4B">
 
-<title>CalcVerse - Free Online Calculators</title>
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="CalcVerse — Free Online Calculators">
+<meta property="og:description" content="Fast, accurate, free calculators for finance, health, education and everyday math. No sign-up required.">
+<meta property="og:url" content="https://calcverse.example.com/">
+<meta property="og:site_name" content="CalcVerse">
 
-<meta name="description" content="CalcVerse offers free online calculators including Age Calculator, EMI Calculator, BMI Calculator, Date Calculator, GST Calculator and more.">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CalcVerse — Free Online Calculators">
+<meta name="twitter:description" content="Fast, accurate, free calculators for finance, health, education and everyday math.">
+
+<!-- Structured data: WebSite + search -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CalcVerse",
+  "url": "https://calcverse.example.com/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://calcverse.example.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- Structured data: FAQ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are all the calculators on CalcVerse really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every calculator on CalcVerse is free to use, with no hidden fees, subscriptions, or usage limits."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to create an account to use a calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No account is needed. Open any calculator and start entering numbers right away."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate are CalcVerse's results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each calculator uses standard, widely accepted formulas for its field, and results update instantly as you type."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use CalcVerse calculators on my phone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every calculator is built to work smoothly on phones, tablets, and desktop browsers alike."
+      }
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+  :root{
+    --paper:#F7F7F2;
+    --ink:#17241C;
+    --ink-soft:#54615A;
+    --ledger:#1F6F4B;
+    --ledger-deep:#154E36;
+    --amber:#E8A33D;
+    --amber-deep:#C7841F;
+    --line:#DCE3DC;
+    --card:#FFFFFF;
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Inter',system-ui,-apple-system,sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--font-body);
+    color:var(--ink);
+    background:
+      linear-gradient(90deg, rgba(23,36,28,0.035) 1px, transparent 1px) 0 0/28px 28px,
+      linear-gradient(rgba(23,36,28,0.035) 1px, transparent 1px) 0 0/28px 28px,
+      var(--paper);
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  button{cursor:pointer;font-family:inherit;border:none;background:none;}
+  .mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums;}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+  .skip-link{position:absolute;left:-999px;top:0;background:var(--ledger);color:#fff;padding:10px 16px;z-index:999;border-radius:0 0 8px 0;}
+  .skip-link:focus{left:0;}
+  :focus-visible{outline:2px solid var(--amber-deep);outline-offset:2px;}
 
-body{
-background:#f5f7f5;
-color:#222;
-padding:0;
-line-height:1.7;
-}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 5%;}
 
-.container{
-max-width:1400px;
-margin:auto;
-background:#fff;
-padding:15px 20px;
-}
+  /* ---------- HEADER ---------- */
+  header{
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:100;
+  }
+  .header-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 5%;gap:18px;max-width:1180px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:21px;color:var(--ink);}
+  .brand .dot{color:var(--amber-deep);}
+  .header-mid{display:flex;align-items:center;gap:22px;}
+  nav.main-nav{display:flex;gap:22px;font-size:14.5px;font-weight:500;color:var(--ink-soft);}
+  nav.main-nav a:hover{color:var(--ledger);}
+  .header-search{
+    display:flex;align-items:center;background:var(--paper);border:1px solid var(--line);
+    border-radius:8px;padding:8px 12px;min-width:190px;
+  }
+  .header-search input{border:none;outline:none;background:none;font-size:13.5px;flex:1;color:var(--ink);}
+  .hamburger{display:none;font-size:20px;color:var(--ink);}
+  .mobile-nav{display:none;flex-direction:column;background:var(--card);border-top:1px solid var(--line);}
+  .mobile-nav a{padding:12px 5%;border-bottom:1px solid var(--line);font-size:14.5px;}
+  .mobile-nav.open{display:flex;}
 
-h1{
-text-align:center;
-font-size:38px;
-margin-bottom:15px;
-color:#2e7d32;
-}
+  /* ---------- HERO ---------- */
+  .hero{padding:44px 0 40px;border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);
+    font-size:12px;letter-spacing:0.06em;color:var(--ledger-deep);
+    background:rgba(31,111,75,0.08);border:1px solid rgba(31,111,75,0.18);
+    padding:5px 10px;border-radius:20px;margin-bottom:16px;text-transform:uppercase;
+  }
+  .hero h1{font-family:var(--font-display);font-size:38px;line-height:1.15;font-weight:700;margin-bottom:14px;}
+  .hero h1 .accent{color:var(--ledger);}
+  .hero p.lede{color:var(--ink-soft);font-size:15.5px;line-height:1.6;max-width:480px;margin-bottom:22px;}
+  .hero-search{display:flex;max-width:440px;background:var(--card);border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 2px 10px rgba(23,36,28,0.05);}
+  .hero-search input{flex:1;border:none;outline:none;padding:13px 15px;font-size:14.5px;}
+  .hero-search button{background:var(--ledger);color:#fff;padding:0 20px;font-weight:600;font-size:14px;}
+  .hero-search button:hover{background:var(--ledger-deep);}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .chip{font-size:13px;font-weight:500;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);padding:6px 13px;border-radius:20px;}
+  .chip:hover{border-color:var(--ledger);color:var(--ledger);}
 
-.subtitle{
-text-align:center;
-margin-bottom:25px;
-color:#666;
-}
+  /* signature: working calculator widget */
+  .calc-widget{
+    background:var(--ink);border-radius:16px;padding:16px;max-width:300px;margin:0 auto;
+    box-shadow:0 14px 34px rgba(23,36,28,0.22);
+  }
+  .calc-screen{
+    background:#0E1712;border-radius:9px;padding:20px 16px;margin-bottom:14px;text-align:right;
+  }
+  .calc-screen .label{font-family:var(--font-mono);font-size:10.5px;color:#7C9585;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;}
+  .calc-screen .display{font-family:var(--font-mono);font-size:32px;color:var(--amber);font-weight:600;word-break:break-all;line-height:1.1;}
+  .calc-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .calc-keys button{
+    font-family:var(--font-mono);font-size:16px;font-weight:600;color:#fff;
+    background:#243428;border-radius:8px;padding:13px 0;transition:transform .05s ease, background .15s ease;
+  }
+  .calc-keys button:active{transform:scale(0.94);}
+  .calc-keys button.op{background:var(--ledger);}
+  .calc-keys button.op:hover{background:var(--ledger-deep);}
+  .calc-keys button.fn{background:#3A4A3E;}
+  .calc-keys button.eq{background:var(--amber);color:var(--ink);grid-row:span 1;}
+  .calc-keys button.eq:hover{background:var(--amber-deep);}
+  .calc-keys button.zero{grid-column:span 2;}
 
-label{
-font-size:20px;
-font-weight:bold;
-display:block;
-margin-bottom:10px;
-}
+  /* ---------- STATS BAR ---------- */
+  .stats-bar{border-bottom:1px solid var(--line);background:var(--card);}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);padding:22px 0;}
+  .stat{text-align:center;border-left:1px solid var(--line);}
+  .stat:first-child{border-left:none;}
+  .stat .num{font-family:var(--font-mono);font-size:24px;font-weight:600;color:var(--ledger);}
+  .stat .lbl{font-size:12.5px;color:var(--ink-soft);margin-top:2px;}
 
-input{
-width:100%;
-padding:15px;
-font-size:18px;
-border:1px solid #ccc;
-border-radius:5px;
-margin-bottom:15px;
-}
-#birthYear,
-#targetYear{
-width:34%;
-display:inline-block;
-}
-button{
-width:100%;
-padding:15px;
-font-size:22px;
-background:#2e7d32;
-color:white;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
-}
+  /* ---------- SECTIONS ---------- */
+  .section{padding:44px 0;}
+  .section-head{margin-bottom:24px;}
+  .section-head .kicker{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ledger-deep);margin-bottom:6px;display:block;}
+  .section-head h2{font-family:var(--font-display);font-size:25px;font-weight:700;}
+  .section-alt{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
 
-button:hover{
-opacity:0.9;
-}
+  /* popular calculators */
+  .popular-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .calc-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 16px;position:relative;}
+  .calc-card:hover{border-color:var(--ledger);}
+  .calc-card .keytag{
+    font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--ledger-deep);
+    background:rgba(31,111,75,0.09);display:inline-block;padding:3px 8px;border-radius:5px;margin-bottom:12px;
+  }
+  .calc-card h3{font-size:16.5px;font-weight:700;margin-bottom:6px;}
+  .calc-card p{color:var(--ink-soft);font-size:13px;line-height:1.5;margin-bottom:14px;}
+  .btn-ledger{
+    display:inline-block;background:var(--ledger);color:#fff;padding:8px 18px;border-radius:7px;font-size:13.5px;font-weight:600;
+  }
+  .btn-ledger:hover{background:var(--ledger-deep);}
 
-.card{
-background:#e8f5e9;
-border:1px solid #c8e6c9;
-padding:20px;
-border-radius:10px;
-margin-top:20px;
-}
+  /* categories */
+  .category-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+  .category-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 16px;}
+  .category-card h3{font-family:var(--font-display);font-size:16px;font-weight:700;margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed var(--line);}
+  .category-card ul li{padding:3px 0;}
+  .category-card ul li a{font-size:13px;color:var(--ink-soft);}
+  .category-card ul li a:hover{color:var(--ledger);}
+  .view-all{display:inline-block;margin-top:10px;color:var(--ledger-deep);font-weight:600;font-size:13px;}
 
-.section{
-margin-top:40px;
-}
+  /* why + long copy */
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .why-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;}
+  .why-card .mark{font-family:var(--font-mono);color:var(--amber-deep);font-size:13px;font-weight:600;margin-bottom:8px;display:block;}
+  .why-card h4{font-size:15px;font-weight:700;margin-bottom:4px;}
+  .why-card p{font-size:13px;color:var(--ink-soft);line-height:1.5;}
 
-.faq{
-background:#f8f8f8;
-border:1px solid #e0e0e0;
-padding:20px;
-margin-top:20px;
-border-radius:10px;
-}
+  .about-copy{max-width:760px;}
+  .about-copy p{color:var(--ink-soft);font-size:14.5px;line-height:1.75;margin-bottom:14px;}
+  .about-copy strong{color:var(--ink);}
 
-h2{
-margin-bottom:15px;
-color:#2e7d32;
-font-size:32px;
-}
+  /* faq */
+  .faq-list{max-width:760px;}
+  .faq-item{border-bottom:1px solid var(--line);padding:14px 0;}
+  .faq-item summary{cursor:pointer;font-weight:600;font-size:14.5px;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+";font-family:var(--font-mono);font-size:18px;color:var(--ledger);}
+  .faq-item[open] summary::after{content:"–";}
+  .faq-item p{margin-top:10px;color:var(--ink-soft);font-size:13.5px;line-height:1.6;}
 
-footer{
-margin-top:40px;
-text-align:center;
-border-top:1px solid #ddd;
-padding-top:20px;
-}
-footer a{
-display:block;
-margin:10px 0;
-color:#2e7d32;
-font-weight:bold;
-text-decoration:none;
-}
-  select{
-width:31%;
-padding:15px;
-font-size:18px;
-border:1px solid #ccc;
-border-radius:5px;
-margin-bottom:15px;
-}
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:#B9C4BC;padding:40px 0 0;}
+  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:26px;padding-bottom:26px;}
+  .footer-grid h4{color:#fff;font-family:var(--font-display);font-size:15px;margin-bottom:12px;}
+  .footer-grid .brand{color:#fff;margin-bottom:10px;}
+  .footer-grid p{font-size:13px;line-height:1.6;margin-bottom:14px;}
+  .footer-grid ul li{padding:5px 0;font-size:13px;}
+  .footer-grid ul li a:hover{color:#fff;}
+  .social-icons{display:flex;gap:9px;}
+  .social-icons a{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.09);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.12);padding:15px 0;display:flex;justify-content:space-between;font-size:12.5px;flex-wrap:wrap;gap:8px;}
+  .footer-bottom .mono{color:#8FA096;}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:1024px){
+    .popular-grid{grid-template-columns:repeat(2,1fr);}
+    .category-grid{grid-template-columns:repeat(3,1fr);}
+    .why-grid{grid-template-columns:repeat(2,1fr);}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .hero-grid{grid-template-columns:1fr;}
+    .calc-widget{margin:0;}
+  }
+  @media (max-width:768px){
+    nav.main-nav{display:none;}
+    .header-mid .header-search{display:none;}
+    .hamburger{display:block;}
+    .hero{padding:26px 0 28px;}
+    .hero h1{font-size:28px;}
+    .hero p.lede{font-size:14px;}
+    .stats-grid{grid-template-columns:repeat(2,1fr);row-gap:14px;}
+    .stat:nth-child(3){border-left:none;}
+    .section{padding:28px 0;}
+    .section-head h2{font-size:20px;}
+    .popular-grid{grid-template-columns:1fr 1fr;gap:10px;}
+    .category-grid{grid-template-columns:1fr 1fr;gap:10px;}
+    .why-grid{grid-template-columns:1fr;gap:10px;}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:20px;}
+    .calc-widget{max-width:100%;}
+    .calc-screen .display{font-size:26px;}
+  }
+  @media (max-width:480px){
+    .popular-grid{grid-template-columns:1fr;}
+    .category-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:24px;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header>
+  <div class="header-inner">
+    <a href="#" class="brand"><span>Calc</span><span class="dot">Verse</span></a>
+    <div class="header-mid">
+      <nav class="main-nav" aria-label="Primary">
+        <a href="#">Home</a>
+        <a href="#categories">All Calculators</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+      </nav>
+      <form class="header-search" role="search" action="#" onsubmit="return false;">
+        <label for="headerSearch" class="visually-hidden">Search calculators</label>
+        <input id="headerSearch" type="text" placeholder="Search calculators…">
+      </form>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" onclick="document.getElementById('mobileNav').classList.toggle('open')">&#9776;</button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#">Home</a>
+    <a href="#categories">All Calculators</a>
+    <a href="#">About Us</a>
+    <a href="#">Contact</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Free &middot; No sign-up &middot; Instant results</span>
+        <h1>Free online calculators for <span class="accent">the numbers that matter</span></h1>
+        <p class="lede">CalcVerse gives you fast, accurate calculators for finance, health, education and everyday math — no clutter, no account, just the answer you came for.</p>
+        <form class="hero-search" role="search" action="#" onsubmit="return false;">
+          <label for="heroSearch" class="visually-hidden">Search calculators</label>
+          <input id="heroSearch" type="text" placeholder="Try “EMI calculator” or “BMI”…">
+          <button type="submit">Search</button>
+        </form>
+        <div class="chips">
+          <a class="chip" href="#categories">Finance</a>
+          <a class="chip" href="#categories">Health</a>
+          <a class="chip" href="#categories">Education</a>
+          <a class="chip" href="#categories">Utility</a>
+          <a class="chip" href="#categories">Math</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="calc-widget" role="group" aria-label="Try a live calculator">
+          <div class="calc-screen">
+            <div class="label">Try it — it works</div>
+            <div class="display mono" id="calcDisplay">0</div>
+          </div>
+          <div class="calc-keys">
+            <button class="fn" onclick="calcClear()">AC</button>
+            <button class="fn" onclick="calcToggleSign()">±</button>
+            <button class="fn" onclick="calcPercent()">%</button>
+            <button class="op" onclick="calcPerformOp('÷')">÷</button>
+
+            <button onclick="calcInputDigit('7')">7</button>
+            <button onclick="calcInputDigit('8')">8</button>
+            <button onclick="calcInputDigit('9')">9</button>
+            <button class="op" onclick="calcPerformOp('×')">×</button>
+
+            <button onclick="calcInputDigit('4')">4</button>
+            <button onclick="calcInputDigit('5')">5</button>
+            <button onclick="calcInputDigit('6')">6</button>
+            <button class="op" onclick="calcPerformOp('-')">−</button>
+
+            <button onclick="calcInputDigit('1')">1</button>
+            <button onclick="calcInputDigit('2')">2</button>
+            <button onclick="calcInputDigit('3')">3</button>
+            <button class="op" onclick="calcPerformOp('+')">+</button>
+
+            <button class="zero" onclick="calcInputDigit('0')">0</button>
+            <button onclick="calcInputDot()">.</button>
+            <button class="eq" onclick="calcEquals()">=</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STATS ================= -->
+  <section class="stats-bar">
+    <div class="wrap stats-grid">
+      <div class="stat"><div class="num mono">50+</div><div class="lbl">Calculators</div></div>
+      <div class="stat"><div class="num mono">100%</div><div class="lbl">Free</div></div>
+      <div class="stat"><div class="num mono">0</div><div class="lbl">Sign-ups required</div></div>
+      <div class="stat"><div class="num mono">24/7</div><div class="lbl">Available</div></div>
+    </div>
+  </section>
+
+  <!-- ================= POPULAR ================= -->
+  <section class="section" id="popular">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Start here</span>
+        <h2>Most-used calculators</h2>
+      </div>
+      <div class="popular-grid">
+        <article class="calc-card">
+          <span class="keytag">fx · date</span>
+          <h3>Age Calculator</h3>
+          <p>Work out an exact age in years, months and days from any birth date.</p>
+          <a href="#" class="btn-ledger">Calculate now</a>
+        </article>
+        <article class="calc-card">
+          <span class="keytag">fx · health</span>
+          <h3>BMI Calculator</h3>
+          <p>Check your Body Mass Index and see which healthy-weight range you fall into.</p>
+          <a href="#" class="btn-ledger">Calculate now</a>
+        </article>
+        <article class="calc-card">
+          <span class="keytag">fx · finance</span>
+          <h3>EMI Calculator</h3>
+          <p>Work out the monthly instalment on any loan before you sign for it.</p>
+          <a href="#" class="btn-ledger">Calculate now</a>
+        </article>
+        <article class="calc-card">
+          <span class="keytag">fx · health</span>
+          <h3>Calorie Calculator</h3>
+          <p>Estimate the daily calories your body needs based on your activity level.</p>
+          <a href="#" class="btn-ledger">Calculate now</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CATEGORIES ================= -->
+  <section class="section section-alt" id="categories">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Browse</span>
+        <h2>Every calculator, sorted by category</h2>
+      </div>
+      <div class="category-grid">
+        <div class="category-card">
+          <h3>Finance</h3>
+          <ul>
+            <li><a href="#">EMI Calculator</a></li>
+            <li><a href="#">Loan Calculator</a></li>
+            <li><a href="#">Mortgage Calculator</a></li>
+            <li><a href="#">Compound Interest</a></li>
+            <li><a href="#">Discount Calculator</a></li>
+          </ul>
+          <a href="#" class="view-all">View all &rarr;</a>
+        </div>
+        <div class="category-card">
+          <h3>Health</h3>
+          <ul>
+            <li><a href="#">BMI Calculator</a></li>
+            <li><a href="#">Calorie Calculator</a></li>
+            <li><a href="#">BMR Calculator</a></li>
+            <li><a href="#">Body Fat Calculator</a></li>
+            <li><a href="#">Ideal Weight Calculator</a></li>
+          </ul>
+          <a href="#" class="view-all">View all &rarr;</a>
+        </div>
+        <div class="category-card">
+          <h3>Education</h3>
+          <ul>
+            <li><a href="#">GPA Calculator</a></li>
+            <li><a href="#">Percentage Calculator</a></li>
+            <li><a href="#">Grade Calculator</a></li>
+            <li><a href="#">CGPA Calculator</a></li>
+            <li><a href="#">Average Calculator</a></li>
+          </ul>
+          <a href="#" class="view-all">View all &rarr;</a>
+        </div>
+        <div class="category-card">
+          <h3>Utility</h3>
+          <ul>
+            <li><a href="#">Age Calculator</a></li>
+            <li><a href="#">Date Calculator</a></li>
+            <li><a href="#">Time Calculator</a></li>
+            <li><a href="#">Unit Converter</a></li>
+            <li><a href="#">Fuel Cost Calculator</a></li>
+          </ul>
+          <a href="#" class="view-all">View all &rarr;</a>
+        </div>
+        <div class="category-card">
+          <h3>Math</h3>
+          <ul>
+            <li><a href="#">Scientific Calculator</a></li>
+            <li><a href="#">Percentage Calculator</a></li>
+            <li><a href="#">Fraction Calculator</a></li>
+            <li><a href="#">Random Number Gen.</a></li>
+            <li><a href="#">Equation Solver</a></li>
+          </ul>
+          <a href="#" class="view-all">View all &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHY ================= -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Why CalcVerse</span>
+        <h2>Built to be the fastest way to an answer</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <span class="mark">01</span>
+          <h4>Completely free</h4>
+          <p>Every calculator stays free, with no premium tier or usage cap.</p>
+        </div>
+        <div class="why-card">
+          <span class="mark">02</span>
+          <h4>Accurate by default</h4>
+          <p>Standard, well-tested formulas power every result you see.</p>
+        </div>
+        <div class="why-card">
+          <span class="mark">03</span>
+          <h4>Built for mobile</h4>
+          <p>Every layout adapts cleanly to phones, tablets and desktops.</p>
+        </div>
+        <div class="why-card">
+          <span class="mark">04</span>
+          <h4>Privacy respected</h4>
+          <p>No account, no tracking of your inputs — nothing is stored.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT / SEO COPY ================= -->
+  <section class="section section-alt">
+    <div class="wrap about-copy">
+      <div class="section-head">
+        <span class="kicker">About</span>
+        <h2>Why a good calculator still matters</h2>
+      </div>
+      <p>Spreadsheets and search-engine snippets can approximate an answer, but they rarely show their work or match the exact formula a topic calls for. <strong>CalcVerse</strong> builds a single, focused calculator for each real-world question — a mortgage payment, a body-mass index, a final grade — so the inputs match what you actually have on hand, and the result is one you can trust without digging through a manual.</p>
+      <p>The catalogue spans finance, health, education, everyday utility and core math, and keeps growing. Every calculator loads instantly, works without an account, and is designed first for the phone in your hand — because most people reach for a calculator between tasks, not at a desk.</p>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">FAQ</span>
+        <h2>Common questions</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Are all the calculators on CalcVerse really free?</summary>
+          <p>Yes. Every calculator on CalcVerse is free to use, with no hidden fees, subscriptions, or usage limits.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need to create an account to use a calculator?</summary>
+          <p>No account is needed. Open any calculator and start entering numbers right away.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How accurate are CalcVerse's results?</summary>
+          <p>Each calculator uses standard, widely accepted formulas for its field, and results update instantly as you type.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I use CalcVerse calculators on my phone?</summary>
+          <p>Yes. Every calculator is built to work smoothly on phones, tablets, and desktop browsers alike.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <a href="#" class="brand" style="font-size:19px;">CalcVerse</a>
+      <p>Free, accurate calculators for finance, health, education and everyday math — no sign-up required.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="X (Twitter)">x</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="YouTube">&#9658;</a>
+      </div>
+    </div>
+    <div>
+      <h4>Quick links</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#categories">All calculators</a></li>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Contact us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Terms of use</a></li>
+        <li><a href="#">Disclaimer</a></li>
+        <li><a href="#">Sitemap</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Popular calculators</h4>
+      <ul>
+        <li><a href="#">Age calculator</a></li>
+        <li><a href="#">BMI calculator</a></li>
+        <li><a href="#">EMI calculator</a></li>
+        <li><a href="#">Loan calculator</a></li>
+        <li><a href="#">Calorie calculator</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span class="mono">© 2026 CalcVerse. All rights reserved.</span>
+    <span>Made with care, for everyone.</span>
+    <a href="#main" class="mono">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+  // ---- Minimal, real four-function calculator (no eval) ----
+  let calcState = {display:'0', prevValue:null, operator:null, waitingForOperand:false};
+  function calcUpdateDisplay(){document.getElementById('calcDisplay').textContent = calcState.display;}
+  function calcInputDigit(d){
+    if(calcState.waitingForOperand){calcState.display=d; calcState.waitingForOperand=false;}
+    else{calcState.display = calcState.display==='0' ? d : calcState.display+d;}
+    calcUpdateDisplay();
+  }
+  function calcInputDot(){
+    if(calcState.waitingForOperand){calcState.display='0.'; calcState.waitingForOperand=false; calcUpdateDisplay(); return;}
+    if(calcState.display.indexOf('.')===-1){calcState.display+='.';}
+    calcUpdateDisplay();
+  }
+  function calcClear(){calcState={display:'0',prevValue:null,operator:null,waitingForOperand:false}; calcUpdateDisplay();}
+  function calcToggleSign(){calcState.display = String(parseFloat(calcState.display)*-1); calcUpdateDisplay();}
+  function calcPercent(){calcState.display = String(parseFloat(calcState.display)/100); calcUpdateDisplay();}
+  function calcCompute(a,b,op){
+    switch(op){
+      case '+': return a+b;
+      case '-': return a-b;
+      case '×': return a*b;
+      case '÷': return b===0 ? 0 : a/b;
+      default: return b;
+    }
+  }
+  function calcPerformOp(next){
+    const inputValue = parseFloat(calcState.display);
+    if(calcState.prevValue===null){calcState.prevValue=inputValue;}
+    else if(calcState.operator){
+      const result = calcCompute(calcState.prevValue, inputValue, calcState.operator);
+      calcState.display = String(Math.round(result*1e10)/1e10);
+      calcState.prevValue = result;
+      calcUpdateDisplay();
+    }
+    calcState.waitingForOperand = true;
+    calcState.operator = next;
+  }
+  function calcEquals(){
+    const inputValue = parseFloat(calcState.display);
+    if(calcState.operator!==null && calcState.prevValue!==null){
+      const result = calcCompute(calcState.prevValue, inputValue, calcState.operator);
+      calcState.display = String(Math.round(result*1e10)/1e10);
+      calcState.prevValue = null;
+      calcState.operator = null;
+      calcState.waitingForOperand = true;
+      calcUpdateDisplay();
+    }
+  }
+</script>
+</body>
+</html>
