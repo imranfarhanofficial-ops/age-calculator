@@ -142,7 +142,7 @@ nav a:hover{ text-decoration:underline; }
   position:relative;
   background:linear-gradient(180deg,var(--green-light) 0%, var(--bg) 100%);
   text-align:center;
-  padding:70px 20px 60px;
+  padding:35px 20px 30px;
   overflow:hidden;
 }
 
@@ -157,7 +157,7 @@ nav a:hover{ text-decoration:underline; }
 .hero .deco.right{ right:6%; top:20%; }
 
 .hero h1{
-  font-size:44px;
+  font-size:38px;
   color:var(--green);
   margin-bottom:12px;
 }
@@ -210,16 +210,18 @@ nav a:hover{ text-decoration:underline; }
 
 /* ---------- Section headings ---------- */
 .section{
-  padding:50px 20px;
+  padding:25px 20px;
 }
 .section.alt{ background:var(--card-bg); }
 
 .section-title{
   text-align:center;
-  font-size:28px;
-  color:var(--green);
-  margin-bottom:36px;
+  font-size:30px;
+  margin-bottom:18px;
+  color:#111;
+  font-weight:700;
 }
+  
 
 /* ---------- Popular calculators carousel ---------- */
 .carousel-wrap{
@@ -230,8 +232,10 @@ nav a:hover{ text-decoration:underline; }
 
 .carousel{
   display:flex;
-  gap:24px;
-  overflow-x:auto;
+  gap:14px;
+  overflow:hidden;
+  flex-wrap:nowrap;
+  justify-content:space-between;
   scroll-behavior:smooth;
   padding:6px;
   scrollbar-width:none;
@@ -239,11 +243,12 @@ nav a:hover{ text-decoration:underline; }
 .carousel::-webkit-scrollbar{ display:none; }
 
 .calc-card{
-  flex:0 0 260px;
+  width:23%;
+  flex:none;
   background:var(--card-bg);
   border:1px solid var(--green-border);
   border-radius:10px;
-  padding:26px 20px;
+  padding:18px 15px;
   text-align:center;
 }
 
@@ -260,13 +265,13 @@ nav a:hover{ text-decoration:underline; }
 }
 
 .calc-card h3{
-  font-size:19px;
+  font-size:16px;
   margin-bottom:10px;
 }
 
 .calc-card p{
   color:var(--muted);
-  font-size:14px;
+  font-size:12px;
   margin-bottom:18px;
   min-height:44px;
 }
@@ -274,13 +279,13 @@ nav a:hover{ text-decoration:underline; }
 .calc-btn{
   display:inline-block;
   width:100%;
-  padding:11px;
+  padding:8px;
   background:var(--green);
   color:#fff;
   border:none;
   border-radius:6px;
   font-weight:bold;
-  font-size:15px;
+  font-size:13px;
 }
 .calc-btn:hover{ background:var(--green-dark); }
 
@@ -306,7 +311,7 @@ nav a:hover{ text-decoration:underline; }
 .categories-grid{
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  gap:24px;
+  gap:16px;
   max-width:1300px;
   margin:auto;
 }
@@ -315,7 +320,7 @@ nav a:hover{ text-decoration:underline; }
   background:var(--card-bg);
   border:1px solid var(--green-border);
   border-radius:10px;
-  padding:26px 20px;
+  padding:18px 14px;
   text-align:center;
 }
 
@@ -353,7 +358,7 @@ nav a:hover{ text-decoration:underline; }
 .why-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:24px;
+  gap:16px;
   max-width:1300px;
   margin:auto;
 }
@@ -365,7 +370,7 @@ nav a:hover{ text-decoration:underline; }
   background:var(--card-bg);
   border:1px solid var(--green-border);
   border-radius:10px;
-  padding:22px;
+  padding:16px;
 }
 
 .why-icon{
@@ -386,7 +391,7 @@ nav a:hover{ text-decoration:underline; }
 .recent-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:20px;
+  gap:14px;
   max-width:1300px;
   margin:auto;
 }
@@ -411,7 +416,7 @@ nav a:hover{ text-decoration:underline; }
 .about-faq-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:30px;
+  gap:18px;
   max-width:1300px;
   margin:auto;
 }
