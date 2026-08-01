@@ -909,89 +909,21 @@
         </div>
     </footer>
 <script>
+    const calculators = [
 
-const calculators = [
-
-{name:"Age Calculator",url:"/age-calculator/"},
-{name:"BMI Calculator",url:"/bmi-calculator/"},
-{name:"EMI Calculator",url:"/emi-calculator/"},
-{name:"Calorie Calculator",url:"/calorie-calculator/"},
-{name:"Loan Calculator",url:"/loan-calculator/"},
-{name:"Mortgage Calculator",url:"/mortgage-calculator/"},
-{name:"Compound Interest Calculator",url:"/compound-interest-calculator/"},
-{name:"Discount Calculator",url:"/discount-calculator/"},
-{name:"BMR Calculator",url:"/bmr-calculator/"},
-{name:"Body Fat Calculator",url:"/body-fat-calculator/"},
-{name:"Ideal Weight Calculator",url:"/ideal-weight-calculator/"},
-{name:"GPA Calculator",url:"/gpa-calculator/"},
-{name:"Percentage Calculator",url:"/percentage-calculator/"},
-{name:"Grade Calculator",url:"/grade-calculator/"},
-{name:"CGPA Calculator",url:"/cgpa-calculator/"},
-{name:"Average Calculator",url:"/average-calculator/"},
-{name:"Date Calculator",url:"/date-calculator/"},
-{name:"Time Calculator",url:"/time-calculator/"},
-{name:"Unit Converter",url:"/unit-converter/"},
-{name:"Fuel Cost Calculator",url:"/fuel-cost-calculator/"},
-{name:"Scientific Calculator",url:"/scientific-calculator/"},
-{name:"Fraction Calculator",url:"/fraction-calculator/"},
-{name:"Random Number Generator",url:"/random-number-generator/"},
-{name:"Equation Solver",url:"/equation-solver/"}
+{name:"Age Calculator",url:"index.html"},
+{name:"BMI Calculator",url:"bmi-calculator.html"},
+{name:"EMI Calculator",url:"emi-calculator.html"},
+{name:"Calorie Calculator",url:"calorie-calculator.html"},
+{name:"Loan Calculator",url:"loan-calculator.html"},
+{name:"Mortgage Calculator",url:"mortgage-calculator.html"},
+{name:"Compound Interest Calculator",url:"compound-interest-calculator.html"},
+{name:"Discount Calculator",url:"discount-calculator.html"},
+{name:"Percentage Calculator",url:"percentage-calculator.html"},
+{name:"Date Calculator",url:"date-calculator.html"},
+{name:"Unit Converter",url:"unit-converter.html"}
 
 ];
-
-function setupSearch(inputId,resultId){
-
-const input=document.getElementById(inputId);
-const results=document.getElementById(resultId);
-
-input.addEventListener("input",function(){
-
-const value=this.value.toLowerCase();
-
-results.innerHTML="";
-
-if(value===""){
-results.style.display="none";
-return;
-}
-
-const filtered=calculators.filter(c=>c.name.toLowerCase().includes(value));
-
-filtered.forEach(item=>{
-
-const div=document.createElement("div");
-
-div.textContent=item.name;
-
-div.onclick=function(){
-
-window.location.href=item.url;
-
-};
-
-results.appendChild(div);
-
-});
-
-results.style.display=filtered.length?"block":"none";
-
-});
-
-document.addEventListener("click",function(e){
-
-if(!input.contains(e.target)&&!results.contains(e.target)){
-
-results.style.display="none";
-
-}
-
-});
-
-}
-
-setupSearch("navSearch","navResults");
-setupSearch("mainSearch","mainResults");
-
 </script>
 </body>
 </html>
