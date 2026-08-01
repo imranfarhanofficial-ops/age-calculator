@@ -598,8 +598,9 @@
         <div class="nav-search">
             <input type="text" id="navSearch" placeholder="Search calculators...">
             <i class="fa-solid fa-magnifying-glass"></i>
+            <div id="navResults" class="search-results"></div>
+            </div>
         </div>
-        <div id="navResults" class="search-results"></div>
         <div class="nav-links">
             <a href="#">Home</a>
             <a href="#">All Calculators</a>
@@ -618,8 +619,9 @@
         <div class="main-search">
             <input type="text" id="mainSearch" placeholder="Search calculators...">
             <button><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            <div id="mainResults" class="search-results"></div>
+            </div>
         </div>
-        <div id="mainResults" class="search-results"></div>
     </section>
 
     <div class="container">
@@ -924,6 +926,58 @@
 {name:"Unit Converter",url:"unit-converter.html"}
 
 ];
+    const navSearch = document.getElementById("navSearch");
+const mainSearch = document.getElementById("mainSearch");
+const navResults = document.getElementById("navResults");
+const mainResults = document.getElementById("mainResults");
+
+function showResults(input, resultBox) {
+    const keyword = input.value.toLowerCase().trim();
+
+    if (keyword === "") {
+        resultBox.style.display = "none";
+        resultBox.innerHTML = "";
+        return;
+    }
+
+    const matches = calculators.filter(c =>
+        c.name.toLowerCase().includes(keyword)
+    );
+
+    resultBox.innerHTML = "";
+
+    if (matches.length === 0) {
+        resultBox.innerHTML = "<div>No calculator found</div>";
+    } else {
+        matches.forEach(c => {
+            const item = document.createElement("div");
+            item.textContent = c.name;
+            item.onclick = () => {
+                window.location.href = c.url;
+            };
+            resultBox.appendChild(item);
+        });
+    }
+
+    resultBox.style.display = "block";
+}
+
+navSearch.addEventListener("input", () => {
+    showResults(navSearch, navResults);
+});
+
+mainSearch.addEventListener("input", () => {
+    showResults(mainSearch, mainResults);
+});
+
+document.addEventListener("click", function(e){
+    if(!e.target.closest(".nav-search")){
+        navResults.style.display="none";
+    }
+    if(!e.target.closest(".main-search")){
+        mainResults.style.display="none";
+    }
+});
 </script>
 </body>
 </html>
