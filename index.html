@@ -7,23 +7,23 @@
     <!-- Google Fonts (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* --- Root Variables & Reset --- */
         :root {
-            --primary-dark: #064e3b;
-            --primary-green: #047857;
-            --primary-hover: #065f46;
-            --bg-light: #f8fafc;
+            --primary-dark: #004d28;
+            --primary-green: #0f6e38;
+            --primary-hover: #0a5229;
+            --bg-light: #f4f8f5;
             --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
+            --text-main: #0f172a;      /* টেক্সট আরও ডার্ক ও স্পষ্ট করা হয়েছে */
+            --text-muted: #334155;     /* সাব-টেক্সট আরও ডার্ক ও হাইলাইটেড */
             --border-color: #e2e8f0;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 10px rgba(0,0,0,0.06);
             --radius-lg: 12px;
             --radius-md: 8px;
         }
@@ -39,6 +39,7 @@
             background-color: var(--bg-light);
             color: var(--text-main);
             line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
         a {
@@ -50,7 +51,7 @@
         header {
             background-color: var(--primary-dark);
             color: white;
-            padding: 12px 5%;
+            padding: 14px 6%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -74,20 +75,18 @@
             font-size: 24px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
         }
 
         .nav-search {
             position: relative;
             flex-grow: 1;
-            max-width: 400px;
+            max-width: 380px;
             margin: 0 20px;
         }
 
         .nav-search input {
             width: 100%;
-            padding: 8px 35px 8px 15px;
+            padding: 9px 38px 9px 16px;
             border-radius: 20px;
             border: none;
             outline: none;
@@ -97,7 +96,7 @@
 
         .nav-search i {
             position: absolute;
-            right: 12px;
+            right: 14px;
             top: 50%;
             transform: translateY(-50%);
             color: #64748b;
@@ -107,57 +106,49 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 22px;
             font-size: 14px;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-
-        .dark-mode-toggle {
-            cursor: pointer;
-            font-size: 16px;
+            font-weight: 600;
         }
 
         /* --- Hero Section --- */
         .hero {
             text-align: center;
-            padding: 40px 20px 30px;
-            background: radial-gradient(circle at top, #ecfdf5 0%, #f8fafc 70%);
+            padding: 45px 20px 35px;
+            background: linear-gradient(180deg, #e8f5e9 0%, #f4f8f5 100%);
         }
 
         .hero h1 {
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 800;
-            color: #0f172a;
+            color: #052e16;
             margin-bottom: 6px;
         }
 
         .hero .subtitle {
             color: var(--primary-green);
             font-weight: 700;
-            font-size: 16px;
-            margin-bottom: 12px;
+            font-size: 17px;
+            margin-bottom: 14px;
         }
 
         .hero p {
             color: var(--text-muted);
             font-size: 14px;
-            max-width: 600px;
-            margin: 0 auto 25px;
+            font-weight: 500;
+            max-width: 620px;
+            margin: 0 auto 28px;
         }
 
         .main-search {
             display: flex;
             justify-content: center;
-            max-width: 600px;
+            max-width: 580px;
             margin: 0 auto;
             box-shadow: var(--shadow-md);
             border-radius: var(--radius-md);
             overflow: hidden;
-            border: 1px solid var(--border-color);
+            border: 1px solid #cbd5e1;
         }
 
         .main-search input {
@@ -166,38 +157,35 @@
             border: none;
             outline: none;
             font-size: 15px;
+            color: var(--text-main);
         }
 
         .main-search button {
             background-color: var(--primary-green);
             color: white;
             border: none;
-            padding: 0 25px;
-            font-weight: 600;
+            padding: 0 28px;
+            font-weight: 700;
+            font-size: 15px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: background 0.2s;
-        }
-
-        .main-search button:hover {
-            background-color: var(--primary-hover);
         }
 
         /* --- Container --- */
         .container {
-            max-width: 1100px;
+            max-width: 1120px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
         .section-title {
             text-align: center;
-            font-size: 20px;
-            font-weight: 700;
+            font-size: 21px;
+            font-weight: 800;
             color: #0f172a;
-            margin: 40px 0 20px;
+            margin: 45px 0 22px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -208,7 +196,7 @@
             color: var(--primary-green);
         }
 
-        /* --- Popular Calculators (Carousel-style) --- */
+        /* --- Popular Calculators --- */
         .popular-wrapper {
             position: relative;
             display: flex;
@@ -223,11 +211,11 @@
         }
 
         .nav-btn {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: white;
-            border: 1px solid var(--border-color);
+            border: 1px solid #cbd5e1;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -235,15 +223,16 @@
             box-shadow: var(--shadow-sm);
             position: absolute;
             z-index: 10;
+            color: var(--text-main);
         }
 
-        .nav-btn.prev { left: -16px; }
-        .nav-btn.next { right: -16px; }
+        .nav-btn.prev { left: -18px; }
+        .nav-btn.next { right: -18px; }
 
         .card-popular {
             background: var(--card-bg);
             border-radius: var(--radius-lg);
-            padding: 24px 20px;
+            padding: 24px 18px;
             text-align: center;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-sm);
@@ -252,102 +241,109 @@
             align-items: center;
         }
 
+        /* লোগো শেপ টেমপ্লেট অনুযায়ী স্কোয়ার ও রাউন্ডেড কোণা */
         .icon-box {
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            margin-bottom: 15px;
+            font-size: 24px;
+            margin-bottom: 16px;
         }
 
-        .icon-green { background: #dcfce7; color: #166534; }
-        .icon-blue { background: #dbeafe; color: #1e40af; }
-        .icon-purple { background: #f3e8ff; color: #6b21a8; }
-        .icon-orange { background: #ffedd5; color: #c2410c; }
-        .icon-red { background: #ffe4e6; color: #9f1239; }
+        .icon-green-bg { background: #0f6e38; color: #ffffff; }
+        .icon-blue-bg  { background: #2563eb; color: #ffffff; }
+        .icon-purple-bg{ background: #7c3aed; color: #ffffff; }
+        .icon-orange-bg{ background: #ea580c; color: #ffffff; }
 
         .card-popular h3 {
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 800; /* টেক্সট স্পষ্ট */
+            color: #0f172a;
             margin-bottom: 8px;
         }
 
         .card-popular p {
-            font-size: 12px;
+            font-size: 13px;
+            font-weight: 500; /* ভালো ভিজিবিলিটির জন্য */
             color: var(--text-muted);
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             flex-grow: 1;
+            line-height: 1.4;
         }
 
         .btn-calc {
             background-color: var(--primary-green);
             color: white;
-            padding: 8px 18px;
+            padding: 9px 20px;
             border-radius: 6px;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             display: inline-block;
-            transition: background 0.2s;
-        }
-
-        .btn-calc:hover {
-            background-color: var(--primary-hover);
         }
 
         /* --- Category Section --- */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
+            gap: 16px;
         }
 
         .category-card {
             background: var(--card-bg);
             border-radius: var(--radius-lg);
-            padding: 20px 15px;
+            padding: 22px 16px;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-sm);
             text-align: center;
         }
 
+        /* সার্কেল হালকা ব্যাকগ্রাউন্ড ও ডার্ক আইকন (ছবি অনুসারী) */
         .category-card .icon-circle {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            margin: 0 auto 12px;
+            margin: 0 auto 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
         }
 
+        .circle-green  { background: #dcfce7; color: #065f46; }
+        .circle-pink   { background: #ffe4e6; color: #be123c; }
+        .circle-purple { background: #f3e8ff; color: #6b21a8; }
+        .circle-blue   { background: #dbeafe; color: #1d4ed8; }
+        .circle-orange { background: #ffedd5; color: #c2410c; }
+
         .category-card h3 {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 14px;
         }
 
         .category-card ul {
             list-style: none;
             text-align: left;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
         .category-card ul li {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
+            font-size: 13px;
+            font-weight: 600; /* টেক্সট হাইলাইট */
+            color: #334155;
+            margin-bottom: 8px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .view-all {
-            font-size: 12px;
-            font-weight: 700;
+            font-size: 13px;
+            font-weight: 800;
             color: var(--primary-green);
             display: inline-flex;
             align-items: center;
@@ -358,38 +354,40 @@
         .features-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+            gap: 16px;
         }
 
         .feature-card {
             background: var(--card-bg);
             border-radius: var(--radius-md);
-            padding: 16px;
+            padding: 18px 16px;
             border: 1px solid var(--border-color);
             display: flex;
-            align-items: flex-start;
-            gap: 12px;
+            align-items: center;
+            gap: 14px;
         }
 
         .feature-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 18px;
             flex-shrink: 0;
         }
 
         .feature-info h4 {
-            font-size: 13px;
-            font-weight: 700;
+            font-size: 14px;
+            font-weight: 800;
+            color: #0f172a;
             margin-bottom: 2px;
         }
 
         .feature-info p {
-            font-size: 11px;
+            font-size: 12px;
+            font-weight: 500;
             color: var(--text-muted);
             line-height: 1.3;
         }
@@ -398,72 +396,80 @@
         .recent-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+            gap: 16px;
         }
 
         .recent-card {
             background: var(--card-bg);
             border-radius: var(--radius-md);
-            padding: 12px 16px;
+            padding: 14px 18px;
             border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .recent-card i {
+            font-size: 18px;
         }
 
         /* --- About & FAQ Split --- */
         .info-split {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 30px;
+            gap: 25px;
+            margin-top: 35px;
         }
 
         .about-box, .faq-box {
             background: var(--card-bg);
             border-radius: var(--radius-lg);
-            padding: 24px;
+            padding: 26px;
             border: 1px solid var(--border-color);
         }
 
         .about-box h3, .faq-box h3 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
+            font-size: 17px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 14px;
         }
 
         .about-box p {
-            font-size: 12px;
+            font-size: 13px;
+            font-weight: 500;
             color: var(--text-muted);
             margin-bottom: 12px;
+            line-height: 1.6;
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 22px;
             text-align: center;
         }
 
         .stat-item h4 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 800;
             color: var(--primary-green);
         }
 
         .stat-item p {
-            font-size: 10px;
+            font-size: 11px;
+            font-weight: 600;
             color: var(--text-muted);
-            margin: 0;
         }
 
-        /* Accordion */
+        /* FAQ Accordion */
         .accordion-item {
             border-bottom: 1px solid var(--border-color);
-            padding: 10px 0;
+            padding: 12px 0;
         }
 
         .accordion-item:last-child {
@@ -474,8 +480,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 13px;
+            font-weight: 700;
+            color: #0f172a;
             cursor: pointer;
         }
 
@@ -483,26 +490,27 @@
         footer {
             background-color: var(--primary-dark);
             color: white;
-            margin-top: 50px;
-            padding: 40px 0 20px;
+            margin-top: 60px;
+            padding: 45px 0 20px;
         }
 
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 30px;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .footer-about .logo {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .footer-about p {
-            font-size: 12px;
+            font-size: 13px;
             color: #a7f3d0;
-            margin-bottom: 15px;
-            max-width: 250px;
+            margin-bottom: 18px;
+            max-width: 260px;
+            line-height: 1.5;
         }
 
         .social-icons {
@@ -511,20 +519,20 @@
         }
 
         .social-icons a {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.12);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .footer-col h4 {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .footer-col ul {
@@ -532,22 +540,22 @@
         }
 
         .footer-col ul li {
-            font-size: 12px;
+            font-size: 13px;
             color: #d1fae5;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 11px;
+            font-size: 12px;
             color: #a7f3d0;
         }
 
-        /* Responsive Layouts */
+        /* Responsive */
         @media (max-width: 900px) {
             .popular-grid, .category-grid, .features-grid, .recent-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -576,7 +584,7 @@
             <a href="#">All Calculators</a>
             <a href="#">About Us</a>
             <a href="#">Contact</a>
-            <i class="fa-regular fa-moon dark-mode-toggle"></i>
+            <i class="fa-regular fa-moon" style="cursor:pointer;"></i>
         </div>
     </header>
 
@@ -604,28 +612,28 @@
             <div class="popular-grid">
                 <!-- Age Calculator -->
                 <div class="card-popular">
-                    <div class="icon-box icon-green"><i class="fa-regular fa-calendar-check"></i></div>
+                    <div class="icon-box icon-green-bg"><i class="fa-solid fa-calendar-days"></i></div>
                     <h3>Age Calculator</h3>
                     <p>Calculate your exact age in years, months, days and more.</p>
                     <a href="#" class="btn-calc">Calculate Now</a>
                 </div>
                 <!-- BMI Calculator -->
                 <div class="card-popular">
-                    <div class="icon-box icon-blue"><i class="fa-solid fa-child"></i></div>
+                    <div class="icon-box icon-blue-bg"><i class="fa-solid fa-child-reaching"></i></div>
                     <h3>BMI Calculator</h3>
                     <p>Check your Body Mass Index and find your health range.</p>
                     <a href="#" class="btn-calc">Calculate Now</a>
                 </div>
                 <!-- EMI Calculator -->
                 <div class="card-popular">
-                    <div class="icon-box icon-purple"><i class="fa-solid fa-calculator"></i></div>
+                    <div class="icon-box icon-purple-bg"><i class="fa-solid fa-calculator"></i></div>
                     <h3>EMI Calculator</h3>
                     <p>Calculate Equated Monthly Installment for loans.</p>
                     <a href="#" class="btn-calc">Calculate Now</a>
                 </div>
                 <!-- Calorie Calculator -->
                 <div class="card-popular">
-                    <div class="icon-box icon-orange"><i class="fa-solid fa-fire"></i></div>
+                    <div class="icon-box icon-orange-bg"><i class="fa-solid fa-fire"></i></div>
                     <h3>Calorie Calculator</h3>
                     <p>Find out how many calories your body needs daily.</p>
                     <a href="#" class="btn-calc">Calculate Now</a>
@@ -636,13 +644,13 @@
 
         <!-- Browse Calculators by Category -->
         <div class="section-title">
-            <i class="fa-solid fa-table-cells-large"></i> Browse Calculators by Category
+            <i class="fa-solid fa-border-all"></i> Browse Calculators by Category
         </div>
 
         <div class="category-grid">
             <!-- Finance -->
             <div class="category-card">
-                <div class="icon-circle icon-green"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="icon-circle circle-green"><i class="fa-solid fa-building-columns"></i></div>
                 <h3>Finance</h3>
                 <ul>
                     <li>EMI Calculator</li>
@@ -655,7 +663,7 @@
             </div>
             <!-- Health -->
             <div class="category-card">
-                <div class="icon-circle icon-red"><i class="fa-solid fa-heart-pulse"></i></div>
+                <div class="icon-circle circle-pink"><i class="fa-solid fa-heart-pulse"></i></div>
                 <h3>Health</h3>
                 <ul>
                     <li>BMI Calculator</li>
@@ -668,7 +676,7 @@
             </div>
             <!-- Education -->
             <div class="category-card">
-                <div class="icon-circle icon-purple"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div class="icon-circle circle-purple"><i class="fa-solid fa-graduation-cap"></i></div>
                 <h3>Education</h3>
                 <ul>
                     <li>GPA Calculator</li>
@@ -681,7 +689,7 @@
             </div>
             <!-- Utility -->
             <div class="category-card">
-                <div class="icon-circle icon-blue"><i class="fa-solid fa-wrench"></i></div>
+                <div class="icon-circle circle-blue"><i class="fa-solid fa-wrench"></i></div>
                 <h3>Utility</h3>
                 <ul>
                     <li>Age Calculator</li>
@@ -694,7 +702,7 @@
             </div>
             <!-- Math -->
             <div class="category-card">
-                <div class="icon-circle icon-orange"><i class="fa-solid fa-pi"></i></div>
+                <div class="icon-circle circle-orange"><i class="fa-solid fa-pi"></i></div>
                 <h3>Math</h3>
                 <ul>
                     <li>Scientific Calculator</li>
@@ -714,28 +722,28 @@
 
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon icon-green"><i class="fa-solid fa-tag"></i></div>
+                <div class="feature-icon circle-green"><i class="fa-solid fa-tag"></i></div>
                 <div class="feature-info">
                     <h4>100% Free</h4>
                     <p>All calculators are completely free to use.</p>
                 </div>
             </div>
             <div class="feature-card">
-                <div class="feature-icon icon-blue"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="feature-icon circle-blue"><i class="fa-solid fa-shield-halved"></i></div>
                 <div class="feature-info">
                     <h4>Accurate Results</h4>
                     <p>Get instant and accurate calculations everytime.</p>
                 </div>
             </div>
             <div class="feature-card">
-                <div class="feature-icon icon-green"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <div class="feature-icon circle-green"><i class="fa-solid fa-mobile-screen-button"></i></div>
                 <div class="feature-info">
                     <h4>Mobile Friendly</h4>
                     <p>Works perfectly on all devices and screen sizes.</p>
                 </div>
             </div>
             <div class="feature-card">
-                <div class="feature-icon icon-purple"><i class="fa-solid fa-lock"></i></div>
+                <div class="feature-icon circle-purple"><i class="fa-solid fa-lock"></i></div>
                 <div class="feature-info">
                     <h4>Privacy Focused</h4>
                     <p>We respect your privacy. No data is stored.</p>
@@ -750,19 +758,19 @@
 
         <div class="recent-grid">
             <div class="recent-card">
-                <i class="fa-regular fa-calendar-check" style="color: #166534;"></i>
+                <i class="fa-solid fa-calendar-days" style="color: #0f6e38;"></i>
                 <span>Age Calculator</span>
             </div>
             <div class="recent-card">
-                <i class="fa-solid fa-calculator" style="color: #991b1b;"></i>
+                <i class="fa-solid fa-calculator" style="color: #b91c1c;"></i>
                 <span>EMI Calculator</span>
             </div>
             <div class="recent-card">
-                <i class="fa-solid fa-house" style="color: #1e40af;"></i>
+                <i class="fa-solid fa-house" style="color: #1d4ed8;"></i>
                 <span>Mortgage Calculator</span>
             </div>
             <div class="recent-card">
-                <i class="fa-solid fa-fire" style="color: #1d4ed8;"></i>
+                <i class="fa-solid fa-fire" style="color: #2563eb;"></i>
                 <span>Calorie Calculator</span>
             </div>
         </div>
