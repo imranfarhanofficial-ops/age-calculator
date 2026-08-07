@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Use - CalcVerse</title>
+<style>
+:root{
+  --dark-green:#163a2b;
+  --primary-green:#1f7a45;
+  --primary-green-dark:#175c34;
+  --light-bg:#eef6f0;
+  --card-bg:#ffffff;
+  --text-dark:#1a2e22;
+  --text-gray:#5f6b66;
+  --border:#e1eae4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--light-bg);color:var(--text-dark);line-height:1.5;}
+a{text-decoration:none;color:inherit;}
+header.site-header{background:var(--dark-green);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.logo{color:#fff;font-size:22px;font-weight:700;}
+nav.main-nav{display:flex;gap:22px;flex-wrap:wrap;}
+nav.main-nav a{color:#fff;font-size:15px;opacity:.9;}
+nav.main-nav a:hover{opacity:1;text-decoration:underline;}
+.search-box{display:flex;max-width:320px;flex:1;min-width:180px;}
+.search-box input{flex:1;padding:9px 12px;border:none;border-radius:6px 0 0 6px;font-size:14px;}
+.search-box button{background:var(--primary-green);color:#fff;border:none;padding:0 14px;border-radius:0 6px 6px 0;cursor:pointer;}
+main{max-width:900px;margin:0 auto;padding:36px 20px 60px;}
+.page-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:28px 26px;box-shadow:0 2px 10px rgba(22,58,43,.06);}
+h1.page-title{font-size:28px;color:var(--dark-green);margin-bottom:6px;}
+p.page-sub{color:var(--text-gray);margin-bottom:22px;font-size:15px;}
+.form-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;}
+.form-group{flex:1;min-width:160px;display:flex;flex-direction:column;gap:6px;}
+label{font-size:14px;font-weight:600;color:var(--text-dark);}
+input,select{padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:15px;background:#fbfdfc;}
+input:focus,select:focus{outline:2px solid var(--primary-green);border-color:var(--primary-green);}
+.btn{background:var(--primary-green);color:#fff;border:none;padding:12px 22px;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;margin-top:6px;}
+.btn:hover{background:var(--primary-green-dark);}
+.btn-secondary{background:#fff;border:1px solid var(--primary-green);color:var(--primary-green);}
+.result-box{margin-top:22px;padding:18px 20px;background:var(--light-bg);border:1px solid var(--border);border-radius:10px;display:none;}
+.result-box.show{display:block;}
+.result-box h3{color:var(--dark-green);margin-bottom:10px;font-size:17px;}
+.result-line{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--border);font-size:15px;}
+.result-line:last-child{border-bottom:none;}
+.result-line span:last-child{font-weight:700;color:var(--primary-green-dark);}
+.error-text{color:#c0392b;font-size:14px;margin-top:8px;display:none;}
+.error-text.show{display:block;}
+.back-link{display:inline-block;margin-bottom:16px;color:var(--primary-green-dark);font-size:14px;font-weight:600;}
+.dyn-row{display:flex;gap:10px;margin-bottom:10px;align-items:center;flex-wrap:wrap;}
+.dyn-row select,.dyn-row input{flex:1;min-width:110px;}
+.remove-row{background:#c0392b;color:#fff;border:none;border-radius:6px;width:32px;height:38px;cursor:pointer;font-size:16px;}
+.sci-calc{max-width:340px;margin:0 auto;}
+.sci-display{background:var(--dark-green);color:#fff;font-size:28px;text-align:right;padding:18px 14px;border-radius:10px;margin-bottom:14px;min-height:60px;word-break:break-all;}
+.sci-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.sci-grid button{padding:14px 0;border:none;border-radius:8px;background:#fff;border:1px solid var(--border);font-size:15px;cursor:pointer;}
+.sci-grid button.op{background:var(--primary-green);color:#fff;}
+.sci-grid button.eq{background:var(--dark-green);color:#fff;}
+.sci-grid button:hover{opacity:.85;}
+footer.site-footer{background:var(--dark-green);color:#fff;padding:36px 24px 18px;margin-top:40px;}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between;}
+.footer-col h4{margin-bottom:12px;font-size:15px;}
+.footer-col a{display:block;color:#cfe3d6;font-size:14px;margin-bottom:8px;}
+.footer-col a:hover{color:#fff;text-decoration:underline;}
+.footer-bottom{text-align:center;margin-top:26px;padding-top:16px;border-top:1px solid rgba(255,255,255,.15);color:#a9c4b5;font-size:13px;}
+@media(max-width:640px){nav.main-nav{order:3;width:100%;justify-content:center;} .search-box{order:2;}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="index.html">CalcVerse</a>
+  <nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="all-calculators.html">All Calculators</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <form class="search-box" action="all-calculators.html" method="get">
+    <input type="text" name="q" placeholder="Search calculators...">
+    <button type="submit">🔍</button>
+  </form>
+</header>
+<main>
+  <a class="back-link" href="index.html">&larr; Back to Home</a>
+  <div class="page-card">
+<h1 class="page-title">Terms of Use</h1>
+<p class="page-sub">Last updated: 2026</p>
+<div style="font-size:15px;color:var(--text-dark);line-height:1.8;">
+  <p style="margin-bottom:14px;">By accessing and using CalcVerse, you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use this website.</p>
+  <p style="margin-bottom:14px;"><strong>1. Use of Calculators:</strong> All calculators on CalcVerse are provided for general informational and educational purposes only. Results should not be considered professional financial, medical, or academic advice.</p>
+  <p style="margin-bottom:14px;"><strong>2. No Warranty:</strong> While we strive for accuracy, CalcVerse makes no guarantees about the completeness or reliability of any calculation results. Use them at your own discretion.</p>
+  <p style="margin-bottom:14px;"><strong>3. Limitation of Liability:</strong> CalcVerse and its owners shall not be held liable for any losses or damages arising from the use of this website or reliance on its calculators.</p>
+  <p style="margin-bottom:14px;"><strong>4. Changes to Terms:</strong> We may update these Terms of Use from time to time. Continued use of the site after changes constitutes acceptance of the revised terms.</p>
+  <p style="margin-bottom:14px;"><strong>5. Contact:</strong> If you have any questions about these Terms of Use, please reach out via our Contact page.</p>
+</div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>CalcVerse</h4>
+      <p style="color:#cfe3d6;font-size:14px;max-width:220px;">Your all-in-one place for free online calculators. Simple, fast and reliable.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="all-calculators.html">All Calculators</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-use.html">Terms of Use</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="sitemap.xml">Sitemap</a>
+    </div>
+    <div class="footer-col">
+      <h4>Popular Calculators</h4>
+      <a href="age-calculator.html">Age Calculator</a>
+      <a href="bmi-calculator.html">BMI Calculator</a>
+      <a href="emi-calculator.html">EMI Calculator</a>
+      <a href="loan-calculator.html">Loan Calculator</a>
+      <a href="calorie-calculator.html">Calorie Calculator</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 CalcVerse. All Rights Reserved. &nbsp;|&nbsp; Made with ♥ for everyone</div>
+</footer>
+</body>
+</html>
