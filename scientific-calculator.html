@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Calculator - CalcVerse</title>
+<meta name="description" content="Free online scientific calculator.">
+<style>
+:root{
+  --dark-green:#163a2b;
+  --primary-green:#1f7a45;
+  --primary-green-dark:#175c34;
+  --light-bg:#eef6f0;
+  --card-bg:#ffffff;
+  --text-dark:#1a2e22;
+  --text-gray:#5f6b66;
+  --border:#e1eae4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--light-bg);color:var(--text-dark);line-height:1.5;}
+a{text-decoration:none;color:inherit;}
+header.site-header{background:var(--dark-green);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.logo{color:#fff;font-size:22px;font-weight:700;}
+nav.main-nav{display:flex;gap:22px;flex-wrap:wrap;}
+nav.main-nav a{color:#fff;font-size:15px;opacity:.9;}
+nav.main-nav a:hover{opacity:1;text-decoration:underline;}
+.search-box{display:flex;max-width:320px;flex:1;min-width:180px;}
+.search-box input{flex:1;padding:9px 12px;border:none;border-radius:6px 0 0 6px;font-size:14px;}
+.search-box button{background:var(--primary-green);color:#fff;border:none;padding:0 14px;border-radius:0 6px 6px 0;cursor:pointer;}
+main{max-width:900px;margin:0 auto;padding:36px 20px 60px;}
+.page-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:28px 26px;box-shadow:0 2px 10px rgba(22,58,43,.06);}
+h1.page-title{font-size:28px;color:var(--dark-green);margin-bottom:6px;}
+p.page-sub{color:var(--text-gray);margin-bottom:22px;font-size:15px;}
+.form-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;}
+.form-group{flex:1;min-width:160px;display:flex;flex-direction:column;gap:6px;}
+label{font-size:14px;font-weight:600;color:var(--text-dark);}
+input,select{padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:15px;background:#fbfdfc;}
+input:focus,select:focus{outline:2px solid var(--primary-green);border-color:var(--primary-green);}
+.btn{background:var(--primary-green);color:#fff;border:none;padding:12px 22px;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;margin-top:6px;}
+.btn:hover{background:var(--primary-green-dark);}
+.btn-secondary{background:#fff;border:1px solid var(--primary-green);color:var(--primary-green);}
+.result-box{margin-top:22px;padding:18px 20px;background:var(--light-bg);border:1px solid var(--border);border-radius:10px;display:none;}
+.result-box.show{display:block;}
+.result-box h3{color:var(--dark-green);margin-bottom:10px;font-size:17px;}
+.result-line{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--border);font-size:15px;}
+.result-line:last-child{border-bottom:none;}
+.result-line span:last-child{font-weight:700;color:var(--primary-green-dark);}
+.error-text{color:#c0392b;font-size:14px;margin-top:8px;display:none;}
+.error-text.show{display:block;}
+.back-link{display:inline-block;margin-bottom:16px;color:var(--primary-green-dark);font-size:14px;font-weight:600;}
+.dyn-row{display:flex;gap:10px;margin-bottom:10px;align-items:center;flex-wrap:wrap;}
+.dyn-row select,.dyn-row input{flex:1;min-width:110px;}
+.remove-row{background:#c0392b;color:#fff;border:none;border-radius:6px;width:32px;height:38px;cursor:pointer;font-size:16px;}
+.sci-calc{max-width:340px;margin:0 auto;}
+.sci-display{background:var(--dark-green);color:#fff;font-size:28px;text-align:right;padding:18px 14px;border-radius:10px;margin-bottom:14px;min-height:60px;word-break:break-all;}
+.sci-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.sci-grid button{padding:14px 0;border:none;border-radius:8px;background:#fff;border:1px solid var(--border);font-size:15px;cursor:pointer;}
+.sci-grid button.op{background:var(--primary-green);color:#fff;}
+.sci-grid button.eq{background:var(--dark-green);color:#fff;}
+.sci-grid button:hover{opacity:.85;}
+footer.site-footer{background:var(--dark-green);color:#fff;padding:36px 24px 18px;margin-top:40px;}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between;}
+.footer-col h4{margin-bottom:12px;font-size:15px;}
+.footer-col a{display:block;color:#cfe3d6;font-size:14px;margin-bottom:8px;}
+.footer-col a:hover{color:#fff;text-decoration:underline;}
+.footer-bottom{text-align:center;margin-top:26px;padding-top:16px;border-top:1px solid rgba(255,255,255,.15);color:#a9c4b5;font-size:13px;}
+@media(max-width:640px){nav.main-nav{order:3;width:100%;justify-content:center;} .search-box{order:2;}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="index.html">CalcVerse</a>
+  <nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="all-calculators.html">All Calculators</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <form class="search-box" action="all-calculators.html" method="get">
+    <input type="text" name="q" placeholder="Search calculators...">
+    <button type="submit">🔍</button>
+  </form>
+</header>
+<main>
+  <a class="back-link" href="index.html">&larr; Back to Home</a>
+  <div class="page-card">
+    
+<h1 class="page-title">Scientific Calculator</h1>
+<p class="page-sub">Perform basic and scientific calculations.</p>
+<div class="sci-calc">
+  <div class="sci-display" id="disp">0</div>
+  <div class="sci-grid">
+    <button onclick="fn('sin')">sin</button><button onclick="fn('cos')">cos</button><button onclick="fn('tan')">tan</button><button onclick="fn('sqrt')">√</button><button onclick="clearAll()">C</button>
+    <button onclick="fn('log')">log</button><button onclick="fn('ln')">ln</button><button onclick="fn('sq')">x²</button><button onclick="fn('inv')">1/x</button><button onclick="backspace()">⌫</button>
+    <button onclick="append('7')">7</button><button onclick="append('8')">8</button><button onclick="append('9')">9</button><button class="op" onclick="setOp('/')">÷</button><button onclick="fn('pi')">π</button>
+    <button onclick="append('4')">4</button><button onclick="append('5')">5</button><button onclick="append('6')">6</button><button class="op" onclick="setOp('*')">×</button><button onclick="fn('pow')">^</button>
+    <button onclick="append('1')">1</button><button onclick="append('2')">2</button><button onclick="append('3')">3</button><button class="op" onclick="setOp('-')">−</button><button onclick="fn('pct')">%</button>
+    <button onclick="append('0')">0</button><button onclick="append('.')">.</button><button class="eq" onclick="calcEq()">=</button><button class="op" onclick="setOp('+')">+</button><button onclick="fn('neg')">±</button>
+  </div>
+</div>
+
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>CalcVerse</h4>
+      <p style="color:#cfe3d6;font-size:14px;max-width:220px;">Your all-in-one place for free online calculators. Simple, fast and reliable.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="all-calculators.html">All Calculators</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-use.html">Terms of Use</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="sitemap.xml">Sitemap</a>
+    </div>
+    <div class="footer-col">
+      <h4>Popular Calculators</h4>
+      <a href="age-calculator.html">Age Calculator</a>
+      <a href="bmi-calculator.html">BMI Calculator</a>
+      <a href="emi-calculator.html">EMI Calculator</a>
+      <a href="loan-calculator.html">Loan Calculator</a>
+      <a href="calorie-calculator.html">Calorie Calculator</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 CalcVerse. All Rights Reserved. &nbsp;|&nbsp; Made with ♥ for everyone</div>
+</footer>
+<script>
+
+let current = '0', pending = null, operator = null, resetNext = false;
+function updateDisp(){ document.getElementById('disp').textContent = current; }
+function append(ch){
+  if(resetNext){ current = '0'; resetNext = false; }
+  if(current === '0' && ch !== '.') current = ch;
+  else current += ch;
+  updateDisp();
+}
+function backspace(){ current = current.length>1 ? current.slice(0,-1) : '0'; updateDisp(); }
+function clearAll(){ current='0'; pending=null; operator=null; resetNext=false; updateDisp(); }
+function setOp(op){
+  if(pending !== null && !resetNext) calcEq();
+  pending = parseFloat(current);
+  operator = op;
+  resetNext = true;
+}
+function calcEq(){
+  if(operator === null || pending === null) return;
+  const cur = parseFloat(current);
+  let res;
+  switch(operator){
+    case '+': res = pending + cur; break;
+    case '-': res = pending - cur; break;
+    case '*': res = pending * cur; break;
+    case '/': res = cur === 0 ? NaN : pending / cur; break;
+  }
+  current = String(Math.round(res*1e10)/1e10);
+  operator = null; pending = null; resetNext = true;
+  updateDisp();
+}
+function fn(name){
+  const x = parseFloat(current);
+  let res;
+  switch(name){
+    case 'sin': res = Math.sin(x*Math.PI/180); break;
+    case 'cos': res = Math.cos(x*Math.PI/180); break;
+    case 'tan': res = Math.tan(x*Math.PI/180); break;
+    case 'sqrt': res = Math.sqrt(x); break;
+    case 'log': res = Math.log10(x); break;
+    case 'ln': res = Math.log(x); break;
+    case 'sq': res = x*x; break;
+    case 'inv': res = x === 0 ? NaN : 1/x; break;
+    case 'pi': res = Math.PI; break;
+    case 'pow': setOp('^_pow'); return;
+    case 'pct': res = x/100; break;
+    case 'neg': res = -x; break;
+  }
+  current = String(Math.round(res*1e10)/1e10);
+  resetNext = true;
+  updateDisp();
+}
+
+</script>
+</body>
+</html>
