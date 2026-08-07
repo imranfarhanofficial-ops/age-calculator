@@ -1,1022 +1,2159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age Calculator - CalcVerse</title>
-    <meta name="description" content="Calculate your exact age in years, months, days, hours, and seconds with CalcVerse. Fast, accurate and 100% free online calculator.">
-    
-    <!-- Google Fonts & Font Awesome Icons (CalcVerse Standard) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        /* ==========================================================================
-           CalcVerse Home Page Design System & Global Variables
-           ========================================================================== */
-        :root {
-            --primary-color: #4f46e5;
-            --primary-hover: #4338ca;
-            --primary-light: #e0e7ff;
-            --bg-body: #f8fafc;
-            --bg-card: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-            --success-bg: #f0fdf4;
-            --success-border: #bbf7d0;
-            --success-text: #166534;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --radius-lg: 12px;
-            --radius-md: 8px;
-            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
-        }
-
-        /* Dark Mode Theme Variables */
-        body.dark-theme {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --primary-light: rgba(79, 70, 229, 0.2);
-            --success-bg: rgba(16, 185, 129, 0.15);
-            --success-border: rgba(16, 185, 129, 0.3);
-            --success-text: #4ade80;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: var(--font-main);
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            line-height: 1.5;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* ==========================================================================
-           CalcVerse Global Header & Navigation
-           ========================================================================== */
-        header {
-            background-color: var(--bg-card);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .nav-links a {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--primary-color);
-        }
-
-        .theme-toggle {
-            background: none;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            transition: all 0.2s;
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--border-color);
-        }
-
-        /* ==========================================================================
-           CalcVerse Hero & Search Section (Home Layout Matched)
-           ========================================================================== */
-        .calc-hero-section {
-            background-color: var(--bg-card);
-            border-bottom: 1px solid var(--border-color);
-            padding: 32px 24px;
-            text-align: center;
-        }
-
-        .calc-hero-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .calc-hero-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .calc-hero-subtitle {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-
-        .search-box {
-            position: relative;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 12px 16px 12px 44px;
-            border-radius: 50px;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            font-size: 0.95rem;
-            outline: none;
-        }
-
-        .search-box input:focus {
-            border-color: var(--primary-color);
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-        }
-
-        /* ==========================================================================
-           Calculator Inner Layout & Container
-           ========================================================================== */
-        .main-wrapper {
-            flex: 1;
-            max-width: 850px;
-            width: 100%;
-            margin: 32px auto;
-            padding: 0 24px;
-        }
-
-        .calc-card-container {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            padding: 32px;
-            margin-bottom: 32px;
-        }
-
-        .calc-input-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 640px) {
-            .calc-input-grid { grid-template-columns: 1fr; }
-            .header-container { padding: 12px 16px; }
-            .nav-links { gap: 12px; }
-            .calc-card-container { padding: 20px; }
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .form-label {
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        .req { color: #ef4444; }
-
-        .input-row {
-            display: flex;
-            gap: 8px;
-        }
-
-        .cv-input {
-            width: 100%;
-            padding: 10px 14px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            font-size: 0.95rem;
-            outline: none;
-        }
-
-        .cv-input:focus {
-            border-color: var(--primary-color);
-        }
-
-        .cv-time-input {
-            max-width: 110px;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 12px;
-            margin-top: 24px;
-        }
-
-        .cv-btn {
-            padding: 12px 24px;
-            border-radius: var(--radius-md);
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-
-        .cv-btn-primary {
-            background-color: var(--primary-color);
-            color: #ffffff;
-            flex: 2;
-        }
-
-        .cv-btn-primary:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .cv-btn-secondary {
-            background-color: var(--bg-body);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            flex: 1;
-        }
-
-        .cv-btn-secondary:hover {
-            background-color: var(--border-color);
-        }
-
-        .alert-error {
-            background-color: rgba(239, 68, 68, 0.1);
-            border: 1px solid #ef4444;
-            color: #ef4444;
-            padding: 12px;
-            border-radius: var(--radius-md);
-            font-size: 0.875rem;
-            margin-top: 16px;
-        }
-
-        /* ==========================================================================
-           Results View Styling
-           ========================================================================== */
-        .results-wrapper {
-            margin-top: 32px;
-            padding-top: 24px;
-            border-top: 2px dashed var(--border-color);
-        }
-
-        .result-hero-box {
-            background-color: var(--primary-light);
-            border: 1px solid var(--primary-color);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            text-align: center;
-        }
-
-        .hero-badge {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .hero-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-top: 4px;
-        }
-
-        .hero-subvalue {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        .ticker-text {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 8px;
-            font-family: monospace;
-        }
-
-        .action-row {
-            display: flex;
-            justify-content: flex-end;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .action-btn {
-            background-color: var(--bg-body);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 6px 12px;
-            border-radius: var(--radius-md);
-            font-size: 0.8rem;
-            cursor: pointer;
-        }
-
-        .action-btn:hover {
-            background-color: var(--border-color);
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 28px 0 16px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
-
-        .panel-box {
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 16px;
-            background-color: var(--bg-body);
-        }
-
-        .panel-box.highlight {
-            background-color: var(--success-bg);
-            border-color: var(--success-border);
-            color: var(--success-text);
-        }
-
-        .panel-title {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .panel-value {
-            font-size: 1rem;
-            font-weight: 700;
-        }
-
-        .progress-track {
-            height: 6px;
-            background-color: var(--border-color);
-            border-radius: 3px;
-            margin-top: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background-color: #10b981;
-            transition: width 0.3s ease;
-        }
-
-        .progress-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-            display: block;
-        }
-
-        .stats-grid, .facts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-        }
-
-        .stat-card, .fact-card {
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 12px 16px;
-            background-color: var(--bg-body);
-        }
-
-        .stat-label, .fact-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            display: block;
-        }
-
-        .stat-number, .fact-value {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-top: 2px;
-        }
-
-        .fact-card {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .fact-icon {
-            font-size: 1.25rem;
-            color: var(--primary-color);
-        }
-
-        /* SEO Content & FAQ Section */
-        .info-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 32px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .info-card h2 { font-size: 1.25rem; margin-bottom: 12px; }
-        .info-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
-
-        .faq-accordion details {
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 12px 16px;
-            margin-top: 10px;
-            background-color: var(--bg-body);
-        }
-
-        .faq-accordion summary {
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.95rem;
-        }
-
-        .faq-accordion p {
-            margin-top: 8px;
-            font-size: 0.9rem;
-        }
-
-        /* ==========================================================================
-           CalcVerse Global Footer
-           ========================================================================== */
-        footer {
-            background-color: var(--bg-card);
-            border-top: 1px solid var(--border-color);
-            padding: 32px 24px;
-            margin-top: auto;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
-
-        .hidden { display: none !important; }
-    </style>
+  <!-- Basic Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator - Calculate Exact Age Online | CalcVerse</title>
+  <meta name="description" content="Calculate your exact age in years, months, weeks, days, hours, minutes and seconds with our free, fast and accurate online Age Calculator.">
+  <link rel="canonical" href="https://calcverse.com/age-calculator">
+  <meta name="theme-color" content="#024731">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://calcverse.com/age-calculator">
+  <meta property="og:title" content="Age Calculator - Calculate Exact Age Online | CalcVerse">
+  <meta property="og:description" content="Calculate your exact age in years, months, weeks, days, hours, minutes and seconds with our free online Age Calculator.">
+  <meta property="og:image" content="https://calcverse.com/assets/og-age-calculator.png">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://calcverse.com/age-calculator">
+  <meta name="twitter:title" content="Age Calculator - Calculate Exact Age Online | CalcVerse">
+  <meta name="twitter:description" content="Calculate your exact age in years, months, weeks, days, hours, minutes and seconds with our free online Age Calculator.">
+  <meta name="twitter:image" content="https://calcverse.com/assets/og-age-calculator.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- ==========================================================================
+       STRUCTURED DATA (JSON-LD SEO SCHEMAS)
+       ========================================================================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://calcverse.com/age-calculator",
+        "url": "https://calcverse.com/age-calculator",
+        "name": "Age Calculator",
+        "description": "Calculate your exact age in years, months, weeks, days, hours, minutes and seconds with our free online Age Calculator.",
+        "breadcrumb": { "@id": "https://calcverse.com/age-calculator#breadcrumb" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://calcverse.com/age-calculator#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://calcverse.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "All Calculators",
+            "item": "https://calcverse.com/all-calculators"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Age Calculator",
+            "item": "https://calcverse.com/age-calculator"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "CalcVerse Age Calculator",
+        "operatingSystem": "All",
+        "applicationCategory": "UtilitiesApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How is age calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Age is calculated using standard astronomical calendar formulas that subtract your date of birth from the target date while accounting for leap years and month variations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I calculate age in months or days only?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, once submitted, CalcVerse breaks down your exact age into total months, total weeks, total days, hours, minutes, and seconds."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this calculator consider leap years?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, every leap year (366 days) in your selected date range is automatically factored in for 100% precision."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why may age be different on some calculators?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Simplistic calculators assume every month has 30 days. CalcVerse tracks exact month lengths (28, 29, 30, or 31 days) based on the Gregorian calendar."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my personal data saved?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. All calculations are executed locally inside your device browser using vanilla JavaScript. We do not transmit or store any personal birth dates."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ==========================================================================
+       EMBEDDED STYLES (COMPLETE STYLESHEET RECREATION)
+       ========================================================================== -->
+  <style>
+    /* ==========================================
+       CSS VARIABLES & BRAND COLOR SYSTEM
+       ========================================== */
+    :root {
+      /* Primary Deep Green (Matching UI Header/Footer) */
+      --color-brand-dark: #024731;
+      --color-brand-medium: #035c3f;
+      --color-brand-accent: #00875a;
+      --color-brand-hover: #023827;
+      
+      /* Light Green Tints & Highlights */
+      --color-green-light: #e6f4f0;
+      --color-green-tint: #f0f8f5;
+      --color-green-badge-bg: #e6f4ef;
+      --color-info-bg: #eaf5f1;
+      --color-info-border: #d2e8df;
+
+      /* Neutrals & Surfaces (Light Mode) */
+      --bg-body: #f4f6f8;
+      --bg-card: #ffffff;
+      --bg-input: #ffffff;
+      --border-card: #e5e9f0;
+      --border-input: #d8e0ea;
+      
+      --text-main: #111827;
+      --text-muted: #64748b;
+      --text-subtle: #94a3b8;
+
+      /* Typography & Shapes */
+      --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --radius-card: 12px;
+      --radius-input: 8px;
+      --radius-pill: 20px;
+      --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    /* Dark Mode Overrides */
+    body.dark-mode {
+      --bg-body: #0b1320;
+      --bg-card: #152238;
+      --bg-input: #0f172a;
+      --border-card: #22334f;
+      --border-input: #334766;
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+
+      --color-brand-dark: #07271c;
+      --color-green-light: #123326;
+      --color-green-tint: #0d281e;
+      --color-info-bg: #102d22;
+      --color-info-border: #1a4233;
+    }
+
+    /* ==========================================
+       GLOBAL RESETS & BASE STYLES
+       ========================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Visually Hidden Utility for Screen Readers */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ==========================================
+       1. HEADER
+       ========================================== */
+    .site-header {
+      background-color: var(--color-brand-dark);
+      color: #ffffff;
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 1.35rem;
+    }
+
+    .logo-icon-box {
+      background-color: var(--color-brand-accent);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+    }
+
+    .main-nav .nav-list {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-size: 0.925rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #ffffff;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-toggle-btn {
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      color: #ffffff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    /* ==========================================
+       2. BREADCRUMB
+       ========================================== */
+    .breadcrumb-wrapper {
+      padding: 18px 20px 8px 20px;
+    }
+
+    .breadcrumb-list {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+      font-size: 0.875rem;
+    }
+
+    .breadcrumb-list a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb-list a:hover {
+      color: var(--color-brand-medium);
+    }
+
+    .breadcrumb-list .separator {
+      color: var(--text-subtle);
+      font-size: 0.8rem;
+    }
+
+    .breadcrumb-list .active {
+      color: var(--color-brand-accent);
+      font-weight: 600;
+    }
+
+    /* ==========================================
+       3. HERO SECTION
+       ========================================== */
+    .hero-section {
+      text-align: center;
+      padding: 12px 0 28px 0;
+    }
+
+    .hero-title-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .hero-icon-badge {
+      background-color: var(--color-brand-dark);
+      color: #ffffff;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-description {
+      max-width: 620px;
+      margin: 0 auto 18px auto;
+      color: var(--text-muted);
+      font-size: 0.975rem;
+      line-height: 1.5;
+    }
+
+    .feature-badges {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .badge-item {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .badge-icon {
+      background-color: var(--color-brand-dark);
+      color: #ffffff;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 800;
+    }
+
+    .badge-icon-lightning {
+      color: var(--color-brand-accent);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* ==========================================
+       4. CALCULATOR FORM CARD
+       ========================================== */
+    .calculator-container {
+      margin-bottom: 28px;
+    }
+
+    .calc-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-card);
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .calc-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: var(--color-brand-accent);
+    }
+
+    .calc-card-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .form-dual-columns {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+    }
+
+    .date-field-set {
+      flex: 1;
+    }
+
+    .field-set-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .date-inputs-triple {
+      display: flex;
+      gap: 8px;
+    }
+
+    .input-block {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-block.year-block {
+      flex: 1;
+    }
+
+    .input-block.month-block {
+      flex: 1.1;
+    }
+
+    .input-block.day-block {
+      flex: 1.3;
+    }
+
+    .sub-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    /* Custom Input Control Wrapper */
+    .control-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .text-input-year {
+      width: 100%;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-input);
+      border-radius: var(--radius-input);
+      padding: 10px 10px;
+      font-family: inherit;
+      font-size: 0.925rem;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .text-input-year:focus {
+      border-color: var(--color-brand-accent);
+    }
+
+    .custom-select {
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-input);
+      border-radius: var(--radius-input);
+      padding: 10px 24px 10px 10px;
+      font-family: inherit;
+      font-size: 0.925rem;
+      color: var(--text-main);
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .custom-select:focus {
+      border-color: var(--color-brand-accent);
+    }
+
+    .select-chevron {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .day-input-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .calendar-trigger-btn {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-input);
+      border-radius: var(--radius-input);
+      width: 40px;
+      height: 41px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-main);
+      flex-shrink: 0;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .calendar-trigger-btn:hover {
+      border-color: var(--color-brand-accent);
+      color: var(--color-brand-accent);
+    }
+
+    /* Native Date Picker Hidden Element */
+    .hidden-native-date {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    /* Swap Button Column */
+    .swap-column {
+      padding-bottom: 1px;
+    }
+
+    .swap-btn {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-input);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+    }
+
+    .swap-btn:hover {
+      background-color: var(--color-green-light);
+      color: var(--color-brand-dark);
+      border-color: var(--color-brand-accent);
+    }
+
+    /* Validation Error Banner */
+    .validation-alert {
+      background-color: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      padding: 10px 14px;
+      border-radius: var(--radius-input);
+      margin-top: 16px;
+      font-size: 0.875rem;
+    }
+
+    /* Form Actions Row */
+    .form-action-buttons {
+      display: flex;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .btn-calculate {
+      background-color: var(--color-brand-dark);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-input);
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-calculate:hover {
+      background-color: var(--color-brand-hover);
+    }
+
+    .btn-reset {
+      background-color: transparent;
+      border: 1px solid var(--border-input);
+      color: var(--text-main);
+      border-radius: var(--radius-input);
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-reset:hover {
+      background-color: var(--bg-body);
+    }
+
+    /* Info Notice Box below card */
+    .info-notice-box {
+      background-color: var(--color-info-bg);
+      border: 1px solid var(--color-info-border);
+      border-radius: var(--radius-input);
+      padding: 12px 16px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.875rem;
+      color: var(--color-brand-dark);
+    }
+
+    body.dark-mode .info-notice-box {
+      color: #a7f3d0;
+    }
+
+    .info-notice-icon {
+      background-color: var(--color-brand-dark);
+      color: #ffffff;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    /* ==========================================
+       5. DYNAMIC RESULTS DISPLAY
+       ========================================== */
+    .results-display-section {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-card);
+      padding: 28px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .primary-result-hero {
+      background-color: var(--color-green-light);
+      border: 1px solid var(--color-brand-accent);
+      border-radius: var(--radius-card);
+      padding: 22px;
+      text-align: center;
+    }
+
+    .hero-badge-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--color-brand-accent);
+    }
+
+    .primary-age-output {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--color-brand-dark);
+      margin-top: 4px;
+    }
+
+    body.dark-mode .primary-age-output {
+      color: #6ee7b7;
+    }
+
+    .live-seconds-ticker {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-family: monospace;
+    }
+
+    .result-actions-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin: 12px 0 24px 0;
+    }
+
+    .btn-copy-result {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-input);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .results-subtitle {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .duration-breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .metric-card {
+      background-color: var(--bg-body);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-input);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .metric-value {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 2px;
+    }
+
+    /* Milestone Next Birthday Banner */
+    .milestone-card {
+      background-color: var(--bg-body);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-input);
+      padding: 16px;
+    }
+
+    .milestone-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      margin-bottom: 4px;
+    }
+
+    .milestone-title { font-weight: 700; }
+    .milestone-date { color: var(--color-brand-accent); font-weight: 600; }
+    .milestone-countdown { font-size: 1.15rem; font-weight: 800; color: var(--color-brand-dark); }
+    body.dark-mode .milestone-countdown { color: #6ee7b7; }
+
+    /* ==========================================
+       6. 3-COLUMN INFORMATIONAL SECTION
+       ========================================== */
+    .info-triplet-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+
+    .info-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .info-card-header h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .card-icon-box {
+      background-color: var(--color-green-badge-bg);
+      color: var(--color-brand-dark);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    body.dark-mode .card-icon-box {
+      color: #6ee7b7;
+    }
+
+    .info-card p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .info-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* How to Use Step List */
+    .step-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .step-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .step-number {
+      background-color: var(--color-brand-dark);
+      color: #ffffff;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* FAQ Accordion Styling */
+    .faq-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-input);
+      overflow: hidden;
+      background-color: var(--bg-card);
+    }
+
+    .faq-trigger {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      padding: 12px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .faq-chevron {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      transition: transform 0.25s ease;
+    }
+
+    .faq-item.active .faq-chevron {
+      transform: rotate(180deg);
+    }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease-out;
+      padding: 0 12px;
+      background-color: var(--bg-body);
+    }
+
+    .faq-item.active .faq-content {
+      padding: 10px 12px 12px 12px;
+    }
+
+    .faq-content p {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    /* ==========================================
+       7. RELATED CALCULATORS
+       ========================================== */
+    .related-calculators-section {
+      margin-bottom: 48px;
+    }
+
+    .related-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--color-brand-accent);
+      margin-bottom: 16px;
+    }
+
+    .related-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .related-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .related-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-input);
+      padding: 14px 10px;
+      text-decoration: none;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: border-color 0.2s ease, transform 0.15s ease;
+      box-shadow: var(--shadow-card);
+    }
+
+    .related-card:hover {
+      border-color: var(--color-brand-accent);
+      transform: translateY(-2px);
+    }
+
+    .related-card-icon {
+      color: var(--color-brand-dark);
+      display: flex;
+      align-items: center;
+    }
+
+    body.dark-mode .related-card-icon {
+      color: #6ee7b7;
+    }
+
+    /* ==========================================
+       8. FOOTER
+       ========================================== */
+    .site-footer {
+      background-color: var(--color-brand-dark);
+      color: #ffffff;
+      padding: 48px 0 24px 0;
+    }
+
+    .footer-top-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .footer-tagline {
+      color: #94a3b8;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      max-width: 240px;
+    }
+
+    .footer-col-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #ffffff;
+    }
+
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-links-list a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links-list a:hover {
+      color: #ffffff;
+    }
+
+    /* Newsletter Form */
+    .newsletter-desc {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+
+    .newsletter-input-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .newsletter-input {
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      padding: 8px 12px;
+      color: #ffffff;
+      font-size: 0.85rem;
+      width: 100%;
+      outline: none;
+    }
+
+    .newsletter-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .newsletter-btn {
+      background-color: var(--color-brand-accent);
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .newsletter-btn:hover {
+      opacity: 0.9;
+    }
+
+    .newsletter-status-msg {
+      font-size: 0.8rem;
+      margin-top: 6px;
+    }
+
+    .newsletter-status-msg.success { color: #4ade80; }
+    .newsletter-status-msg.error { color: #f87171; }
+
+    /* Footer Bottom Bar */
+    .footer-bottom-bar {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-legal-links a {
+      color: #94a3b8;
+      text-decoration: none;
+    }
+
+    .footer-legal-links a:hover {
+      color: #ffffff;
+    }
+
+    .back-to-top-btn {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ==========================================
+       9. RESPONSIVE BREAKPOINTS
+       ========================================== */
+    @media (max-width: 1024px) {
+      .info-triplet-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .related-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-top-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .form-dual-columns {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .swap-column {
+        align-self: center;
+      }
+
+      .duration-breakdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .related-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .main-nav {
+        display: none;
+      }
+
+      .footer-top-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom-bar {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .duration-breakdown-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .related-cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Header Navigation Bar -->
-    <header>
-        <div class="header-container">
-            <a href="index.html" class="logo">
-                <i class="fa-solid fa-calculator"></i>
-                <span>CalcVerse</span>
-            </a>
-            
-            <nav class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="all-calculators.html">All Calculators</a>
-                <a href="about.html">About Us</a>
-                <a href="contact.html">Contact</a>
-                <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle Dark Mode">
-                    <i class="fa-regular fa-moon"></i>
+  <!-- ==========================================================================
+       1. HEADER
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-logo" aria-label="CalcVerse Homepage">
+        <div class="logo-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+        </div>
+        <span>CalcVerse</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/all-calculators" class="nav-link">All Calculators</a></li>
+          <li><a href="/about" class="nav-link">About Us</a></li>
+          <li><a href="/contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       2. BREADCRUMB
+       ========================================================================== -->
+  <div class="container breadcrumb-wrapper">
+    <nav aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/">Home</a></li>
+        <li class="separator">›</li>
+        <li><a href="/all-calculators">All Calculators</a></li>
+        <li class="separator">›</li>
+        <li class="active" aria-current="page">Age Calculator</li>
+      </ol>
+    </nav>
+  </div>
+
+  <main>
+    <div class="container">
+
+      <!-- ==========================================================================
+           3. HERO SECTION
+           ========================================================================== -->
+      <section class="hero-section">
+        <div class="hero-title-group">
+          <div class="hero-icon-badge">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+          </div>
+          <h1 class="hero-title">Age Calculator</h1>
+        </div>
+        <p class="hero-description">
+          Calculate your exact age in years, months, weeks, days, hours, minutes and seconds with our free online Age Calculator.
+        </p>
+
+        <div class="feature-badges">
+          <div class="badge-item">
+            <span class="badge-icon">✓</span> <span>100% Free</span>
+          </div>
+          <div class="badge-item">
+            <span class="badge-icon">✓</span> <span>Accurate Results</span>
+          </div>
+          <div class="badge-item">
+            <span class="badge-icon-lightning">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </span>
+            <span>Instant Result</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           4. CALCULATOR FORM CARD
+           ========================================================================== -->
+      <section class="calculator-container">
+        <div class="calc-card">
+          
+          <div class="calc-card-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><line x1="8" x2="16" y1="14" y2="14"/></svg>
+            <h2>Calculate Your Age</h2>
+          </div>
+
+          <form id="ageCalculatorForm" novalidate>
+            <div class="form-dual-columns">
+              
+              <!-- LEFT COLUMN: Date of Birth -->
+              <div class="date-field-set">
+                <span class="field-set-label">Date of Birth</span>
+                <div class="date-inputs-triple">
+                  
+                  <!-- Year -->
+                  <div class="input-block year-block">
+                    <label for="dobYearInput" class="sub-label">Year</label>
+                    <div class="control-wrapper">
+                      <input type="number" id="dobYearInput" name="dobYearInput" class="text-input-year" value="2006" min="1000" max="9999" required aria-label="Birth Year">
+                    </div>
+                  </div>
+
+                  <!-- Month -->
+                  <div class="input-block month-block">
+                    <label for="dobMonthSelect" class="sub-label">Month</label>
+                    <div class="control-wrapper">
+                      <select id="dobMonthSelect" name="dobMonthSelect" class="custom-select" aria-label="Birth Month">
+                        <option value="0">Jan</option>
+                        <option value="1">Feb</option>
+                        <option value="2">Mar</option>
+                        <option value="3" selected>Apr</option>
+                        <option value="4">May</option>
+                        <option value="5">Jun</option>
+                        <option value="6">Jul</option>
+                        <option value="7">Aug</option>
+                        <option value="8">Sep</option>
+                        <option value="9">Oct</option>
+                        <option value="10">Nov</option>
+                        <option value="11">Dec</option>
+                      </select>
+                      <span class="select-chevron">▼</span>
+                    </div>
+                  </div>
+
+                  <!-- Day -->
+                  <div class="input-block day-block">
+                    <label for="dobDaySelect" class="sub-label">Day</label>
+                    <div class="day-input-group">
+                      <div class="control-wrapper">
+                        <select id="dobDaySelect" name="dobDaySelect" class="custom-select" aria-label="Birth Day"></select>
+                        <span class="select-chevron">▼</span>
+                      </div>
+                      <button type="button" class="calendar-trigger-btn" id="dobCalendarBtn" aria-label="Pick Birth Date from Calendar">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                      </button>
+                      <input type="date" id="dobNativePicker" class="hidden-native-date" tabindex="-1" aria-hidden="true">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- SWAP BUTTON -->
+              <div class="swap-column">
+                <button type="button" class="swap-btn" id="swapDatesBtn" aria-label="Swap Date of Birth and Target Date">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l4 4-4 4"/><path d="M20 7H4"/><path d="M8 21l-4-4 4-4"/><path d="M4 17h16"/></svg>
                 </button>
-            </nav>
-        </div>
-    </header>
+              </div>
 
-    <!-- Calculator Hero & Search Section -->
-    <section class="calc-hero-section">
-        <div class="calc-hero-content">
-            <h1 class="calc-hero-title">Age Calculator</h1>
-            <p class="calc-hero-subtitle">Calculate your exact age in years, months, days, hours, and seconds with detailed lifetime milestones and statistics.</p>
+              <!-- RIGHT COLUMN: Target Date -->
+              <div class="date-field-set">
+                <span class="field-set-label">Calculate Age at (Optional)</span>
+                <div class="date-inputs-triple">
+                  
+                  <!-- Year -->
+                  <div class="input-block year-block">
+                    <label for="targetYearInput" class="sub-label">Year</label>
+                    <div class="control-wrapper">
+                      <input type="number" id="targetYearInput" name="targetYearInput" class="text-input-year" min="1000" max="9999" required aria-label="Target Year">
+                    </div>
+                  </div>
+
+                  <!-- Month -->
+                  <div class="input-block month-block">
+                    <label for="targetMonthSelect" class="sub-label">Month</label>
+                    <div class="control-wrapper">
+                      <select id="targetMonthSelect" name="targetMonthSelect" class="custom-select" aria-label="Target Month">
+                        <option value="0">Jan</option>
+                        <option value="1">Feb</option>
+                        <option value="2">Mar</option>
+                        <option value="3">Apr</option>
+                        <option value="4">May</option>
+                        <option value="5">Jun</option>
+                        <option value="6">Jul</option>
+                        <option value="7">Aug</option>
+                        <option value="8">Sep</option>
+                        <option value="9">Oct</option>
+                        <option value="10">Nov</option>
+                        <option value="11">Dec</option>
+                      </select>
+                      <span class="select-chevron">▼</span>
+                    </div>
+                  </div>
+
+                  <!-- Day -->
+                  <div class="input-block day-block">
+                    <label for="targetDaySelect" class="sub-label">Day</label>
+                    <div class="day-input-group">
+                      <div class="control-wrapper">
+                        <select id="targetDaySelect" name="targetDaySelect" class="custom-select" aria-label="Target Day"></select>
+                        <span class="select-chevron">▼</span>
+                      </div>
+                      <button type="button" class="calendar-trigger-btn" id="targetCalendarBtn" aria-label="Pick Target Date from Calendar">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                      </button>
+                      <input type="date" id="targetNativePicker" class="hidden-native-date" tabindex="-1" aria-hidden="true">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Validation Error Alert Banner -->
+            <div id="validationAlert" class="validation-alert hidden" role="alert"></div>
+
+            <!-- Form Buttons -->
+            <div class="form-action-buttons">
+              <button type="submit" class="btn-calculate">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><line x1="8" x2="16" y1="14" y2="14"/></svg>
+                <span>Calculate Age</span>
+              </button>
+
+              <button type="button" class="btn-reset" id="resetCalcBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                <span>Reset</span>
+              </button>
+            </div>
+          </form>
+
+        </div>
+
+        <!-- Info Notice -->
+        <div class="info-notice-box">
+          <span class="info-notice-icon">i</span>
+          <p>Leave the “Calculate Age at” fields as default if you want to calculate age by today’s date.</p>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           5. DYNAMIC RESULTS DISPLAY
+           ========================================================================== -->
+      <section id="resultsContainer" class="results-display-section hidden" aria-live="polite">
+        
+        <div class="primary-result-hero">
+          <span class="hero-badge-label">YOUR EXACT AGE</span>
+          <div id="primaryAgeText" class="primary-age-output">--</div>
+          <div id="liveSecondsText" class="live-seconds-ticker">--</div>
+        </div>
+
+        <div class="result-actions-bar">
+          <button type="button" id="copyResultsBtn" class="btn-copy-result">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            <span>Copy Result</span>
+          </button>
+        </div>
+
+        <h3 class="results-subtitle">Total Duration Breakdown</h3>
+        <div class="duration-breakdown-grid">
+          <div class="metric-card">
+            <span class="metric-label">In Months</span>
+            <span id="statMonths" class="metric-value">--</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">In Weeks</span>
+            <span id="statWeeks" class="metric-value">--</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">In Days</span>
+            <span id="statDays" class="metric-value">--</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">In Hours</span>
+            <span id="statHours" class="metric-value">--</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">In Minutes</span>
+            <span id="statMinutes" class="metric-value">--</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">In Seconds</span>
+            <span id="statSeconds" class="metric-value">--</span>
+          </div>
+        </div>
+
+        <div class="milestone-card">
+          <div class="milestone-header">
+            <span class="milestone-title">Next Birthday Countdown</span>
+            <span id="nextBirthdayDate" class="milestone-date">--</span>
+          </div>
+          <div id="nextBirthdayCountdown" class="milestone-countdown">--</div>
+        </div>
+
+      </section>
+
+      <!-- ==========================================================================
+           6. 3-COLUMN INFORMATIONAL SECTION
+           ========================================================================== -->
+      <section class="info-triplet-grid">
+        
+        <!-- CARD 1: About Age Calculator -->
+        <div class="info-card">
+          <div class="info-card-header">
+            <div class="card-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><line x1="8" x2="16" y1="14" y2="14"/></svg>
+            </div>
+            <h2>About Age Calculator</h2>
+          </div>
+          <p>
+            Our Age Calculator helps you find your <strong>exact age</strong> from your date of birth to any specific date and time.
+          </p>
+          <p>
+            It provides accurate results in years, months, weeks, days, hours, minutes and seconds.
+          </p>
+        </div>
+
+        <!-- CARD 2: How to Use -->
+        <div class="info-card">
+          <div class="info-card-header">
+            <div class="card-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <h2>How to Use</h2>
+          </div>
+          <ol class="step-list">
+            <li>
+              <span class="step-number">1</span>
+              <span class="step-desc">Select your date of birth.</span>
+            </li>
+            <li>
+              <span class="step-number">2</span>
+              <span class="step-desc">(Optional) Select the date at which you want to calculate age.</span>
+            </li>
+            <li>
+              <span class="step-number">3</span>
+              <span class="step-desc">Click on the “Calculate Age” button.</span>
+            </li>
+            <li>
+              <span class="step-number">4</span>
+              <span class="step-desc">Your exact age will be shown in multiple formats.</span>
+            </li>
+          </ol>
+        </div>
+
+        <!-- CARD 3: Frequently Asked Questions -->
+        <div class="info-card">
+          <div class="info-card-header">
+            <div class="card-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+            </div>
+            <h2>Frequently Asked Questions</h2>
+          </div>
+
+          <div class="faq-accordion">
             
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search other calculators (BMI, EMI, Loan...)" aria-label="Search calculators">
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false">
+                <span>How is age calculated?</span>
+                <span class="faq-chevron">▼</span>
+              </button>
+              <div class="faq-content">
+                <p>Age is calculated using exact calendar math that subtracts birth date from target date while compensating for leap years and exact month lengths.</p>
+              </div>
             </div>
+
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false">
+                <span>Can I calculate age in months or days only?</span>
+                <span class="faq-chevron">▼</span>
+              </button>
+              <div class="faq-content">
+                <p>Yes, CalcVerse outputs your total age broken down into months, total weeks, total days, hours, minutes, and seconds.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false">
+                <span>Does this calculator consider leap years?</span>
+                <span class="faq-chevron">▼</span>
+              </button>
+              <div class="faq-content">
+                <p>Yes. Every leap year (366 days) in your date query is dynamically accounted for in the output.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false">
+                <span>Why may age be different on some calculators?</span>
+                <span class="faq-chevron">▼</span>
+              </button>
+              <div class="faq-content">
+                <p>Basic calculators assume every month has 30 days. CalcVerse uses exact calendar lengths (28, 29, 30, or 31 days) for each specific month.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false">
+                <span>Is my personal data saved?</span>
+                <span class="faq-chevron">▼</span>
+              </button>
+              <div class="faq-content">
+                <p>No. Calculations are executed client-side in your web browser. No dates are saved or transmitted.</p>
+              </div>
+            </div>
+
+          </div>
         </div>
-    </section>
 
-    <!-- Main Content Container -->
-    <main class="main-wrapper">
-        <section class="calc-card-container">
-            <form id="ageForm" novalidate>
-                <div class="calc-input-grid">
-                    
-                    <!-- Date of Birth Group -->
-                    <div class="form-group">
-                        <label for="dobDate" class="form-label">Date of Birth <span class="req">*</span></label>
-                        <div class="input-row">
-                            <input type="date" id="dobDate" class="cv-input" required aria-required="true">
-                            <input type="time" id="dobTime" class="cv-input cv-time-input" value="00:00" aria-label="Time of birth">
-                        </div>
-                    </div>
+      </section>
 
-                    <!-- Target Date Group -->
-                    <div class="form-group">
-                        <label for="targetDate" class="form-label">Age at Date of <span class="req">*</span></label>
-                        <div class="input-row">
-                            <input type="date" id="targetDate" class="cv-input" required aria-required="true">
-                            <input type="time" id="targetTime" class="cv-input cv-time-input" value="12:00" aria-label="Target time">
-                        </div>
-                    </div>
-
-                </div>
-
-                <div id="errorAlert" class="alert-error hidden" role="alert" aria-live="assertive"></div>
-
-                <div class="btn-group">
-                    <button type="submit" class="cv-btn cv-btn-primary">
-                        <i class="fa-solid fa-calculator"></i> Calculate Age
-                    </button>
-                    <button type="button" id="resetBtn" class="cv-btn cv-btn-secondary">
-                        <i class="fa-solid fa-rotate-left"></i> Reset
-                    </button>
-                </div>
-            </form>
-
-            <!-- Results Output Display -->
-            <div id="resultsSection" class="results-wrapper hidden" aria-live="polite">
-                
-                <div class="result-hero-box">
-                    <span class="hero-badge">Chronological Age</span>
-                    <div id="primaryAgeOutput" class="hero-value"></div>
-                    <div id="decimalAgeOutput" class="hero-subvalue"></div>
-                    <div id="liveSecondsOutput" class="ticker-text" aria-atomic="true"></div>
-                </div>
-
-                <div class="action-row">
-                    <button id="copyBtn" class="action-btn" type="button"><i class="fa-regular fa-copy"></i> Copy Result</button>
-                    <button id="shareBtn" class="action-btn" type="button"><i class="fa-solid fa-share-nodes"></i> Share</button>
-                </div>
-
-                <div class="section-title"><i class="fa-solid fa-cake-candles"></i> Milestones</div>
-                <div class="grid-2">
-                    <div class="panel-box highlight">
-                        <div class="panel-title">Next Birthday</div>
-                        <div id="nextBirthdayOutput" class="panel-value"></div>
-                        <div class="progress-track">
-                            <div id="yearProgressBar" class="progress-fill" style="width: 0%;"></div>
-                        </div>
-                        <span id="yearProgressText" class="progress-label"></span>
-                    </div>
-
-                    <div class="panel-box">
-                        <div class="panel-title">Half-Birthday</div>
-                        <div id="halfBirthdayOutput" class="panel-value"></div>
-                    </div>
-                </div>
-
-                <div class="section-title"><i class="fa-solid fa-clock"></i> Total Duration Breakdown</div>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <span class="stat-label">Total Months + Days</span>
-                        <span id="totalMonthsDays" class="stat-number"></span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-label">Total Weeks + Days</span>
-                        <span id="totalWeeksDays" class="stat-number"></span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-label">Total Days</span>
-                        <span id="totalDays" class="stat-number"></span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-label">Total Hours</span>
-                        <span id="totalHours" class="stat-number"></span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-label">Total Minutes</span>
-                        <span id="totalMinutes" class="stat-number"></span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-label">Total Seconds</span>
-                        <span id="totalSeconds" class="stat-number"></span>
-                    </div>
-                </div>
-
-                <div class="section-title"><i class="fa-solid fa-star"></i> Life Context & Trivia</div>
-                <div class="facts-grid">
-                    <div class="fact-card">
-                        <i class="fa-solid fa-burst fact-icon"></i>
-                        <div>
-                            <span class="fact-label">Western Zodiac</span>
-                            <span id="zodiacSign" class="fact-value"></span>
-                        </div>
-                    </div>
-                    <div class="fact-card">
-                        <i class="fa-solid fa-dragon fact-icon"></i>
-                        <div>
-                            <span class="fact-label">Chinese Zodiac</span>
-                            <span id="chineseZodiac" class="fact-value"></span>
-                        </div>
-                    </div>
-                    <div class="fact-card">
-                        <i class="fa-solid fa-gem fact-icon"></i>
-                        <div>
-                            <span class="fact-label">Birthstone</span>
-                            <span id="birthstone" class="fact-value"></span>
-                        </div>
-                    </div>
-                    <div class="fact-card">
-                        <i class="fa-solid fa-calendar-day fact-icon"></i>
-                        <div>
-                            <span class="fact-label">Day You Were Born</span>
-                            <span id="birthDayOfWeek" class="fact-value"></span>
-                        </div>
-                    </div>
-                    <div class="fact-card">
-                        <i class="fa-solid fa-calendar-days fact-icon"></i>
-                        <div>
-                            <span class="fact-label">Leap Years Lived</span>
-                            <span id="leapYearsLived" class="fact-value"></span>
-                        </div>
-                    </div>
-                    <div class="fact-card">
-                        <i class="fa-solid fa-heart-pulse fact-icon"></i>
-                        <div>
-                            <span class="fact-label">Est. Heartbeats</span>
-                            <span id="estHeartbeats" class="fact-value"></span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- SEO Information Section -->
-        <article class="info-card">
-            <h2>How Accurate Age Calculation Works</h2>
-            <p>Our age calculator uses standard Gregorian calendar boundary logic to account for varying month lengths (28 to 31 days) and solar leap years occurring every 4 years.</p>
-            
-            <div class="faq-accordion" style="margin-top: 20px;">
-                <details>
-                    <summary>How are leap year birthdays (Feb 29) handled?</summary>
-                    <p>For individuals born on February 29th, in non-leap years, the age calculation evaluates their birthday on March 1st.</p>
-                </details>
-                <details>
-                    <summary>Is my personal birth date saved?</summary>
-                    <p>No. All calculations are executed client-side in your browser JavaScript memory. No data is stored or transmitted.</p>
-                </details>
-            </div>
-        </article>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div>© 2026 CalcVerse. All Rights Reserved.</div>
-            <div>Simple. Fast. Accurate.</div>
+      <!-- ==========================================================================
+           7. RELATED CALCULATORS
+           ========================================================================== -->
+      <section class="related-calculators-section">
+        <div class="related-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <h2>Related Calculators</h2>
         </div>
-    </footer>
 
-    <!-- Unchanged Core Engine JavaScript Logic -->
-    <script>
-        (() => {
-            'use strict';
+        <div class="related-cards-grid">
+          
+          <a href="/date-calculator" class="related-card">
+            <div class="related-card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            </div>
+            <span>Date Calculator</span>
+          </a>
 
-            let liveTickerTimer = null;
+          <a href="/time-calculator" class="related-card">
+            <div class="related-card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span>Time Calculator</span>
+          </a>
 
-            const elements = {
-                dobDate: document.getElementById('dobDate'),
-                dobTime: document.getElementById('dobTime'),
-                targetDate: document.getElementById('targetDate'),
-                targetTime: document.getElementById('targetTime'),
-                ageForm: document.getElementById('ageForm'),
-                resetBtn: document.getElementById('resetBtn'),
-                errorAlert: document.getElementById('errorAlert'),
-                resultsSection: document.getElementById('resultsSection'),
-                copyBtn: document.getElementById('copyBtn'),
-                shareBtn: document.getElementById('shareBtn'),
+          <a href="/days-calculator" class="related-card">
+            <div class="related-card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            </div>
+            <span>Days Calculator</span>
+          </a>
 
-                primaryAgeOutput: document.getElementById('primaryAgeOutput'),
-                decimalAgeOutput: document.getElementById('decimalAgeOutput'),
-                liveSecondsOutput: document.getElementById('liveSecondsOutput'),
-                nextBirthdayOutput: document.getElementById('nextBirthdayOutput'),
-                yearProgressBar: document.getElementById('yearProgressBar'),
-                yearProgressText: document.getElementById('yearProgressText'),
-                halfBirthdayOutput: document.getElementById('halfBirthdayOutput'),
+          <a href="/week-calculator" class="related-card">
+            <div class="related-card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            </div>
+            <span>Week Calculator</span>
+          </a>
 
-                totalMonthsDays: document.getElementById('totalMonthsDays'),
-                totalWeeksDays: document.getElementById('totalWeeksDays'),
-                totalDays: document.getElementById('totalDays'),
-                totalHours: document.getElementById('totalHours'),
-                totalMinutes: document.getElementById('totalMinutes'),
-                totalSeconds: document.getElementById('totalSeconds'),
+          <a href="/birthday-calculator" class="related-card">
+            <div class="related-card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/><path d="M2 21h20"/><path d="M7 8v3"/><path d="M12 8v3"/><path d="M17 8v3"/></svg>
+            </div>
+            <span>Birthday Calculator</span>
+          </a>
 
-                zodiacSign: document.getElementById('zodiacSign'),
-                chineseZodiac: document.getElementById('chineseZodiac'),
-                birthstone: document.getElementById('birthstone'),
-                birthDayOfWeek: document.getElementById('birthDayOfWeek'),
-                leapYearsLived: document.getElementById('leapYearsLived'),
-                estHeartbeats: document.getElementById('estHeartbeats')
-            };
+        </div>
+      </section>
 
-            // Theme Toggle System (Dark / Light Mode)
-            const themeBtn = document.getElementById('themeToggleBtn');
-            themeBtn.addEventListener('click', () => {
-                document.body.classList.toggle('dark-theme');
-                const isDark = document.body.classList.contains('dark-theme');
-                themeBtn.innerHTML = isDark ? '<i class="fa-regular fa-sun"></i>' : '<i class="fa-regular fa-moon"></i>';
-                localStorage.setItem('calcverse_theme', isDark ? 'dark' : 'light');
-            });
+    </div>
+  </main>
 
-            // Restore Saved Theme
-            if (localStorage.getItem('calcverse_theme') === 'dark') {
-                document.body.classList.add('dark-theme');
-                themeBtn.innerHTML = '<i class="fa-regular fa-sun"></i>';
-            }
+  <!-- ==========================================================================
+       8. FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        
+        <!-- Col 1: Brand -->
+        <div class="footer-brand-col">
+          <a href="/" class="footer-logo">
+            <div class="logo-icon-box">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+            </div>
+            <span>CalcVerse</span>
+          </a>
+          <p class="footer-tagline">
+            Free, accurate and easy to use online calculators for everyday life.
+          </p>
+        </div>
 
-            document.addEventListener('DOMContentLoaded', () => {
-                if (!elements.ageForm) return;
+        <!-- Col 2: Quick Links -->
+        <div class="footer-links-col">
+          <h3 class="footer-col-title">Quick Links</h3>
+          <ul class="footer-links-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/all-calculators">All Calculators</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
 
-                const today = new Date();
-                elements.targetDate.value = formatDateString(today);
+        <!-- Col 3: Categories -->
+        <div class="footer-links-col">
+          <h3 class="footer-col-title">Categories</h3>
+          <ul class="footer-links-list">
+            <li><a href="/category/finance">Finance</a></li>
+            <li><a href="/category/health">Health</a></li>
+            <li><a href="/category/education">Education</a></li>
+            <li><a href="/category/utility">Utility</a></li>
+            <li><a href="/category/math">Math</a></li>
+          </ul>
+        </div>
 
-                elements.ageForm.addEventListener('submit', handleCalculate);
-                elements.resetBtn.addEventListener('click', handleReset);
-                elements.copyBtn.addEventListener('click', handleCopy);
-                elements.shareBtn.addEventListener('click', handleShare);
-            });
+        <!-- Col 4: Popular Calculators -->
+        <div class="footer-links-col">
+          <h3 class="footer-col-title">Popular Calculators</h3>
+          <ul class="footer-links-list">
+            <li><a href="/age-calculator">Age Calculator</a></li>
+            <li><a href="/bmi-calculator">BMI Calculator</a></li>
+            <li><a href="/emi-calculator">EMI Calculator</a></li>
+            <li><a href="/loan-calculator">Loan Calculator</a></li>
+            <li><a href="/percentage-calculator">Percentage Calculator</a></li>
+          </ul>
+        </div>
 
-            function handleCalculate(e) {
-                e.preventDefault();
-                clearError();
+        <!-- Col 5: Newsletter -->
+        <div class="footer-newsletter-col">
+          <h3 class="footer-col-title">Newsletter</h3>
+          <p class="newsletter-desc">Get useful calculator updates and tips in your inbox.</p>
+          
+          <form id="newsletterForm" class="newsletter-form" novalidate>
+            <div class="newsletter-input-group">
+              <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="Enter your email" aria-label="Enter your email for newsletter" required>
+              <button type="submit" class="newsletter-btn">Subscribe</button>
+            </div>
+            <div id="newsletterStatus" class="newsletter-status-msg hidden" aria-live="polite"></div>
+          </form>
+        </div>
 
-                const birthDateVal = elements.dobDate.value;
-                const birthTimeVal = elements.dobTime.value || "00:00";
-                const targetDateVal = elements.targetDate.value;
-                const targetTimeVal = elements.targetTime.value || "12:00";
+      </div>
 
-                if (!birthDateVal || !targetDateVal) {
-                    showError("Please select a valid birth date and target date.");
-                    return;
-                }
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <p>© 2025 CalcVerse. All rights reserved.</p>
+        
+        <div class="footer-legal-links">
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-of-use">Terms of Use</a>
+        </div>
 
-                const birth = new Date(`${birthDateVal}T${birthTimeVal}:00`);
-                const target = new Date(`${targetDateVal}T${targetTimeVal}:00`);
+        <button type="button" class="back-to-top-btn" id="backToTopBtn" aria-label="Back to Top">
+          ▲
+        </button>
+      </div>
+    </div>
+  </footer>
 
-                if (isNaN(birth.getTime()) || isNaN(target.getTime())) {
-                    showError("Invalid date or time provided.");
-                    return;
-                }
+  <!-- ==========================================================================
+       EMBEDDED JAVASCRIPT (CORE LOGIC & SYNCHRONIZATION)
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      'use strict';
 
-                if (birth > target) {
-                    showError("Date of birth cannot be later than the target age date.");
-                    return;
-                }
+      // Live Ticker State
+      let liveTickerInterval = null;
 
-                executeAgeEngine(birth, target);
-            }
+      // Element References - Birth Date
+      const dobYearInput = document.getElementById('dobYearInput');
+      const dobMonthSelect = document.getElementById('dobMonthSelect');
+      const dobDaySelect = document.getElementById('dobDaySelect');
+      const dobCalendarBtn = document.getElementById('dobCalendarBtn');
+      const dobNativePicker = document.getElementById('dobNativePicker');
 
-            function executeAgeEngine(birth, target) {
-                let years = target.getFullYear() - birth.getFullYear();
-                let months = target.getMonth() - birth.getMonth();
-                let days = target.getDate() - birth.getDate();
-                let hours = target.getHours() - birth.getHours();
-                let minutes = target.getMinutes() - birth.getMinutes();
+      // Element References - Target Date
+      const targetYearInput = document.getElementById('targetYearInput');
+      const targetMonthSelect = document.getElementById('targetMonthSelect');
+      const targetDaySelect = document.getElementById('targetDaySelect');
+      const targetCalendarBtn = document.getElementById('targetCalendarBtn');
+      const targetNativePicker = document.getElementById('targetNativePicker');
 
-                if (minutes < 0) {
-                    minutes += 60;
-                    hours--;
-                }
+      // Form & Utility Buttons
+      const swapDatesBtn = document.getElementById('swapDatesBtn');
+      const ageCalculatorForm = document.getElementById('ageCalculatorForm');
+      const resetCalcBtn = document.getElementById('resetCalcBtn');
+      const validationAlert = document.getElementById('validationAlert');
 
-                if (hours < 0) {
-                    hours += 24;
-                    days--;
-                }
+      // Results Elements
+      const resultsContainer = document.getElementById('resultsContainer');
+      const primaryAgeText = document.getElementById('primaryAgeText');
+      const liveSecondsText = document.getElementById('liveSecondsText');
+      const copyResultsBtn = document.getElementById('copyResultsBtn');
 
-                if (days < 0) {
-                    months--;
-                    const prevMonth = new Date(target.getFullYear(), target.getMonth(), 0);
-                    days += prevMonth.getDate();
-                }
+      const statMonths = document.getElementById('statMonths');
+      const statWeeks = document.getElementById('statWeeks');
+      const statDays = document.getElementById('statDays');
+      const statHours = document.getElementById('statHours');
+      const statMinutes = document.getElementById('statMinutes');
+      const statSeconds = document.getElementById('statSeconds');
+      const nextBirthdayDate = document.getElementById('nextBirthdayDate');
+      const nextBirthdayCountdown = document.getElementById('nextBirthdayCountdown');
 
-                if (months < 0) {
-                    years--;
-                    months += 12;
-                }
+      // Footer & Theme Elements
+      const newsletterForm = document.getElementById('newsletterForm');
+      const newsletterEmail = document.getElementById('newsletterEmail');
+      const newsletterStatus = document.getElementById('newsletterStatus');
+      const themeToggle = document.getElementById('themeToggle');
+      const backToTopBtn = document.getElementById('backToTopBtn');
 
-                const diffMs = target - birth;
-                const totalSec = Math.floor(diffMs / 1000);
-                const totalMin = Math.floor(totalSec / 60);
-                const totalHr = Math.floor(totalMin / 60);
-                const totalDay = Math.floor(totalHr / 24);
-                const totalWk = Math.floor(totalDay / 7);
-                const remDaysAfterWk = totalDay % 7;
-                const totalMon = (years * 12) + months;
+      /* ==========================================================================
+         1. DATE SYNCHRONIZATION & DAY DROPDOWN GENERATOR
+         ========================================================================== */
+      function getDaysInMonth(year, monthIndex) {
+        if (isNaN(year) || year <= 0) year = new Date().getFullYear();
+        return new Date(year, monthIndex + 1, 0).getDate();
+      }
 
-                const decimalAge = (years + (months / 12) + (days / 365.2425)).toFixed(3);
+      function updateDayOptions(yearInput, monthSelect, daySelect, preferredDay) {
+        const y = parseInt(yearInput.value, 10) || new Date().getFullYear();
+        const m = parseInt(monthSelect.value, 10);
+        const maxDays = getDaysInMonth(y, m);
 
-                elements.primaryAgeOutput.textContent = `${years} Years, ${months} Months, ${days} Days`;
-                elements.decimalAgeOutput.textContent = `(${decimalAge} Years Old)`;
+        const currentVal = preferredDay !== undefined ? preferredDay : parseInt(daySelect.value, 10) || 1;
+        daySelect.innerHTML = '';
 
-                elements.totalMonthsDays.textContent = `${totalMon} Months, ${days} Days`;
-                elements.totalWeeksDays.textContent = `${totalWk.toLocaleString()} Weeks, ${remDaysAfterWk} Days`;
-                elements.totalDays.textContent = totalDay.toLocaleString();
-                elements.totalHours.textContent = totalHr.toLocaleString();
-                elements.totalMinutes.textContent = totalMin.toLocaleString();
-                elements.totalSeconds.textContent = totalSec.toLocaleString();
+        for (let d = 1; d <= maxDays; d++) {
+          const opt = document.createElement('option');
+          opt.value = d;
+          opt.textContent = d;
+          daySelect.appendChild(opt);
+        }
 
-                calculateMilestones(birth, target);
-                renderTrivia(birth, target, totalDay);
-                startLiveTicker(birth);
+        if (currentVal <= maxDays) {
+          daySelect.value = currentVal;
+        } else {
+          daySelect.value = maxDays;
+        }
+      }
 
-                elements.resultsSection.classList.remove('hidden');
-            }
+      // Initial Default Setup
+      const today = new Date();
+      targetYearInput.value = today.getFullYear();
+      targetMonthSelect.value = today.getMonth();
 
-            function calculateMilestones(birth, target) {
-                let nextBdayYear = target.getFullYear();
-                let nextBday = new Date(nextBdayYear, birth.getMonth(), birth.getDate(), birth.getHours(), birth.getMinutes());
+      // Population of Days
+      updateDayOptions(dobYearInput, dobMonthSelect, dobDaySelect, 1);
+      updateDayOptions(targetYearInput, targetMonthSelect, targetDaySelect, 28);
 
-                if (birth.getMonth() === 1 && birth.getDate() === 29 && !isLeapYear(nextBdayYear)) {
-                    nextBday = new Date(nextBdayYear, 2, 1, birth.getHours(), birth.getMinutes());
-                }
+      // Input Event Handlers
+      dobYearInput.addEventListener('input', () => updateDayOptions(dobYearInput, dobMonthSelect, dobDaySelect));
+      dobMonthSelect.addEventListener('change', () => updateDayOptions(dobYearInput, dobMonthSelect, dobDaySelect));
 
-                if (nextBday < target) {
-                    nextBdayYear++;
-                    nextBday.setFullYear(nextBdayYear);
-                    if (birth.getMonth() === 1 && birth.getDate() === 29 && !isLeapYear(nextBdayYear)) {
-                        nextBday = new Date(nextBdayYear, 2, 1, birth.getHours(), birth.getMinutes());
-                    }
-                }
+      targetYearInput.addEventListener('input', () => updateDayOptions(targetYearInput, targetMonthSelect, targetDaySelect));
+      targetMonthSelect.addEventListener('change', () => updateDayOptions(targetYearInput, targetMonthSelect, targetDaySelect));
 
-                const daysUntil = Math.ceil((nextBday - target) / (1000 * 60 * 60 * 24));
-                elements.nextBirthdayOutput.textContent = `${daysUntil} Days away (${nextBday.toDateString()})`;
+      // Native Calendar Picker Synchronization
+      dobCalendarBtn.addEventListener('click', () => {
+        const y = dobYearInput.value || new Date().getFullYear();
+        const m = String(parseInt(dobMonthSelect.value, 10) + 1).padStart(2, '0');
+        const d = String(dobDaySelect.value).padStart(2, '0');
+        dobNativePicker.value = `${y}-${m}-${d}`;
 
-                const prevBday = new Date(nextBday);
-                prevBday.setFullYear(prevBday.getFullYear() - 1);
-                const yearProgressPct = Math.min(100, Math.max(0, (((target - prevBday) / (nextBday - prevBday)) * 100))).toFixed(1);
+        if (typeof dobNativePicker.showPicker === 'function') {
+          dobNativePicker.showPicker();
+        } else {
+          dobNativePicker.click();
+        }
+      });
 
-                elements.yearProgressBar.style.width = `${yearProgressPct}%`;
-                elements.yearProgressText.textContent = `${yearProgressPct}% of current personal year completed`;
+      dobNativePicker.addEventListener('change', () => {
+        if (!dobNativePicker.value) return;
+        const [y, m, d] = dobNativePicker.value.split('-').map(num => parseInt(num, 10));
+        dobYearInput.value = y;
+        dobMonthSelect.value = m - 1;
+        updateDayOptions(dobYearInput, dobMonthSelect, dobDaySelect, d);
+      });
 
-                const halfBday = new Date(nextBday);
-                halfBday.setMonth(halfBday.getMonth() - 6);
-                elements.halfBirthdayOutput.textContent = halfBday.toDateString();
-            }
+      targetCalendarBtn.addEventListener('click', () => {
+        const y = targetYearInput.value || new Date().getFullYear();
+        const m = String(parseInt(targetMonthSelect.value, 10) + 1).padStart(2, '0');
+        const d = String(targetDaySelect.value).padStart(2, '0');
+        targetNativePicker.value = `${y}-${m}-${d}`;
 
-            function renderTrivia(birth, target, totalDays) {
-                elements.zodiacSign.textContent = getWesternZodiac(birth.getDate(), birth.getMonth() + 1);
-                elements.chineseZodiac.textContent = getChineseZodiac(birth.getFullYear());
-                elements.birthstone.textContent = getBirthstone(birth.getMonth() + 1);
-                elements.birthDayOfWeek.textContent = birth.toLocaleDateString('en-US', { weekday: 'long' });
+        if (typeof targetNativePicker.showPicker === 'function') {
+          targetNativePicker.showPicker();
+        } else {
+          targetNativePicker.click();
+        }
+      });
 
-                let leapCount = 0;
-                for (let y = birth.getFullYear(); y <= target.getFullYear(); y++) {
-                    if (isLeapYear(y)) leapCount++;
-                }
-                elements.leapYearsLived.textContent = `${leapCount} Leap Years`;
+      targetNativePicker.addEventListener('change', () => {
+        if (!targetNativePicker.value) return;
+        const [y, m, d] = targetNativePicker.value.split('-').map(num => parseInt(num, 10));
+        targetYearInput.value = y;
+        targetMonthSelect.value = m - 1;
+        updateDayOptions(targetYearInput, targetMonthSelect, targetDaySelect, d);
+      });
 
-                const heartbeats = totalDays * 24 * 60 * 80;
-                elements.estHeartbeats.textContent = `~${(heartbeats / 1e6).toFixed(1)} Million`;
-            }
+      // Swap Fields Logic
+      swapDatesBtn.addEventListener('click', () => {
+        const tempY = dobYearInput.value;
+        const tempM = dobMonthSelect.value;
+        const tempD = parseInt(dobDaySelect.value, 10);
 
-            function startLiveTicker(birth) {
-                if (liveTickerTimer) clearInterval(liveTickerTimer);
-                liveTickerTimer = setInterval(() => {
-                    const now = new Date();
-                    const secondsLived = Math.floor((now - birth) / 1000);
-                    elements.liveSecondsOutput.textContent = `Real-time lifetime elapsed: ${secondsLived.toLocaleString()} seconds`;
-                }, 1000);
-            }
+        dobYearInput.value = targetYearInput.value;
+        dobMonthSelect.value = targetMonthSelect.value;
+        updateDayOptions(dobYearInput, dobMonthSelect, dobDaySelect, parseInt(targetDaySelect.value, 10));
 
-            function isLeapYear(year) {
-                return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
-            }
+        targetYearInput.value = tempY;
+        targetMonthSelect.value = tempM;
+        updateDayOptions(targetYearInput, targetMonthSelect, targetDaySelect, tempD);
+      });
 
-            function getWesternZodiac(day, month) {
-                const dates = [20, 19, 21, 20, 21, 21, 23, 23, 23, 23, 22, 22];
-                const signs = ["Capricorn ♑", "Aquarius ♒", "Pisces ♓", "Aries ♈", "Taurus ♉", "Gemini ♊", "Cancer ♋", "Leo ♌", "Virgo ♍", "Libra ♎", "Scorpio ♏", "Sagittarius ♐", "Capricorn ♑"];
-                return day < dates[month - 1] ? signs[month - 1] : signs[month];
-            }
+      /* ==========================================================================
+         2. AGE CALCULATION ENGINE
+         ========================================================================== */
+      ageCalculatorForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        hideError();
 
-            function getChineseZodiac(year) {
-                const animals = ["Monkey 🐒", "Rooster 🐓", "Dog 🐕", "Pig 🐖", "Rat 🐀", "Ox 🐂", "Tiger 🐅", "Rabbit 🐇", "Dragon 🐉", "Snake 🐍", "Horse 🐎", "Goat 🐐"];
-                return animals[year % 12];
-            }
+        const bYear = parseInt(dobYearInput.value, 10);
+        const bMonth = parseInt(dobMonthSelect.value, 10);
+        const bDay = parseInt(dobDaySelect.value, 10);
 
-            function getBirthstone(month) {
-                const stones = ["Garnet", "Amethyst", "Aquamarine", "Diamond", "Emerald", "Pearl", "Ruby", "Peridot", "Sapphire", "Opal", "Topaz", "Turquoise"];
-                return stones[month - 1];
-            }
+        const tYear = parseInt(targetYearInput.value, 10);
+        const tMonth = parseInt(targetMonthSelect.value, 10);
+        const tDay = parseInt(targetDaySelect.value, 10);
 
-            function formatDateString(date) {
-                return date.toISOString().split('T')[0];
-            }
+        if (isNaN(bYear) || isNaN(tYear)) {
+          showError('Please enter a valid numeric year.');
+          resultsContainer.classList.add('hidden');
+          return;
+        }
 
-            function showError(msg) {
-                elements.errorAlert.textContent = msg;
-                elements.errorAlert.classList.remove('hidden');
-                elements.resultsSection.classList.add('hidden');
-            }
+        const birthDate = new Date(bYear, bMonth, bDay, 0, 0, 0);
+        const targetDate = new Date(tYear, tMonth, tDay, 0, 0, 0);
 
-            function clearError() {
-                elements.errorAlert.textContent = '';
-                elements.errorAlert.classList.add('hidden');
-            }
+        if (birthDate > targetDate) {
+          showError('Date of birth cannot be later than the target calculate date.');
+          resultsContainer.classList.add('hidden');
+          return;
+        }
 
-            function handleReset() {
-                elements.ageForm.reset();
-                elements.targetDate.value = formatDateString(new Date());
-                clearError();
-                elements.resultsSection.classList.add('hidden');
-                if (liveTickerTimer) clearInterval(liveTickerTimer);
-            }
+        executeCalculation(birthDate, targetDate);
+      });
 
-            function handleCopy() {
-                const text = elements.primaryAgeOutput.textContent;
-                navigator.clipboard.writeText(`My Age: ${text} - Calculated on CalcVerse`).then(() => {
-                    elements.copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-                    setTimeout(() => elements.copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy Result', 2000);
-                });
-            }
+      function executeCalculation(birth, target) {
+        let years = target.getFullYear() - birth.getFullYear();
+        let months = target.getMonth() - birth.getMonth();
+        let days = target.getDate() - birth.getDate();
 
-            function handleShare() {
-                if (navigator.share) {
-                    navigator.share({
-                        title: 'CalcVerse Age Engine',
-                        text: `My exact age is ${elements.primaryAgeOutput.textContent}.`,
-                        url: window.location.href
-                    }).catch(() => {});
-                } else {
-                    handleCopy();
-                }
-            }
-        })();
-    </script>
+        if (days < 0) {
+          months--;
+          const prevMonthLastDay = new Date(target.getFullYear(), target.getMonth(), 0).getDate();
+          days += prevMonthLastDay;
+        }
+
+        if (months < 0) {
+          years--;
+          months += 12;
+        }
+
+        // Totals Metrics
+        const diffMs = target - birth;
+        const totalSecs = Math.floor(diffMs / 1000);
+        const totalMins = Math.floor(totalSecs / 60);
+        const totalHrs = Math.floor(totalMins / 60);
+        const totalDaysVal = Math.floor(totalHrs / 24);
+        const totalWeeksVal = Math.floor(totalDaysVal / 7);
+        const totalMonthsVal = (years * 12) + months;
+
+        // Render Primary Output
+        primaryAgeText.textContent = `${years} Years, ${months} Months, ${days} Days`;
+
+        statMonths.textContent = totalMonthsVal.toLocaleString();
+        statWeeks.textContent = totalWeeksVal.toLocaleString();
+        statDays.textContent = totalDaysVal.toLocaleString();
+        statHours.textContent = totalHrs.toLocaleString();
+        statMinutes.textContent = totalMins.toLocaleString();
+        statSeconds.textContent = totalSecs.toLocaleString();
+
+        // Milestone Next Birthday Calculation
+        calculateNextBirthday(birth, target);
+
+        // Ticker Start
+        startTicker(birth);
+
+        resultsContainer.classList.remove('hidden');
+        resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      function calculateNextBirthday(birth, target) {
+        let nextBdayYear = target.getFullYear();
+        let nextBday = new Date(nextBdayYear, birth.getMonth(), birth.getDate());
+
+        if (nextBday < target) {
+          nextBdayYear++;
+          nextBday = new Date(nextBdayYear, birth.getMonth(), birth.getDate());
+        }
+
+        const diffMs = nextBday - target;
+        const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+
+        const options = { month: 'short', day: 'numeric', year: 'numeric' };
+        nextBirthdayDate.textContent = nextBday.toLocaleDateString('en-US', options);
+        nextBirthdayCountdown.textContent = `${diffDays} Days remaining until your next birthday! 🎉`;
+      }
+
+      function startTicker(birthDate) {
+        if (liveTickerInterval) clearInterval(liveTickerInterval);
+
+        liveTickerInterval = setInterval(() => {
+          const now = new Date();
+          if (now > birthDate) {
+            const liveMs = now - birthDate;
+            const liveSecs = Math.floor(liveMs / 1000);
+            liveSecondsText.textContent = `Live duration elapsed: ${liveSecs.toLocaleString()} seconds`;
+          }
+        }, 1000);
+      }
+
+      /* ==========================================================================
+         3. RESET & UTILITY FUNCTIONS
+         ========================================================================== */
+      resetCalcBtn.addEventListener('click', () => {
+        const curr = new Date();
+        dobYearInput.value = 2006;
+        dobMonthSelect.value = 3;
+        updateDayOptions(dobYearInput, dobMonthSelect, dobDaySelect, 1);
+
+        targetYearInput.value = curr.getFullYear();
+        targetMonthSelect.value = curr.getMonth();
+        updateDayOptions(targetYearInput, targetMonthSelect, targetDaySelect, 28);
+
+        hideError();
+        resultsContainer.classList.add('hidden');
+        if (liveTickerInterval) clearInterval(liveTickerInterval);
+      });
+
+      function showError(msg) {
+        validationAlert.textContent = msg;
+        validationAlert.classList.remove('hidden');
+      }
+
+      function hideError() {
+        validationAlert.textContent = '';
+        validationAlert.classList.add('hidden');
+      }
+
+      copyResultsBtn.addEventListener('click', () => {
+        const textToCopy = `Age: ${primaryAgeText.textContent} (Calculated via CalcVerse)`;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const span = copyResultsBtn.querySelector('span');
+          span.textContent = 'Copied!';
+          setTimeout(() => { span.textContent = 'Copy Result'; }, 2000);
+        });
+      });
+
+      /* ==========================================================================
+         4. ACCORDION FAQ
+         ========================================================================== */
+      const faqTriggers = document.querySelectorAll('.faq-trigger');
+
+      faqTriggers.forEach(trigger => {
+        trigger.addEventListener('click', () => {
+          const faqItem = trigger.parentElement;
+          const content = faqItem.querySelector('.faq-content');
+          const isOpen = faqItem.classList.contains('active');
+
+          document.querySelectorAll('.faq-item').forEach(item => {
+            item.classList.remove('active');
+            item.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+            item.querySelector('.faq-content').style.maxHeight = null;
+          });
+
+          if (!isOpen) {
+            faqItem.classList.add('active');
+            trigger.setAttribute('aria-expanded', 'true');
+            content.style.maxHeight = content.scrollHeight + 'px';
+          }
+        });
+      });
+
+      /* ==========================================================================
+         5. NEWSLETTER VALIDATION & THEME TOGGLE
+         ========================================================================== */
+      newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = newsletterEmail.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        newsletterStatus.classList.remove('hidden', 'success', 'error');
+
+        if (!emailRegex.test(email)) {
+          newsletterStatus.textContent = 'Please enter a valid email address.';
+          newsletterStatus.classList.add('error');
+          return;
+        }
+
+        newsletterStatus.textContent = 'Thank you for subscribing to CalcVerse!';
+        newsletterStatus.classList.add('success');
+        newsletterEmail.value = '';
+      });
+
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+      });
+
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
