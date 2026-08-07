@@ -19,8 +19,8 @@
             --primary-hover: #0a5229;
             --bg-light: #f4f8f5;
             --card-bg: #ffffff;
-            --text-main: #0f172a;      /* টেক্সট আরও ডার্ক ও স্পষ্ট করা হয়েছে */
-            --text-muted: #334155;     /* সাব-টেক্সট আরও ডার্ক ও হাইলাইটেড */
+            --text-main: #0f172a;
+            --text-muted: #334155;
             --border-color: #e2e8f0;
             --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
             --shadow-md: 0 4px 10px rgba(0,0,0,0.06);
@@ -47,7 +47,6 @@
             color: inherit;
         }
 
-        /* --- Header / Navbar --- */
         header {
             background-color: var(--primary-dark);
             color: white;
@@ -111,7 +110,6 @@
             font-weight: 600;
         }
 
-        /* --- Hero Section --- */
         .hero {
             text-align: center;
             padding: 45px 20px 35px;
@@ -173,7 +171,6 @@
             gap: 8px;
         }
 
-        /* --- Container --- */
         .container {
             max-width: 1120px;
             margin: 0 auto;
@@ -196,7 +193,6 @@
             color: var(--primary-green);
         }
 
-        /* --- Popular Calculators --- */
         .popular-wrapper {
             position: relative;
             display: flex;
@@ -241,7 +237,6 @@
             align-items: center;
         }
 
-        /* লোগো শেপ টেমপ্লেট অনুযায়ী স্কোয়ার ও রাউন্ডেড কোণা */
         .icon-box {
             width: 52px;
             height: 52px;
@@ -260,14 +255,14 @@
 
         .card-popular h3 {
             font-size: 16px;
-            font-weight: 800; /* টেক্সট স্পষ্ট */
+            font-weight: 800;
             color: #0f172a;
             margin-bottom: 8px;
         }
 
         .card-popular p {
             font-size: 13px;
-            font-weight: 500; /* ভালো ভিজিবিলিটির জন্য */
+            font-weight: 500;
             color: var(--text-muted);
             margin-bottom: 20px;
             flex-grow: 1;
@@ -284,7 +279,6 @@
             display: inline-block;
         }
 
-        /* --- Category Section --- */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -300,7 +294,6 @@
             text-align: center;
         }
 
-        /* সার্কেল হালকা ব্যাকগ্রাউন্ড ও ডার্ক আইকন (ছবি অনুসারী) */
         .category-card .icon-circle {
             width: 48px;
             height: 48px;
@@ -333,12 +326,21 @@
 
         .category-card ul li {
             font-size: 13px;
-            font-weight: 600; /* টেক্সট হাইলাইট */
+            font-weight: 600;
             color: #334155;
             margin-bottom: 8px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+
+        .category-card ul li a {
+            color: inherit;
+        }
+
+        .category-card ul li a:hover {
+            color: var(--primary-green);
+            text-decoration: underline;
         }
 
         .view-all {
@@ -350,7 +352,6 @@
             gap: 4px;
         }
 
-        /* --- Why Choose Us --- */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -392,7 +393,6 @@
             line-height: 1.3;
         }
 
-        /* --- Recently Used --- */
         .recent-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -416,7 +416,6 @@
             font-size: 18px;
         }
 
-        /* --- About & FAQ Split --- */
         .info-split {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -466,7 +465,6 @@
             color: var(--text-muted);
         }
 
-        /* FAQ Accordion */
         .accordion-item {
             border-bottom: 1px solid var(--border-color);
             padding: 12px 0;
@@ -486,7 +484,6 @@
             cursor: pointer;
         }
 
-        /* --- Footer --- */
         footer {
             background-color: var(--primary-dark);
             color: white;
@@ -555,7 +552,6 @@
             color: #a7f3d0;
         }
 
-        /* Responsive */
         @media (max-width: 900px) {
             .popular-grid, .category-grid, .features-grid, .recent-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -595,17 +591,14 @@ body.dark{
     color:#ffffff;
 }
 
-/* Hero */
 body.dark .hero{
     background:#181818;
 }
 
-/* Header */
 body.dark header{
     background:#0b3d20;
 }
 
-/* Cards */
 body.dark .card-popular,
 body.dark .category-card,
 body.dark .feature-card,
@@ -617,12 +610,10 @@ body.dark .faq-box{
     box-shadow:none;
 }
 
-/* Footer */
 body.dark footer{
     background:#0b3d20;
 }
 
-/* Titles */
 body.dark h1,
 body.dark h2,
 body.dark h3,
@@ -630,14 +621,12 @@ body.dark h4{
     color:#ffffff;
 }
 
-/* Paragraph */
 body.dark p,
 body.dark li,
 body.dark span{
     color:#d1d5db;
 }
 
-/* Search Box */
 body.dark input{
     background:#2b2b2b;
     color:#ffffff;
@@ -648,7 +637,6 @@ body.dark input::placeholder{
     color:#999;
 }
 
-/* Search Suggestions */
 body.dark .search-results{
     background:#222;
     border:1px solid #444;
@@ -662,19 +650,16 @@ body.dark .search-results div:hover{
     background:#333;
 }
 
-/* Buttons */
 body.dark .btn-calc,
 body.dark button{
     background:#0f6e38;
     color:white;
 }
 
-/* Links */
 body.dark a{
     color:#fff;
 }
 
-/* Navigation arrows */
 body.dark .nav-btn{
     background:#222;
     color:#fff;
@@ -708,10 +693,10 @@ body.dark .section-title i{
             </div>
         </div>
         <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">All Calculators</a>
-            <a href="#">About Us</a>
-            <a href="#">Contact</a>
+            <a href="index.html">Home</a>
+            <a href="all-calculators.html">All Calculators</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact</a>
             <i id="darkModeBtn" class="fa-regular fa-moon" style="cursor:pointer;font-size:22px;"></i>
         </div>
     </header>
@@ -745,7 +730,7 @@ body.dark .section-title i{
                     <div class="icon-box icon-green-bg"><i class="fa-solid fa-calendar-days"></i></div>
                     <h3>Age Calculator</h3>
                     <p>Calculate your exact age in years, months, days and more.</p>
-                    <a href="#" class="btn-calc">Calculate Now</a>
+                    <a href="age-calculator.html" class="btn-calc">Calculate Now</a>
                 </div>
                 <!-- BMI Calculator -->
                 <div class="card-popular">
@@ -759,14 +744,14 @@ body.dark .section-title i{
                     <div class="icon-box icon-purple-bg"><i class="fa-solid fa-calculator"></i></div>
                     <h3>EMI Calculator</h3>
                     <p>Calculate Equated Monthly Installment for loans.</p>
-                    <a href="#" class="btn-calc">Calculate Now</a>
+                    <a href="emi-calculator.html" class="btn-calc">Calculate Now</a>
                 </div>
                 <!-- Calorie Calculator -->
                 <div class="card-popular">
                     <div class="icon-box icon-orange-bg"><i class="fa-solid fa-fire"></i></div>
                     <h3>Calorie Calculator</h3>
                     <p>Find out how many calories your body needs daily.</p>
-                    <a href="#" class="btn-calc">Calculate Now</a>
+                    <a href="calorie-calculator.html" class="btn-calc">Calculate Now</a>
                 </div>
             </div>
             <button class="nav-btn next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -783,65 +768,65 @@ body.dark .section-title i{
                 <div class="icon-circle circle-green"><i class="fa-solid fa-building-columns"></i></div>
                 <h3>Finance</h3>
                 <ul>
-                    <li>EMI Calculator</li>
-                    <li>Loan Calculator</li>
-                    <li>Mortgage Calculator</li>
-                    <li>Compound Interest</li>
-                    <li>Discount Calculator</li>
+                    <li><a href="emi-calculator.html">EMI Calculator</a></li>
+                    <li><a href="loan-calculator.html">Loan Calculator</a></li>
+                    <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+                    <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
+                    <li><a href="discount-calculator.html">Discount Calculator</a></li>
                 </ul>
-                <a href="#" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="all-calculators.html#finance" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <!-- Health -->
             <div class="category-card">
                 <div class="icon-circle circle-pink"><i class="fa-solid fa-heart-pulse"></i></div>
                 <h3>Health</h3>
                 <ul>
-                    <li>BMI Calculator</li>
-                    <li>Calorie Calculator</li>
-                    <li>BMR Calculator</li>
-                    <li>Body Fat Calculator</li>
-                    <li>Ideal Weight Calculator</li>
+                    <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+                    <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+                    <li><a href="bmr-calculator.html">BMR Calculator</a></li>
+                    <li><a href="body-fat-calculator.html">Body Fat Calculator</a></li>
+                    <li><a href="ideal-weight-calculator.html">Ideal Weight Calculator</a></li>
                 </ul>
-                <a href="#" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="all-calculators.html#health" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <!-- Education -->
             <div class="category-card">
                 <div class="icon-circle circle-purple"><i class="fa-solid fa-graduation-cap"></i></div>
                 <h3>Education</h3>
                 <ul>
-                    <li>GPA Calculator</li>
-                    <li>Percentage Calculator</li>
-                    <li>Grade Calculator</li>
-                    <li>CGPA Calculator</li>
-                    <li>Average Calculator</li>
+                    <li><a href="gpa-calculator.html">GPA Calculator</a></li>
+                    <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+                    <li><a href="grade-calculator.html">Grade Calculator</a></li>
+                    <li><a href="cgpa-calculator.html">CGPA Calculator</a></li>
+                    <li><a href="average-calculator.html">Average Calculator</a></li>
                 </ul>
-                <a href="#" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="all-calculators.html#education" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <!-- Utility -->
             <div class="category-card">
                 <div class="icon-circle circle-blue"><i class="fa-solid fa-wrench"></i></div>
                 <h3>Utility</h3>
                 <ul>
-                    <li>Age Calculator</li>
-                    <li>Date Calculator</li>
-                    <li>Time Calculator</li>
-                    <li>Unit Converter</li>
-                    <li>Fuel Cost Calculator</li>
+                    <li><a href="age-calculator.html">Age Calculator</a></li>
+                    <li><a href="date-calculator.html">Date Calculator</a></li>
+                    <li><a href="time-calculator.html">Time Calculator</a></li>
+                    <li><a href="unit-converter.html">Unit Converter</a></li>
+                    <li><a href="fuel-cost-calculator.html">Fuel Cost Calculator</a></li>
                 </ul>
-                <a href="#" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="all-calculators.html#utility" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <!-- Math -->
             <div class="category-card">
                 <div class="icon-circle circle-orange"><i class="fa-solid fa-pi"></i></div>
                 <h3>Math</h3>
                 <ul>
-                    <li>Scientific Calculator</li>
-                    <li>Percentage Calculator</li>
-                    <li>Fraction Calculator</li>
-                    <li>Random Number Gen.</li>
-                    <li>Equation Solver</li>
+                    <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+                    <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+                    <li><a href="fraction-calculator.html">Fraction Calculator</a></li>
+                    <li><a href="random-number-calculator.html">Random Number Gen.</a></li>
+                    <li><a href="equation-solver.html">Equation Solver</a></li>
                 </ul>
-                <a href="#" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="all-calculators.html#math" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
 
@@ -887,22 +872,22 @@ body.dark .section-title i{
         </div>
 
         <div class="recent-grid">
-            <div class="recent-card">
+            <a class="recent-card" href="age-calculator.html">
                 <i class="fa-solid fa-calendar-days" style="color: #0f6e38;"></i>
                 <span>Age Calculator</span>
-            </div>
-            <div class="recent-card">
+            </a>
+            <a class="recent-card" href="emi-calculator.html">
                 <i class="fa-solid fa-calculator" style="color: #b91c1c;"></i>
                 <span>EMI Calculator</span>
-            </div>
-            <div class="recent-card">
+            </a>
+            <a class="recent-card" href="mortgage-calculator.html">
                 <i class="fa-solid fa-house" style="color: #1d4ed8;"></i>
                 <span>Mortgage Calculator</span>
-            </div>
-            <div class="recent-card">
+            </a>
+            <a class="recent-card" href="calorie-calculator.html">
                 <i class="fa-solid fa-fire" style="color: #2563eb;"></i>
                 <span>Calorie Calculator</span>
-            </div>
+            </a>
         </div>
 
         <!-- About & FAQ Split Section -->
@@ -982,29 +967,29 @@ body.dark .section-title i{
                 <div class="footer-col">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">All Calculators</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="all-calculators.html">All Calculators</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Legal</h4>
                     <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Disclaimer</a></li>
-                        <li><a href="#">Sitemap</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-use.html">Terms of Use</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                        <li><a href="sitemap.xml">Sitemap</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Popular Calculators</h4>
                     <ul>
-                        <li><a href="#">Age Calculator</a></li>
-                        <li><a href="#">BMI Calculator</a></li>
-                        <li><a href="#">EMI Calculator</a></li>
-                        <li><a href="#">Loan Calculator</a></li>
-                        <li><a href="#">Calorie Calculator</a></li>
+                        <li><a href="age-calculator.html">Age Calculator</a></li>
+                        <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+                        <li><a href="emi-calculator.html">EMI Calculator</a></li>
+                        <li><a href="loan-calculator.html">Loan Calculator</a></li>
+                        <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
                     </ul>
                 </div>
             </div>
@@ -1012,14 +997,14 @@ body.dark .section-title i{
             <div class="footer-bottom">
                 <div>© 2026 CalcVerse. All Rights Reserved.</div>
                 <div>♡ Made with <span style="color: #ef4444;">♥</span> for everyone</div>
-                <div><a href="#">Back to Top ↑</a></div>
+                <div><a href="#top">Back to Top ↑</a></div>
             </div>
         </div>
     </footer>
 <script>
     const calculators = [
 
-{name:"Age Calculator",url:"index.html"},
+{name:"Age Calculator",url:"age-calculator.html"},
 {name:"BMI Calculator",url:"bmi-calculator.html"},
 {name:"EMI Calculator",url:"emi-calculator.html"},
 {name:"Calorie Calculator",url:"calorie-calculator.html"},
@@ -1029,7 +1014,20 @@ body.dark .section-title i{
 {name:"Discount Calculator",url:"discount-calculator.html"},
 {name:"Percentage Calculator",url:"percentage-calculator.html"},
 {name:"Date Calculator",url:"date-calculator.html"},
-{name:"Unit Converter",url:"unit-converter.html"}
+{name:"Unit Converter",url:"unit-converter.html"},
+{name:"BMR Calculator",url:"bmr-calculator.html"},
+{name:"Body Fat Calculator",url:"body-fat-calculator.html"},
+{name:"Ideal Weight Calculator",url:"ideal-weight-calculator.html"},
+{name:"GPA Calculator",url:"gpa-calculator.html"},
+{name:"Grade Calculator",url:"grade-calculator.html"},
+{name:"CGPA Calculator",url:"cgpa-calculator.html"},
+{name:"Average Calculator",url:"average-calculator.html"},
+{name:"Time Calculator",url:"time-calculator.html"},
+{name:"Fuel Cost Calculator",url:"fuel-cost-calculator.html"},
+{name:"Scientific Calculator",url:"scientific-calculator.html"},
+{name:"Fraction Calculator",url:"fraction-calculator.html"},
+{name:"Random Number Generator",url:"random-number-calculator.html"},
+{name:"Equation Solver",url:"equation-solver.html"}
 
 ];
     const navSearch = document.getElementById("navSearch");
