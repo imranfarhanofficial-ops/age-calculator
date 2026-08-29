@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>আপনার তথ্য দিন | SMART ACADEMY</title>
-    
+
     <!-- Google Fonts & Font Awesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -515,205 +515,492 @@
             color: var(--accent-green);
             font-size: 15px;
         }
+
+        /* Error Message */
+        .error-message {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            text-align: center;
+            background: #fdecea;
+            color: #b3261e;
+            border: 1px solid #f5c2c0;
+        }
+
+        .continue-btn.btn-disabled {
+            opacity: 0.75;
+            cursor: not-allowed;
+        }
     </style>
 </head>
+
 <body>
 
-    <div class="page-container">
-        <!-- Navbar -->
-        <header>
-            <div class="logo-box">
-                <i class="fa-solid fa-graduation-cap logo-icon"></i>
-                <div class="logo-text">
-                    <span>SMART</span>
-                    <span>ACADEMY</span>
-                </div>
-            </div>
-            <div class="menu-bars">
-                <i class="fa-solid fa-bars"></i>
-            </div>
-        </header>
+<div class="page-container">
 
-        <!-- Stepper Progress -->
-        <div class="step-progress-wrapper">
-            <div class="step-progress-bar">
-                <div class="step-line-bg"></div>
-                <div class="step-line-fill"></div>
-
-                <div class="step-circle completed">
-                    <i class="fa-solid fa-check"></i>
-                </div>
-                <div class="step-circle active">2</div>
-                <div class="step-circle">3</div>
-                <div class="step-circle">4</div>
-            </div>
-
-            <div class="step-labels">
-                <span>কোর্স নির্বাচন</span>
-                <span class="active-label">আপনার তথ্য</span>
-                <span>পেমেন্ট</span>
-                <span>লিংক পান</span>
+    <!-- Navbar -->
+    <header>
+        <div class="logo-box">
+            <i class="fa-solid fa-graduation-cap logo-icon"></i>
+            <div class="logo-text">
+                <span>SMART</span>
+                <span>ACADEMY</span>
             </div>
         </div>
 
-        <form id="customerInfoForm" class="main-card-wrapper" novalidate>
-            <!-- User Form Box -->
-            <div class="form-main-card">
-                <div class="card-header-title">
-                    <i class="fa-solid fa-circle-user"></i>
-                    <span>আপনার তথ্য দিন</span>
-                </div>
-                <p class="card-subtitle">কোর্স অ্যাক্সেস এবং গুরুত্বপূর্ণ আপডেট পেতে সঠিক তথ্য দিন।</p>
+        <div class="menu-bars">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </header>
 
-                <div class="form-inner-box">
-                    <!-- Name Input -->
-                    <div class="form-group">
-                        <label class="form-label">আপনার নাম *</label>
-                        <div class="input-group">
-                            <i class="fa-solid fa-user input-icon"></i>
-                            <input type="text" id="customerName" class="form-input" placeholder="আপনার পূর্ণ নাম লিখুন" required>
-                        </div>
-                    </div>
+    <!-- Stepper Progress -->
+    <div class="step-progress-wrapper">
+        <div class="step-progress-bar">
+            <div class="step-line-bg"></div>
+            <div class="step-line-fill"></div>
 
-                    <!-- Email Input -->
-                    <div class="form-group">
-                        <label class="form-label">ইমেইল আইডি *</label>
-                        <div class="input-group">
-                            <i class="fa-solid fa-envelope input-icon"></i>
-                            <input type="email" id="customerEmail" class="form-input" placeholder="আপনার ইমেইল লিখুন" required>
-                        </div>
-                    </div>
-
-                    <!-- WhatsApp Input -->
-                    <div class="form-group">
-                        <label class="form-label">হোয়াটসঅ্যাপ নম্বর *</label>
-                        <div class="input-group">
-                            <i class="fa-brands fa-whatsapp input-icon whatsapp"></i>
-                            <input type="tel" id="customerWhatsapp" class="form-input" placeholder="01XXXXXXXXX" required>
-                        </div>
-                    </div>
-                </div>
+            <div class="step-circle completed">
+                <i class="fa-solid fa-check"></i>
             </div>
 
-            <!-- Privacy Trust Alert -->
-            <div class="trust-alert">
-                <i class="fa-regular fa-circle-check"></i>
-                <p>আপনার দেওয়া তথ্য 100% নিরাপদ এবং গোপনীয় রাখা হবে। আমরা আপনার অনুমতি ছাড়া কারও সাথে শেয়ার করি না।</p>
+            <div class="step-circle active">2</div>
+            <div class="step-circle">3</div>
+            <div class="step-circle">4</div>
+        </div>
+
+        <div class="step-labels">
+            <span>কোর্স নির্বাচন</span>
+            <span class="active-label">আপনার তথ্য</span>
+            <span>পেমেন্ট</span>
+            <span>লিংক পান</span>
+        </div>
+    </div>
+
+    <!-- Customer Information -->
+    <form id="customerInfoForm" class="main-card-wrapper" novalidate>
+
+        <div class="form-main-card">
+
+            <div class="card-header-title">
+                <i class="fa-solid fa-circle-user"></i>
+                <span>আপনার তথ্য দিন</span>
             </div>
 
-            <!-- Selected Course Summary Card -->
-            <div class="summary-card">
-                <div class="summary-title">আপনি যে কোর্সটি নিচ্ছেন</div>
-                <div class="summary-content">
-                    <!-- Thumbnail Mock -->
-                    <div class="course-mini-thumb">
-                        <span class="thumb-tag">DIGITAL<br>MARKETING</span>
-                        <div class="thumb-icon">
-                            <i class="fa-solid fa-bullhorn"></i>
-                        </div>
-                        <div class="thumb-charts">
-                            <div class="mini-bars">
-                                <div class="mini-bar" style="height: 6px;"></div>
-                                <div class="mini-bar" style="height: 10px;"></div>
-                                <div class="mini-bar" style="height: 8px;"></div>
-                                <div class="mini-bar" style="height: 12px;"></div>
-                            </div>
-                            <div class="mini-pie"></div>
-                        </div>
-                    </div>
+            <p class="card-subtitle">
+                কোর্স অ্যাক্সেস এবং গুরুত্বপূর্ণ আপডেট পেতে সঠিক তথ্য দিন।
+            </p>
 
-                    <!-- Details Points -->
-                    <div class="course-bullets">
-                        <div class="course-name">ডিজিটাল মার্কেটিং</div>
-                        <div class="bullet-item">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span>Recorded Video Course</span>
-                        </div>
-                        <div class="bullet-item">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span>২৫ – ৩০ টি ক্লাস</span>
-                        </div>
-                        <div class="bullet-item">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span>বাংলা ভাষায়</span>
-                        </div>
-                        <div class="bullet-item">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span>Beginner Friendly</span>
-                        </div>
-                    </div>
+            <div class="form-inner-box">
 
-                    <!-- Price Block -->
-                    <div class="summary-price-box">
-                        <span class="p-reg-label">Regular Price</span>
-                        <span class="p-strike">₹500</span>
-                        <span class="p-special-label">Special Offer</span>
-                        <span class="p-main">₹199</span>
-                        <span class="p-discount-chip">60% OFF</span>
+                <!-- Name -->
+                <div class="form-group">
+                    <label class="form-label">আপনার নাম *</label>
+
+                    <div class="input-group">
+                        <i class="fa-solid fa-user input-icon"></i>
+
+                        <input
+                            type="text"
+                            id="customerName"
+                            class="form-input"
+                            placeholder="আপনার পূর্ণ নাম লিখুন"
+                            required
+                        >
                     </div>
                 </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label class="form-label">ইমেইল আইডি *</label>
+
+                    <div class="input-group">
+                        <i class="fa-solid fa-envelope input-icon"></i>
+
+                        <input
+                            type="email"
+                            id="customerEmail"
+                            class="form-input"
+                            placeholder="আপনার ইমেইল লিখুন"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- WhatsApp -->
+                <div class="form-group">
+                    <label class="form-label">হোয়াটসঅ্যাপ নম্বর *</label>
+
+                    <div class="input-group">
+                        <i class="fa-brands fa-whatsapp input-icon whatsapp"></i>
+
+                        <input
+                            type="tel"
+                            id="customerWhatsapp"
+                            class="form-input"
+                            placeholder="01XXXXXXXXX"
+                            required
+                        >
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Privacy -->
+        <div class="trust-alert">
+            <i class="fa-regular fa-circle-check"></i>
+
+            <p>
+                আপনার দেওয়া তথ্য 100% নিরাপদ এবং গোপনীয় রাখা হবে।
+                আমরা আপনার অনুমতি ছাড়া কারও সাথে শেয়ার করি না।
+            </p>
+        </div>
+
+        <!-- Course Summary -->
+        <div class="summary-card">
+
+            <div class="summary-title">
+                আপনি যে কোর্সটি নিচ্ছেন
             </div>
 
-        </form>
+            <div class="summary-content">
 
-        <!-- Submit / Continue Button Area -->
-        <div class="bottom-cta-area">
-            <button type="button" id="continueBtn" class="continue-btn">
-                <i class="fa-solid fa-lock"></i>
-                <span>CONTINUE TO PAYMENT</span>
-                <i class="fa-solid fa-arrow-right"></i>
-            </button>
+                <!-- Thumbnail -->
+                <div class="course-mini-thumb">
 
-            <div class="guarantee-note">
-                <i class="fa-regular fa-circle-check"></i>
-                <span>নিরাপদ পেমেন্ট | 100% নিরাপদ লেনদেন</span>
+                    <span class="thumb-tag">
+                        DIGITAL<br>MARKETING
+                    </span>
+
+                    <div class="thumb-icon">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+
+                    <div class="thumb-charts">
+
+                        <div class="mini-bars">
+                            <div class="mini-bar" style="height: 6px;"></div>
+                            <div class="mini-bar" style="height: 10px;"></div>
+                            <div class="mini-bar" style="height: 8px;"></div>
+                            <div class="mini-bar" style="height: 12px;"></div>
+                        </div>
+
+                        <div class="mini-pie"></div>
+
+                    </div>
+                </div>
+
+                <!-- Course Details -->
+                <div class="course-bullets">
+
+                    <div class="course-name">
+                        ডিজিটাল মার্কেটিং
+                    </div>
+
+                    <div class="bullet-item">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Recorded Video Course</span>
+                    </div>
+
+                    <div class="bullet-item">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>২৫ – ৩০ টি ক্লাস</span>
+                    </div>
+
+                    <div class="bullet-item">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>বাংলা ভাষায়</span>
+                    </div>
+
+                    <div class="bullet-item">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Beginner Friendly</span>
+                    </div>
+
+                </div>
+
+                <!-- Price -->
+                <div class="summary-price-box">
+
+                    <span class="p-reg-label">
+                        Regular Price
+                    </span>
+
+                    <span class="p-strike">
+                        ₹500
+                    </span>
+
+                    <span class="p-special-label">
+                        Special Offer
+                    </span>
+
+                    <span class="p-main">
+                        ₹199
+                    </span>
+
+                    <span class="p-discount-chip">
+                        60% OFF
+                    </span>
+
+                </div>
+
             </div>
+        </div>
+
+    </form>
+
+    <!-- Continue Button -->
+    <div class="bottom-cta-area">
+
+        <div id="errorMessage" class="error-message"></div>
+
+        <button
+            type="button"
+            id="continueBtn"
+            class="continue-btn"
+        >
+            <i class="fa-solid fa-lock"></i>
+
+            <span>CONTINUE TO PAYMENT</span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <div class="guarantee-note">
+
+            <i class="fa-regular fa-circle-check"></i>
+
+            <span>
+                নিরাপদ পেমেন্ট | 100% নিরাপদ লেনদেন
+            </span>
+
         </div>
 
     </div>
 
-    <!-- Required field validation before moving to Page 3 -->
-    <script>
-        document.getElementById('continueBtn').addEventListener('click', function () {
-            const nameInput = document.getElementById('customerName');
-            const emailInput = document.getElementById('customerEmail');
-            const whatsappInput = document.getElementById('customerWhatsapp');
+</div>
 
-            const name = nameInput.value.trim();
-            const email = emailInput.value.trim();
-            const whatsapp = whatsappInput.value.trim();
+<script>
+(function () {
 
-            [nameInput, emailInput, whatsappInput].forEach(function (el) {
-                el.classList.remove('input-error');
-            });
+    /* =========================================================
+       CASHFREE PAYMENT LINK
+       ========================================================= */
 
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const whatsappPattern = /^[0-9+\-\s]{10,15}$/;
+    var CASHFREE_PAYMENT_LINK =
+        'https://payments.cashfree.com/links?code=Hau5ghecnh4g_AAAAAAAVNbQ';
 
-            let firstInvalid = null;
-            let errorMessage = '';
 
-            if (name === '') {
-                firstInvalid = nameInput;
-                errorMessage = 'অনুগ্রহ করে আপনার নাম লিখুন।';
-            } else if (email === '' || !emailPattern.test(email)) {
-                firstInvalid = emailInput;
-                errorMessage = 'অনুগ্রহ করে সঠিক ইমেইল আইডি লিখুন।';
-            } else if (whatsapp === '' || !whatsappPattern.test(whatsapp)) {
-                firstInvalid = whatsappInput;
-                errorMessage = 'অনুগ্রহ করে সঠিক হোয়াটসঅ্যাপ নম্বর লিখুন।';
-            }
+    /* =========================================================
+       ELEMENTS
+       ========================================================= */
 
-            if (firstInvalid) {
-                firstInvalid.classList.add('input-error');
-                firstInvalid.focus();
-                alert(errorMessage);
-                return;
-            }
+    var continueBtn =
+        document.getElementById('continueBtn');
 
-            window.location.href = 'payment.html';
+    var errorBox =
+        document.getElementById('errorMessage');
+
+    var isSubmitting = false;
+
+
+    /* =========================================================
+       ERROR MESSAGE
+       ========================================================= */
+
+    function showError(message) {
+
+        errorBox.innerHTML =
+            '<i class="fa-solid fa-circle-exclamation"></i>' +
+            '<span>' + message + '</span>';
+
+        errorBox.style.display = 'flex';
+    }
+
+
+    function hideError() {
+
+        errorBox.style.display = 'none';
+        errorBox.innerHTML = '';
+    }
+
+
+    /* =========================================================
+       BUTTON LOADING
+       ========================================================= */
+
+    function setButtonLoading(text) {
+
+        continueBtn.disabled = true;
+
+        continueBtn.classList.add('btn-disabled');
+
+        continueBtn.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i>' +
+            '<span>' + text + '</span>';
+    }
+
+
+    /* =========================================================
+       BUTTON RESET
+       ========================================================= */
+
+    function resetButton() {
+
+        continueBtn.disabled = false;
+
+        continueBtn.classList.remove('btn-disabled');
+
+        continueBtn.innerHTML =
+            '<i class="fa-solid fa-lock"></i>' +
+            '<span>CONTINUE TO PAYMENT</span>' +
+            '<i class="fa-solid fa-arrow-right"></i>';
+    }
+
+
+    /* =========================================================
+       CONTINUE TO PAYMENT
+       ========================================================= */
+
+    continueBtn.addEventListener('click', function () {
+
+        if (isSubmitting) {
+            return;
+        }
+
+
+        var nameInput =
+            document.getElementById('customerName');
+
+        var emailInput =
+            document.getElementById('customerEmail');
+
+        var whatsappInput =
+            document.getElementById('customerWhatsapp');
+
+
+        var name =
+            nameInput.value.trim();
+
+        var email =
+            emailInput.value.trim();
+
+        var whatsapp =
+            whatsappInput.value.trim();
+
+
+        /* Remove previous errors */
+
+        [
+            nameInput,
+            emailInput,
+            whatsappInput
+        ].forEach(function (el) {
+
+            el.classList.remove('input-error');
+
         });
-    </script>
+
+
+        hideError();
+
+
+        /* =====================================================
+           VALIDATION
+           ===================================================== */
+
+        var emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        var whatsappPattern =
+            /^[0-9+\-\s]{10,15}$/;
+
+
+        var firstInvalid = null;
+
+        var errorMessage = '';
+
+
+        if (name === '') {
+
+            firstInvalid = nameInput;
+
+            errorMessage =
+                'অনুগ্রহ করে আপনার নাম লিখুন।';
+
+        }
+
+        else if (
+            email === '' ||
+            !emailPattern.test(email)
+        ) {
+
+            firstInvalid = emailInput;
+
+            errorMessage =
+                'অনুগ্রহ করে সঠিক ইমেইল আইডি লিখুন।';
+
+        }
+
+        else if (
+            whatsapp === '' ||
+            !whatsappPattern.test(whatsapp)
+        ) {
+
+            firstInvalid = whatsappInput;
+
+            errorMessage =
+                'অনুগ্রহ করে সঠিক হোয়াটসঅ্যাপ নম্বর লিখুন।';
+
+        }
+
+
+        if (firstInvalid) {
+
+            firstInvalid.classList.add('input-error');
+
+            firstInvalid.focus();
+
+            showError(errorMessage);
+
+            return;
+        }
+
+
+        /* =====================================================
+           DIRECT CASHFREE REDIRECT
+           ===================================================== */
+
+        isSubmitting = true;
+
+        setButtonLoading('পেমেন্ট পেজে নেওয়া হচ্ছে...');
+
+
+        /*
+         * Customer information is validated on this page.
+         * No Google Sheet / Apps Script is used here.
+         * Payment is handled directly by Cashfree.
+         */
+
+
+        setTimeout(function () {
+
+            window.location.href =
+                CASHFREE_PAYMENT_LINK;
+
+        }, 300);
+
+
+    });
+
+})();
+</script>
 
 </body>
 </html>
