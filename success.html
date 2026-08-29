@@ -811,6 +811,178 @@
             background: #fafdfb;
             border-color: var(--accent-green);
         }
+
+        /* ===== Link-Save Warning Modal (new) ===== */
+        .warning-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        .warning-modal-overlay.active {
+            display: flex;
+        }
+
+        .warning-modal {
+            width: 100%;
+            max-width: 400px;
+            background: #ffffff;
+            border-radius: 16px;
+            border-top: 5px solid #dc2626;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+            padding: 20px 18px 18px 18px;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .warning-modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: #f3f4f6;
+            color: #6b7280;
+            border-radius: 50%;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .warning-modal-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+            color: #dc2626;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px auto;
+        }
+
+        .warning-modal-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: #dc2626;
+            margin-bottom: 10px;
+        }
+
+        .warning-modal-message {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: center;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .warning-modal-desc {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #4b5563;
+            text-align: center;
+            line-height: 1.55;
+            margin-bottom: 14px;
+        }
+
+        .warning-modal-steps {
+            background: #fef2f2;
+            border: 1.5px solid #fecaca;
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #991b1b;
+            text-align: center;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .warning-modal-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal-copy-btn {
+            width: 100%;
+            border: 1.5px solid #dc2626;
+            background: #ffffff;
+            color: #dc2626;
+            border-radius: 8px;
+            padding: 13px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+            transition: background 0.2s;
+        }
+
+        .modal-copy-btn:active {
+            background: #fef2f2;
+        }
+
+        .modal-proceed-btn {
+            width: 100%;
+            border: none;
+            background: var(--primary-green);
+            color: #ffffff;
+            border-radius: 8px;
+            padding: 13px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+            box-shadow: 0 4px 12px rgba(3, 68, 36, 0.2);
+            transition: background 0.2s;
+        }
+
+        .modal-proceed-btn:active {
+            background: var(--primary-dark);
+        }
+
+        .modal-copy-feedback {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 2px;
+            font-size: 12.5px;
+            font-weight: 700;
+            color: var(--accent-green);
+            text-align: center;
+        }
+
+        @media (max-width: 360px) {
+            .warning-modal {
+                padding: 18px 14px 16px 14px;
+            }
+
+            .warning-modal-title {
+                font-size: 16.5px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -964,7 +1136,7 @@
 
                 <div class="expiry-note">
                     <i class="fa-solid fa-circle-info"></i>
-                    <span>এই লিংকটি ভবিষ্যতেও কাজ করবে — হারিয়ে যাবে না।</span>
+                    <span>এই লিংকটি সংরক্ষণ করে রাখুন। পরবর্তীতে আপনার Success Page-এ ফিরে আসতে না পারলেও সংরক্ষিত লিংক থেকে কোর্সে প্রবেশ করতে পারবেন।</span>
                 </div>
 
                 <!-- Save / copy the reusable course link -->
@@ -1038,6 +1210,46 @@
 
     </div>
 
+    <!-- Link-Save Warning Modal (shown before entering the course) -->
+    <div class="warning-modal-overlay" id="warningModalOverlay">
+        <div class="warning-modal" role="dialog" aria-modal="true" aria-labelledby="warningModalTitle">
+            <button type="button" class="warning-modal-close" id="closeWarningModal" aria-label="বন্ধ করুন">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="warning-modal-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <h3 class="warning-modal-title" id="warningModalTitle">🔴 গুরুত্বপূর্ণ!</h3>
+
+            <p class="warning-modal-message">
+                কোর্সে প্রবেশ করার আগে এই লিংকটি কপি করে নিজের কাছে সংরক্ষণ করুন।
+            </p>
+
+            <p class="warning-modal-desc">
+                লিংকটি এখনই সংরক্ষণ করে রাখুন। ভবিষ্যতে এই Success Page-এ ফিরে আসতে না পারলেও আপনার সংরক্ষিত লিংক দিয়ে সরাসরি কোর্সে প্রবেশ করতে পারবেন।
+            </p>
+
+            <div class="warning-modal-steps">
+                প্রথমে "লিংক কপি করুন" চাপুন → তারপর "কোর্সে প্রবেশ করুন" চাপুন।
+            </div>
+
+            <div class="warning-modal-actions">
+                <button type="button" class="modal-copy-btn" id="modalCopyBtn">
+                    <span>📋 লিংক কপি করুন</span>
+                </button>
+                <span id="modalCopyFeedback" class="modal-copy-feedback">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>✅ কোর্সের লিংক কপি হয়েছে</span>
+                </span>
+                <button type="button" class="modal-proceed-btn" id="modalProceedBtn">
+                    <span>➡️ কোর্সে প্রবেশ করুন</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!--
         COURSE LINK
         ------------
@@ -1048,23 +1260,18 @@
     <script>
         const COURSE_LINK = "https://drive.google.com/drive/folders/15wb8da8kNmWmM9TjbL-VOM1PfbJc8MYD";
 
-        // "কোর্সে প্রবেশ করুন" opens the course in a new tab so this
-        // success page (with the save/copy link box) stays open and
-        // the customer can easily come back to it.
-        document.getElementById('getCourseLinkBtn').addEventListener('click', function () {
-            window.open(COURSE_LINK, '_blank', 'noopener');
-        });
-
-        // Copy-to-clipboard with a manual-select fallback for browsers
-        // or contexts where clipboard permission isn't available.
-        document.getElementById('copyLinkBtn').addEventListener('click', function () {
+        // Shared copy-to-clipboard helper with a manual-select fallback
+        // for browsers/contexts where clipboard permission isn't available.
+        // Used by both the existing "link সংরক্ষণ করুন" copy button and
+        // the new warning-modal copy button, so the logic isn't duplicated.
+        function copyCourseLink(feedbackEl) {
             const input = document.getElementById('courseLinkInput');
-            const feedback = document.getElementById('copyFeedback');
 
             function showFeedback() {
-                feedback.style.display = 'inline-flex';
+                if (!feedbackEl) return;
+                feedbackEl.style.display = 'inline-flex';
                 setTimeout(function () {
-                    feedback.style.display = 'none';
+                    feedbackEl.style.display = 'none';
                 }, 2500);
             }
 
@@ -1087,6 +1294,55 @@
             } else {
                 fallbackCopy();
             }
+        }
+
+        // ---- Warning Modal elements ----
+        const warningModalOverlay = document.getElementById('warningModalOverlay');
+        const closeWarningModal = document.getElementById('closeWarningModal');
+        const modalCopyBtn = document.getElementById('modalCopyBtn');
+        const modalCopyFeedback = document.getElementById('modalCopyFeedback');
+        const modalProceedBtn = document.getElementById('modalProceedBtn');
+
+        function openWarningModal() {
+            warningModalOverlay.classList.add('active');
+        }
+
+        function closeModal() {
+            warningModalOverlay.classList.remove('active');
+        }
+
+        // "কোর্সে প্রবেশ করুন" (main button) no longer opens Google Drive
+        // directly. It first shows the red warning modal so the customer
+        // notices the "save your link" instruction before leaving the page.
+        document.getElementById('getCourseLinkBtn').addEventListener('click', function () {
+            openWarningModal();
+        });
+
+        // Close the modal without navigating anywhere.
+        closeWarningModal.addEventListener('click', closeModal);
+        warningModalOverlay.addEventListener('click', function (e) {
+            if (e.target === warningModalOverlay) {
+                closeModal();
+            }
+        });
+
+        // Modal action A: "📋 লিংক কপি করুন" — copies the course link.
+        modalCopyBtn.addEventListener('click', function () {
+            copyCourseLink(modalCopyFeedback);
+        });
+
+        // Modal action B: "➡️ কোর্সে প্রবেশ করুন" — the customer is not
+        // forced to copy first. Clicking this always lets them into the
+        // course. Opens in a new tab so the success page stays open.
+        modalProceedBtn.addEventListener('click', function () {
+            window.open(COURSE_LINK, '_blank', 'noopener');
+            closeModal();
+        });
+
+        // Copy-to-clipboard for the existing "লিংক সংরক্ষণ করুন" section
+        // (unchanged in behavior, now using the shared helper above).
+        document.getElementById('copyLinkBtn').addEventListener('click', function () {
+            copyCourseLink(document.getElementById('copyFeedback'));
         });
     </script>
 
