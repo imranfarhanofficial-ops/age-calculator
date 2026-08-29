@@ -541,6 +541,89 @@
             font-size: 13px;
         }
 
+        /* Save / Copy Link Box */
+        .link-save-box {
+            margin-top: 14px;
+            background: #fafdfb;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 10px 12px;
+        }
+
+        .link-save-label {
+            display: block;
+            font-size: 11.5px;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .link-copy-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .link-input {
+            flex: 1;
+            min-width: 0;
+            height: 38px;
+            border: 1.5px solid #d1d5db;
+            border-radius: 8px;
+            padding: 0 10px;
+            font-size: 11px;
+            color: #374151;
+            background: #ffffff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .copy-link-btn {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+            border: none;
+            border-radius: 8px;
+            background: var(--primary-green);
+            color: #ffffff;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .copy-link-btn:active {
+            background: var(--primary-dark);
+        }
+
+        .copy-feedback {
+            display: none;
+            align-items: center;
+            gap: 5px;
+            margin-top: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+
+        .save-note-text {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            margin-top: 10px;
+            font-size: 11.5px;
+            font-weight: 600;
+            color: #4b5563;
+            line-height: 1.4;
+        }
+
+        .save-note-text i {
+            color: var(--badge-yellow);
+            margin-top: 1px;
+            flex-shrink: 0;
+        }
+
         /* How to Watch Guide Box */
         .guide-box {
             background: #fefdf5;
@@ -875,14 +958,34 @@
                 </div>
 
                 <button class="get-link-btn" id="getCourseLinkBtn">
-                    <i class="fa-solid fa-link"></i>
-                    <span>কোর্স লিংক নিন</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span>কোর্সে প্রবেশ করুন</span>
                 </button>
 
                 <div class="expiry-note">
-                    <i class="fa-regular fa-clock"></i>
-                    <span>লিংক 48 ঘণ্টার জন্য অ্যাক্টিভ থাকবে।</span>
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>এই লিংকটি ভবিষ্যতেও কাজ করবে — হারিয়ে যাবে না।</span>
                 </div>
+
+                <!-- Save / copy the reusable course link -->
+                <div class="link-save-box">
+                    <label class="link-save-label" for="courseLinkInput">লিংক সংরক্ষণ করুন</label>
+                    <div class="link-copy-row">
+                        <input type="text" id="courseLinkInput" class="link-input" value="https://drive.google.com/drive/folders/15wb8da8kNmWmM9TjbL-VOM1PfbJc8MYD" readonly>
+                        <button type="button" id="copyLinkBtn" class="copy-link-btn" aria-label="কোর্স লিংক কপি করুন">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+                    <span id="copyFeedback" class="copy-feedback">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>কোর্সের লিংক কপি হয়েছে ✓</span>
+                    </span>
+                </div>
+
+                <p class="save-note-text">
+                    <i class="fa-regular fa-bookmark"></i>
+                    <span>এই লিংকটি সংরক্ষণ করে রাখুন (কপি করুন বা পেজটি বুকমার্ক করুন)। পরবর্তীতে আবার এখান থেকে আপনার কোর্সে প্রবেশ করতে পারবেন।</span>
+                </p>
             </div>
 
             <!-- How To Watch Guide -->
@@ -936,22 +1039,53 @@
     </div>
 
     <!--
-        COURSE LINK PLACEHOLDER
-        ------------------------
-        The real course URL has not been provided yet.
-        Replace the value below with the actual course link
-        (e.g. Google Drive folder / course platform URL) when ready.
-        Until it is replaced, the button will show a clear
-        "not available yet" message instead of a broken or fake link.
+        COURSE LINK
+        ------------
+        This is the real, active Google Drive course folder link
+        (General access: "Anyone with the link -> Viewer").
+        Update this single constant if the folder link ever changes.
     -->
     <script>
-        const COURSE_LINK_PLACEHOLDER = "https://drive.google.com/drive/folders/15wb8da8kNmWmM9TjbL-VOM1PfbJc8MYD";
+        const COURSE_LINK = "https://drive.google.com/drive/folders/15wb8da8kNmWmM9TjbL-VOM1PfbJc8MYD";
 
+        // "কোর্সে প্রবেশ করুন" opens the course in a new tab so this
+        // success page (with the save/copy link box) stays open and
+        // the customer can easily come back to it.
         document.getElementById('getCourseLinkBtn').addEventListener('click', function () {
-            if (COURSE_LINK_PLACEHOLDER === "COURSE_LINK_PLACEHOLDER") {
-                alert('কোর্স লিংক এখনো যুক্ত করা হয়নি। শীঘ্রই আপডেট করা হবে।');
+            window.open(COURSE_LINK, '_blank', 'noopener');
+        });
+
+        // Copy-to-clipboard with a manual-select fallback for browsers
+        // or contexts where clipboard permission isn't available.
+        document.getElementById('copyLinkBtn').addEventListener('click', function () {
+            const input = document.getElementById('courseLinkInput');
+            const feedback = document.getElementById('copyFeedback');
+
+            function showFeedback() {
+                feedback.style.display = 'inline-flex';
+                setTimeout(function () {
+                    feedback.style.display = 'none';
+                }, 2500);
+            }
+
+            function fallbackCopy() {
+                input.removeAttribute('readonly');
+                input.focus();
+                input.select();
+                input.setSelectionRange(0, 99999);
+                try {
+                    document.execCommand('copy');
+                    showFeedback();
+                } catch (err) {
+                    alert('লিংকটি স্বয়ংক্রিয়ভাবে কপি করা যায়নি। উপরের বক্স থেকে লিংকটি ম্যানুয়ালি সিলেক্ট করে কপি করুন।');
+                }
+                input.setAttribute('readonly', 'readonly');
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(COURSE_LINK).then(showFeedback).catch(fallbackCopy);
             } else {
-                window.location.href = COURSE_LINK_PLACEHOLDER;
+                fallbackCopy();
             }
         });
     </script>
