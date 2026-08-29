@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পেমেন্ট সফল হয়েছে! | SMART ACADEMY</title>
+    
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-dark: #002816;
+            --primary-green: #034424;
+            --accent-green: #0ea755;
+            --light-bg-green: #edf8f2;
+            --text-dark: #111827;
+            --text-muted: #4b5563;
+            --border-light: #e6f0ea;
+            --badge-yellow: #fdb813;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f7f9fa;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .page-container {
+            width: 100%;
+            max-width: 480px;
+            background: #ffffff;
+            position: relative;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            padding-bottom: 25px;
+        }
+
+        /* Top Header */
+        header {
+            background-color: var(--primary-dark);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+            color: #2ec4b6;
+        }
+
+        .logo-text {
+            color: #ffffff;
+            line-height: 1.1;
+        }
+
+        .logo-text span:first-child {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 19px;
+            letter-spacing: 1px;
+            display: block;
+        }
+
+        .logo-text span:last-child {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: #2ec4b6;
+            letter-spacing: 2px;
+            display: block;
+        }
+
+        .menu-bars {
+            color: #ffffff;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        /* Step Progress Bar */
+        .step-progress-wrapper {
+            padding: 24px 14px 18px 14px;
+            background: #ffffff;
+        }
+
+        .step-progress-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 8px;
+            padding: 0 16px;
+        }
+
+        .step-line-bg {
+            position: absolute;
+            top: 50%;
+            left: 28px;
+            right: 28px;
+            height: 2.5px;
+            background: #e2e8f0;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .step-line-fill {
+            position: absolute;
+            top: 50%;
+            left: 28px;
+            width: 100%;
+            right: 28px;
+            height: 3px;
+            background: var(--accent-green);
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .step-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            z-index: 3;
+            background: #e2e8f0;
+            color: #64748b;
+        }
+
+        .step-circle.completed {
+            background: var(--primary-green);
+            color: #ffffff;
+        }
+
+        .step-circle.active {
+            background: var(--primary-dark);
+            color: #ffffff;
+            border: 2px solid var(--accent-green);
+        }
+
+        .step-labels {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .step-labels .active-label {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        /* Success Hero */
+        .success-hero {
+            text-align: center;
+            padding: 10px 16px 16px 16px;
+            position: relative;
+        }
+
+        .confetti-area {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .main-success-badge {
+            width: 68px;
+            height: 68px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 34px;
+            margin: 0 auto;
+            box-shadow: 0 6px 16px rgba(14, 167, 85, 0.25);
+        }
+
+        /* Confetti dots simulation */
+        .confetti-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .cd1 { background: #3b82f6; top: 12px; left: -85px; }
+        .cd2 { background: #f59e0b; top: 35px; left: -105px; width: 7px; height: 7px; }
+        .cd3 { background: #10b981; top: 28px; left: -60px; }
+        .cd4 { background: #eab308; top: 25px; left: -28px; width: 8px; height: 8px; transform: rotate(45deg); border-radius: 0; }
+        .cd5 { background: #10b981; top: -2px; left: -38px; }
+        .cd6 { background: #10b981; top: 0px; right: -40px; }
+        .cd7 { background: #10b981; top: 18px; right: -90px; }
+        .cd8 { background: #f59e0b; top: 22px; right: -110px; }
+        .cd9 { background: #eab308; top: 28px; right: -28px; width: 7px; height: 7px; transform: rotate(45deg); border-radius: 0; }
+        .cd10 { background: #f59e0b; top: 38px; right: -68px; }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .success-title span {
+            font-size: 22px;
+        }
+
+        .success-subtitle {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #374151;
+            line-height: 1.4;
+        }
+
+        /* Main Container Content */
+        .main-content {
+            padding: 0 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* Order ID Box */
+        .order-id-card {
+            background: #fbfdfc;
+            border: 1.5px solid var(--border-light);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .order-icon-wrap {
+            font-size: 26px;
+            color: var(--primary-green);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .order-icon-wrap .sub-check {
+            position: absolute;
+            bottom: -2px;
+            right: -4px;
+            font-size: 12px;
+            background: #ffffff;
+            border-radius: 50%;
+            color: var(--accent-green);
+        }
+
+        .order-info-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .order-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        .order-val {
+            font-size: 14.5px;
+            font-weight: 800;
+            color: var(--primary-green);
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* Course Info Card */
+        .summary-card {
+            border: 1.5px solid var(--border-light);
+            border-radius: 14px;
+            padding: 14px;
+            background: #ffffff;
+        }
+
+        .summary-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        /* Course Mini Graphic */
+        .course-mini-thumb {
+            width: 78px;
+            height: 90px;
+            background: #f1f8f4;
+            border-radius: 8px;
+            border: 1px solid #d9ebde;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 6px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .thumb-tag {
+            font-size: 7px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--primary-green);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .thumb-icon {
+            text-align: center;
+        }
+
+        .thumb-icon i {
+            font-size: 30px;
+            color: var(--primary-green);
+            transform: rotate(-15deg);
+        }
+
+        .thumb-charts {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .mini-bars {
+            display: flex;
+            gap: 1.5px;
+            align-items: flex-end;
+            height: 14px;
+        }
+
+        .mini-bar {
+            width: 2.5px;
+            background: var(--accent-green);
+            border-radius: 1px;
+        }
+
+        .mini-pie {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            border: 2px solid white;
+        }
+
+        /* Course Info Details */
+        .course-bullets {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .course-name {
+            font-size: 16px;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 2px;
+        }
+
+        .course-badge-pill {
+            display: inline-block;
+            background: #e8f6ed;
+            color: var(--primary-green);
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 1px 8px;
+            border-radius: 4px;
+            width: fit-content;
+            margin-bottom: 4px;
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+        }
+
+        .bullet-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11.5px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .bullet-item i {
+            color: var(--primary-green);
+            font-size: 12px;
+        }
+
+        /* Mini Price Tag Inside Card */
+        .summary-price-box {
+            border: 1px solid #f0f0f0;
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 8px 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 90px;
+            flex-shrink: 0;
+        }
+
+        .p-paid-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        .p-main {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary-green);
+            line-height: 1.1;
+            margin: 2px 0 4px 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .p-success-badge {
+            background: var(--accent-green);
+            color: #ffffff;
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        .p-shield-check {
+            color: #94a3b8;
+            font-size: 15px;
+        }
+
+        /* Link Access Card */
+        .link-access-card {
+            border: 1.5px solid var(--border-light);
+            border-radius: 14px;
+            padding: 16px 14px;
+            background: #ffffff;
+        }
+
+        .access-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .access-icon-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--light-bg-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .access-texts h3 {
+            font-size: 16.5px;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        .access-texts p {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #4b5563;
+            margin-top: 2px;
+        }
+
+        .get-link-btn {
+            background: var(--primary-green);
+            color: #ffffff;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            padding: 13px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 16.5px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(3, 68, 36, 0.2);
+            transition: background 0.2s;
+        }
+
+        .get-link-btn:active {
+            background: var(--primary-dark);
+        }
+
+        .expiry-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+            margin-top: 10px;
+        }
+
+        .expiry-note i {
+            font-size: 13px;
+        }
+
+        /* How to Watch Guide Box */
+        .guide-box {
+            background: #fefdf5;
+            border: 1.5px solid #fde68a;
+            border-radius: 12px;
+            padding: 14px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .guide-left {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .guide-bulb-icon {
+            font-size: 24px;
+            color: var(--badge-yellow);
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .guide-content h4 {
+            font-size: 13.5px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 5px;
+        }
+
+        .guide-content ol {
+            padding-left: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .guide-content ol li {
+            font-size: 11px;
+            font-weight: 600;
+            color: #374151;
+            line-height: 1.35;
+        }
+
+        /* Laptop Mockup Graphic */
+        .laptop-mockup-wrap {
+            width: 88px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .laptop-screen {
+            background: #ffffff;
+            border: 4px solid #334155;
+            border-radius: 6px 6px 0 0;
+            height: 52px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: inset 0 0 4px rgba(0,0,0,0.05);
+        }
+
+        .laptop-screen .play-circle {
+            width: 22px;
+            height: 22px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 9px;
+            padding-left: 2px;
+        }
+
+        .laptop-screen-lines {
+            position: absolute;
+            left: 5px;
+            top: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .l-line {
+            width: 14px;
+            height: 2px;
+            background: #e2e8f0;
+            border-radius: 1px;
+        }
+
+        .laptop-base {
+            background: #94a3b8;
+            height: 5px;
+            border-radius: 0 0 6px 6px;
+            position: relative;
+        }
+
+        .laptop-base::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 2px;
+            background: #cbd5e1;
+            border-radius: 0 0 2px 2px;
+        }
+
+        .cap-badge-laptop {
+            position: absolute;
+            bottom: -6px;
+            right: -6px;
+            font-size: 22px;
+            color: var(--primary-green);
+        }
+
+        /* Contact Support Pill */
+        .support-pill {
+            background: #f0f7ff;
+            border-radius: 10px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .support-pill i {
+            font-size: 24px;
+            color: #2563eb;
+            flex-shrink: 0;
+        }
+
+        .support-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .support-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .support-email {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1d4ed8;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+        }
+
+        /* Home Button Area */
+        .home-btn-wrap {
+            padding: 0 16px;
+            margin-top: 4px;
+        }
+
+        .home-btn {
+            background: #ffffff;
+            color: var(--primary-green);
+            border: 1.5px solid var(--border-light);
+            border-radius: 8px;
+            width: 100%;
+            padding: 12px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            transition: all 0.2s;
+        }
+
+        .home-btn:hover {
+            background: #fafdfb;
+            border-color: var(--accent-green);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        <!-- Navbar -->
+        <header>
+            <div class="logo-box">
+                <i class="fa-solid fa-graduation-cap logo-icon"></i>
+                <div class="logo-text">
+                    <span>SMART</span>
+                    <span>ACADEMY</span>
+                </div>
+            </div>
+            <div class="menu-bars">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </header>
+
+        <!-- Stepper Progress (Step 4 Active & Completed) -->
+        <div class="step-progress-wrapper">
+            <div class="step-progress-bar">
+                <div class="step-line-bg"></div>
+                <div class="step-line-fill"></div>
+
+                <div class="step-circle completed">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="step-circle completed">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="step-circle completed">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="step-circle completed">4</div>
+            </div>
+
+            <div class="step-labels">
+                <span>কোর্স নির্বাচন</span>
+                <span>আপনার তথ্য</span>
+                <span>পেমেন্ট</span>
+                <span class="active-label">লিংক পান</span>
+            </div>
+        </div>
+
+        <!-- Success Message Header -->
+        <section class="success-hero">
+            <div class="confetti-area">
+                <div class="main-success-badge">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <!-- Simulating Confetti Dots -->
+                <div class="confetti-dot cd1"></div>
+                <div class="confetti-dot cd2"></div>
+                <div class="confetti-dot cd3"></div>
+                <div class="confetti-dot cd4"></div>
+                <div class="confetti-dot cd5"></div>
+                <div class="confetti-dot cd6"></div>
+                <div class="confetti-dot cd7"></div>
+                <div class="confetti-dot cd8"></div>
+                <div class="confetti-dot cd9"></div>
+                <div class="confetti-dot cd10"></div>
+            </div>
+
+            <h2 class="success-title">
+                পেমেন্ট সফল হয়েছে! <span>🎉</span>
+            </h2>
+            <p class="success-subtitle">
+                ধন্যবাদ! আপনার পেমেন্ট সফলভাবে সম্পন্ন হয়েছে।<br>
+                আপনার কোর্সের লিংক নিচে দেওয়া হলো।
+            </p>
+        </section>
+
+        <div class="main-content">
+            <!-- Order ID Card -->
+            <div class="order-id-card">
+                <div class="order-icon-wrap">
+                    <i class="fa-regular fa-newspaper"></i>
+                    <i class="fa-solid fa-circle-check sub-check"></i>
+                </div>
+                <div class="order-info-text">
+                    <span class="order-label">অর্ডার আইডি</span>
+                    <span class="order-val">SA-DM-250524-0897</span>
+                </div>
+            </div>
+
+            <!-- Purchased Course Details Card -->
+            <div class="summary-card">
+                <div class="summary-content">
+                    <!-- Thumbnail Graphic -->
+                    <div class="course-mini-thumb">
+                        <span class="thumb-tag">DIGITAL<br>MARKETING</span>
+                        <div class="thumb-icon">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                        <div class="thumb-charts">
+                            <div class="mini-bars">
+                                <div class="mini-bar" style="height: 6px;"></div>
+                                <div class="mini-bar" style="height: 10px;"></div>
+                                <div class="mini-bar" style="height: 8px;"></div>
+                                <div class="mini-bar" style="height: 12px;"></div>
+                            </div>
+                            <div class="mini-pie"></div>
+                        </div>
+                    </div>
+
+                    <!-- Details Points -->
+                    <div class="course-bullets">
+                        <div class="course-name">ডিজিটাল মার্কেটিং</div>
+                        <div class="course-badge-pill">Recorded Video Course</div>
+                        <div class="bullet-item">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>২৫ – ৩০ টি ক্লাস</span>
+                        </div>
+                        <div class="bullet-item">
+                            <i class="fa-solid fa-comment-dots"></i>
+                            <span>বাংলা ভাষায়</span>
+                        </div>
+                        <div class="bullet-item">
+                            <i class="fa-solid fa-user-check"></i>
+                            <span>Beginner Friendly</span>
+                        </div>
+                    </div>
+
+                    <!-- Price Block -->
+                    <div class="summary-price-box">
+                        <span class="p-paid-label">পেমেন্ট করা হয়েছে</span>
+                        <span class="p-main">₹199</span>
+                        <span class="p-success-badge">পেমেন্ট সফল</span>
+                        <i class="fa-solid fa-shield-halved p-shield-check"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Get Course Link Card -->
+            <div class="link-access-card">
+                <div class="access-header">
+                    <div class="access-icon-circle">
+                        <i class="fa-solid fa-link"></i>
+                    </div>
+                    <div class="access-texts">
+                        <h3>আপনার কোর্সের লিংক</h3>
+                        <p>নিচের বাটনে ক্লিক করে আপনার কোর্স অ্যাক্সেস করুন।</p>
+                    </div>
+                </div>
+
+                <button class="get-link-btn" id="getCourseLinkBtn">
+                    <i class="fa-solid fa-link"></i>
+                    <span>কোর্স লিংক নিন</span>
+                </button>
+
+                <div class="expiry-note">
+                    <i class="fa-regular fa-clock"></i>
+                    <span>লিংক 48 ঘণ্টার জন্য অ্যাক্টিভ থাকবে।</span>
+                </div>
+            </div>
+
+            <!-- How To Watch Guide -->
+            <div class="guide-box">
+                <div class="guide-left">
+                    <i class="fa-regular fa-lightbulb guide-bulb-icon"></i>
+                    <div class="guide-content">
+                        <h4>কীভাবে ক্লাস দেখবেন?</h4>
+                        <ol>
+                            <li>১. বাটনে ক্লিক করে লিংক খুলুন</li>
+                            <li>২. গুগল ড্রাইভ/ওয়েবসাইটে ক্লাস দেখুন</li>
+                            <li>৩. যেকোনো সময়, যেকোনো ডিভাইসে দেখুন</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="laptop-mockup-wrap">
+                    <div class="laptop-screen">
+                        <div class="laptop-screen-lines">
+                            <div class="l-line"></div>
+                            <div class="l-line" style="width: 8px;"></div>
+                        </div>
+                        <div class="play-circle">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="laptop-base"></div>
+                    <i class="fa-solid fa-graduation-cap cap-badge-laptop"></i>
+                </div>
+            </div>
+
+            <!-- Support Contact Pill -->
+            <div class="support-pill">
+                <i class="fa-solid fa-headset"></i>
+                <div class="support-info">
+                    <span class="support-title">আমাদের সাথে যোগাযোগ করুন</span>
+                    <a href="mailto:itzpreem8910@gmail.com" class="support-email">Email: itzpreem8910@gmail.com</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="home-btn-wrap">
+            <button class="home-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+                <i class="fa-solid fa-house"></i>
+                <span>হোম পেজে ফিরে যান</span>
+            </button>
+        </div>
+
+    </div>
+
+    <!--
+        COURSE LINK PLACEHOLDER
+        ------------------------
+        The real course URL has not been provided yet.
+        Replace the value below with the actual course link
+        (e.g. Google Drive folder / course platform URL) when ready.
+        Until it is replaced, the button will show a clear
+        "not available yet" message instead of a broken or fake link.
+    -->
+    <script>
+        const COURSE_LINK_PLACEHOLDER = "COURSE_LINK_PLACEHOLDER";
+
+        document.getElementById('getCourseLinkBtn').addEventListener('click', function () {
+            if (COURSE_LINK_PLACEHOLDER === "COURSE_LINK_PLACEHOLDER") {
+                alert('কোর্স লিংক এখনো যুক্ত করা হয়নি। শীঘ্রই আপডেট করা হবে।');
+            } else {
+                window.location.href = COURSE_LINK_PLACEHOLDER;
+            }
+        });
+    </script>
+
+</body>
+</html>
